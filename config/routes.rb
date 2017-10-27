@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'irb/home'
+  root 'irb#home'
 
-  get 'irb/about'
+  get 'about', to: 'irb#about'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
