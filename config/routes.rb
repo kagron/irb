@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root 'irb#home'
 
   get 'about', to: 'irb#about'
