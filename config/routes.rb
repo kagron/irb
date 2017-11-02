@@ -1,4 +1,22 @@
 Rails.application.routes.draw do
+  get 'irb/FormApps'
+
+  get 'irb/ArchivedApps'
+
+  get 'irb/InProgressApps'
+
+  get 'irb/StateApps'
+
+  get 'form_apps/ArchivedApps'
+
+  get 'form_apps/InProgressApps'
+
+  get 'form_apps/StateApps'
+
+  get 'irb/NewApplication'
+
+  get 'irb/BoardView'
+
   devise_for :users
   root 'irb#home'
 

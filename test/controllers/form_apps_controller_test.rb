@@ -1,23 +1,18 @@
 require 'test_helper'
 
-class IrbControllerTest < ActionDispatch::IntegrationTest
-  test "should get FormApps" do
-    get irb_FormApps_url
-    assert_response :success
-  end
-
+class FormAppsControllerTest < ActionDispatch::IntegrationTest
   test "should get ArchivedApps" do
-    get irb_ArchivedApps_url
+    get form_apps_ArchivedApps_url
     assert_response :success
   end
 
   test "should get InProgressApps" do
-    get irb_InProgressApps_url
+    get form_apps_InProgressApps_url
     assert_response :success
   end
 
   test "should get StateApps" do
-    get irb_StateApps_url
+    get form_apps_StateApps_url
     assert_response :success
   end
 

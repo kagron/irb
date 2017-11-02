@@ -1,7 +1,13 @@
 class IrbController < ApplicationController
-  def home
+  def FormApps
   end
 
-  def about
+  def ArchivedApps
+  end
+
+  def InProgressApps
+  end
+
+  def StateApps
   end
 end
