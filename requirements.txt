@@ -1,0 +1,54 @@
+---------------------------
+Required Documents
+---------------------------
+1.  Copy of interview questions, surveys, questionnaires, or other data gathering instruments that may be used
+2.  Proper Consent/child assent/parent permission form(s) if needed
+3.  Copy of your human subjects research training certificate from the National Institutes of Health
+	website or evidence of comparable training
+4.  Written permission from the site where hte research is to be conducted (if applicable)
+
+
+---------------------------
+Required Data fields
+---------------------------
+Section 1
+---------
+First Name
+Last Name
+Phone Number
+AU email
+Address
+Department/College
+
+1.  Standard application
+2.  Expedited
+3.  Not sure
+
+Section 2
+---------
+Research Project Title
+Sponsor's Name (Only needed if funded by external organization
+Project Start Date
+Project End date (Good for one year)
+Research Question
+Brief Literature Review
+Description of research project and the procedure to be followed (May attach a copy)
+Describe the pool of subjects
+How are the subjects recruited
+Possible discomfort/risk
+Will the subjects be told they dont have to participate, and they can withdraw? how will you tell them?
+How will confidentiality and privacy be ensured
+Has consent been obtained from the authorities where the research is to be conducted
+
+Section 3
+---------
+if not possible to obtain a written consent form, describe in full detail the explanation which will be
+	given to the subjects and through what means you will provide the explanation: orally, use of
+	interpreter, or other.
+if subjects are minors or members of a population classified as vulnerable (prisoners, mentally disabled individuals)
+	, a parental/guardian consent is required as well as assent of the subject.  Include
+	a copy of the consent form you plan to use
+
+Section 4
+---------
+Student Faculty Advisor signature,
