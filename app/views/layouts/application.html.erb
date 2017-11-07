@@ -8,8 +8,25 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <header class="navbar-fixed-top navbar-inverse">
+      <div class="container">
+   <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Forms Submitted", irb_FormApps_path %></li>
+            <!--<li><%= link_to "About", about_path %></li> -->
+            <li><%= link_to "Archived Apps", irb_ArchivedApps_path %></li>
+            <li><%= link_to "Processing Apps", irb_InProgressApps_path %></li>
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "State Of Applicationn", irb_StateApps_path %></li>
+            <li><%= link_to "New Application", irb_NewApplication_path %></li>
+          </ul>
+
+    </nav>
+    </div>
+    </header>
+
   <body>
-    <p class="navbar-text pull-right">
+    <p class="text-center">
   <!-- If the user is signed in then displays who is currently logged in.
        Underneath who is logged in, it links to editing his/her profile, and
        links to logging out. -->
