@@ -124,5 +124,9 @@
   <%= @document.is_archived %>
 </p>
 
+<p>
+  <%= link_to "Download PDF", @document.questions_file_url %>
+</p>
+
 <%= link_to 'Edit', edit_document_path(@document) %> |
 <%= link_to 'Back', documents_path %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171107183218) do
+ActiveRecord::Schema.define(version: 20171107193723) do
 
   create_table "documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "fName"
@@ -40,6 +40,11 @@ ActiveRecord::Schema.define(version: 20171107183218) do
     t.datetime "updated_at", null: false
     t.integer "state"
     t.integer "is_archived", limit: 2
+    t.string "questions_file"
+    t.string "consent_file"
+    t.string "child_assent_file"
+    t.string "hsr_certificate_file"
+    t.string "written_permission"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
