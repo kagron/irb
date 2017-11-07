@@ -1,24 +1,12 @@
-# README
+## Aurora University IRB application
+# Created by Kyle Grondin, Anthony Barrios, and Brandon Pichen
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails 5.1.4
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To run this:
+1.  Download
+2.  Make sure your database.yml file has the correct username and password
+3.  Bundle install
+4.  Create databases in mysql by running $ rake db:create
+5.  $ rake db:migrate
+6.  $  Rails s
