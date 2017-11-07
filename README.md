@@ -1,5 +1,5 @@
-## Aurora University IRB application
-# Created by Kyle Grondin, Anthony Barrios, and Brandon Pichen
+# Aurora University IRB application
+### Created by Kyle Grondin, Anthony Barrios, and Brandon Pichen
 
 Rails 5.1.4
 
