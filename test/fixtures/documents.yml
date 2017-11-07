@@ -1,0 +1,51 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fName: MyString
+  lName: MyString
+  phone: MyString
+  email: MyString
+  address: MyString
+  department: MyString
+  typeOfApplication: 1
+  project_title: MyString
+  sponsor_name: MyString
+  start_date: 2017-11-06
+  end_date: 2017-11-06
+  research_question: MyString
+  lit_review: MyText
+  procedure: MyText
+  pool_of_subjects: MyText
+  sub_recruitment: MyText
+  risks: MyText
+  opt_participation: MyText
+  confidentiality: MyText
+  authorities_consent: MyText
+  subjects_consent: MyText
+  parental_consent: MyText
+  advisor_sig: MyString
+
+two:
+  fName: MyString
+  lName: MyString
+  phone: MyString
+  email: MyString
+  address: MyString
+  department: MyString
+  typeOfApplication: 1
+  project_title: MyString
+  sponsor_name: MyString
+  start_date: 2017-11-06
+  end_date: 2017-11-06
+  research_question: MyString
+  lit_review: MyText
+  procedure: MyText
+  pool_of_subjects: MyText
+  sub_recruitment: MyText
+  risks: MyText
+  opt_participation: MyText
+  confidentiality: MyText
+  authorities_consent: MyText
+  subjects_consent: MyText
+  parental_consent: MyText
+  advisor_sig: MyString

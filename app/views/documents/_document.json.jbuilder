@@ -1,0 +1,2 @@
+json.extract! document, :id, :fName, :lName, :phone, :email, :address, :department, :typeOfApplication, :project_title, :sponsor_name, :start_date, :end_date, :research_question, :lit_review, :procedure, :pool_of_subjects, :sub_recruitment, :risks, :opt_participation, :confidentiality, :authorities_consent, :subjects_consent, :parental_consent, :advisor_sig, :created_at, :updated_at
+json.url document_url(document, format: :json)

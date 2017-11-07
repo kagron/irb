@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+ @import 'bootstrap';
+
+ //Target the alert notice class and hide it
+ .flash-container {
+     position: absolute;
+     width: 100%;
+     z-index: 999;
+ }
+ .alert-notice, .alert-alert {
+     text-align: center;
+     background: rgba(0, 0, 0, 0.3);
+     border-color: rgba(0,0,0,0.5);
+     color: black;
+ }

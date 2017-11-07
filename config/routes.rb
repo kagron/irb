@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :documents
   get 'irb/FormApps'
 
   get 'irb/ArchivedApps'
