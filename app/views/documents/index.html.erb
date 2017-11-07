@@ -29,6 +29,7 @@
         <th>Parental consent</th>
         <th>Advisor sig</th>
         <th>State</th>
+        <th>Archived</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -60,6 +61,7 @@
           <td><%= document.parental_consent %></td>
           <td><%= document.advisor_sig %></td>
           <td><%= document.state %></td>
+          <td><%= document.is_archived %></td>
           <td><%= link_to 'Show', document, class: 'btn btn-primary', style: 'color: white'  %></td>
           <td><%= link_to 'Edit', edit_document_path(document), class: 'btn btn-warning', style: 'color: white'  %></td>
           <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger', style: 'color: white'  %></td>

@@ -119,6 +119,10 @@
   <strong>State:</strong>
   <%= @document.state %>
 </p>
+<p>
+  <strong>Archived:</strong>
+  <%= @document.is_archived %>
+</p>
 
 <%= link_to 'Edit', edit_document_path(@document) %> |
 <%= link_to 'Back', documents_path %>
