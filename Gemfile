@@ -7,7 +7,6 @@ end
 gem 'delayed_job_active_record'
 gem 'jquery-rails'
 gem 'sprockets-rails'
-gem 'bootstrap-sass', '~> 3.3.7'
 #install pry
 gem 'pry-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
