@@ -131,6 +131,11 @@
     <%= form.select :state, Document.states.keys %>
   </div>
 
+  <div class="field">
+    <%= form.label :is_archived %>
+    <%= form.select :is_archived, Document.is_archiveds.keys %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
