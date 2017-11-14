@@ -19,6 +19,11 @@
             <li><%= link_to "Home", root_path %></li>
             <li><%= link_to "State Of Applicationn", irb_StateApps_path %></li>
             <li><%= link_to "New Application", irb_NewApplication_path %></li>
+			<li><%= form_tag(documents_path, :method => "get", id: "search-form") do %>
+			<%= text_field_tag :search, params[:search], placeholder: "Search Applications" %>
+			<%= submit_tag "Search", :name => nil %>
+			<% end %>
+			</li>
           </ul>
 
     </nav>

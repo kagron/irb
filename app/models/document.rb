@@ -7,4 +7,9 @@ class Document < ApplicationRecord
   enum state: [:new_app, :approved, :rejected, :needs_revisions]
   enum typeOfApplication: [:standard, :expedited, :not_sure]
   enum is_archived: [:no, :yes]
+  
+  
+  def self.search(search)
+	where("fName LIKE ? OR lName LIKE ?", "%#{search}%", "%#{search}%")
+  end
 end
