@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20171107193723) do
 
   create_table "documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -47,9 +46,7 @@ ActiveRecord::Schema.define(version: 20171107193723) do
     t.string "hsr_certificate_file"
     t.string "written_permission"
   end
-=======
 ActiveRecord::Schema.define(version: 20171114024709) do
->>>>>>> pundit
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "email", default: "", null: false

@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
   resources :documents
-=======
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :admins
->>>>>>> pundit
   get 'irb/FormApps'
 
   get 'irb/ArchivedApps'
