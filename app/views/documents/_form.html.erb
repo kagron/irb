@@ -135,8 +135,30 @@
     <%= form.label :is_archived %>
     <%= form.select :is_archived, Document.is_archiveds.keys %>
   </div>
+  <div class="field">
+      <%= form.label :questions_file %>
+      <%= form.file_field :questions_file, id: :document_questions_file %>
+  </div>
 
-  <%= form.file_field :questions_file, id: :document_questions_file %>
+  <div class="field">
+      <%= form.label :consent_file %>
+      <%= form.file_field :consent_file, id: :document_consent_file %>
+  </div>
+
+  <div class="field">
+      <%= form.label :child_assent_file %>
+      <%= form.file_field :child_assent_file, id: :document_child_assent_file %>
+  </div>
+
+  <div class="field">
+      <%= form.label :hsr_certificate_file %>
+      <%= form.file_field :hsr_certificate_file, id: :document_hsr_certificate_file %>
+  </div>
+
+  <div class="field">
+      <%= form.label :written_permission_file %>
+      <%= form.file_field :written_permission_file, id: :document_written_permission_file %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>

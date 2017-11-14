@@ -69,6 +69,11 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:fName, :lName, :phone, :email, :address, :department, :typeOfApplication, :project_title, :sponsor_name, :start_date, :end_date, :research_question, :lit_review, :procedure, :pool_of_subjects, :sub_recruitment, :risks, :opt_participation, :confidentiality, :authorities_consent, :subjects_consent, :parental_consent, :state, :is_archived, :questions_file, :advisor_sig)
+      params.require(:document).permit(:fName, :lName, :phone, :email, :address,
+         :department, :typeOfApplication, :project_title, :sponsor_name, :start_date,
+         :end_date, :research_question, :lit_review, :procedure, :pool_of_subjects,
+         :sub_recruitment, :risks, :opt_participation, :confidentiality, :authorities_consent,
+         :subjects_consent, :parental_consent, :state, :is_archived, :questions_file, :advisor_sig,
+       :consent_file, :child_assent_file, :hsr_certificate_file, :written_permission)
     end
 end

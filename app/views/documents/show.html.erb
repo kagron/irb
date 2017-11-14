@@ -125,7 +125,28 @@
 </p>
 
 <p>
+  <strong>List of Questions: </strong>
   <%= link_to "Download PDF", @document.questions_file_url %>
+</p>
+
+<p>
+  <strong>Copy of Consent Form: </strong>
+  <%= link_to "Download PDF", @document.consent_file_url %>
+</p>
+
+<p>
+  <strong>Copy of Child Assent Form: </strong>
+  <%= link_to "Download PDF", @document.child_assent_file_url %>
+</p>
+
+<p>
+  <strong>Copy of Human Subjects Research Certificate: </strong>
+  <%= link_to "Download PDF", @document.hsr_certificate_file_url %>
+</p>
+
+<p>
+  <strong>Written permission from the site where the research is to be conducted (if applicable):</strong>
+  <%= link_to "Download PDF", @document.written_permission_file_url %>
 </p>
 
 <%= link_to 'Edit', edit_document_path(@document) %> |

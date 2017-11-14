@@ -1,4 +1,4 @@
-class QuestionsAttachmentUploader < CarrierWave::Uploader::Base
+class HsrCertificateUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -16,7 +16,7 @@ class QuestionsAttachmentUploader < CarrierWave::Uploader::Base
 
   def extension_white_list
       %w(pdf doc docx)
-   end
+  end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
