@@ -4,8 +4,18 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
+<<<<<<< HEAD
 gem 'delayed_job_active_record'
 gem 'sprockets-rails'
+=======
+
+#install cancan gem
+gem 'cancancan'
+#install remotipart
+gem 'remotipart', github: 'mshibuya/remotipart'
+#install rails admin
+gem 'rails_admin'
+>>>>>>> pundit
 #install pry
 gem 'pry-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
