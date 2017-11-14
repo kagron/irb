@@ -5,6 +5,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+#install cancan gem
+gem 'cancancan'
+#install remotipart
+gem 'remotipart', github: 'mshibuya/remotipart'
+#install rails admin
+gem 'rails_admin'
 #install pry
 gem 'pry-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
