@@ -1,166 +1,192 @@
-<%= form_with(model: document, local: true, html: { multipart: true }) do |form| %>
-  <% if document.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(document.errors.count, "error") %> prohibited this document from being saved:</h2>
+<div class="container">
+  <%= form_with(model: document, local: true, html: { multipart: true }) do |form| %>
+  <div class="form-group">
 
-      <ul>
-      <% document.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if document.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(document.errors.count, "error") %> prohibited this document from being saved:</h2>
+
+        <ul>
+        <% document.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="well">
+      <h2>Section 1</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= form.label(:fName, "First Name") %>
+            <%= form.text_field :fName, id: :document_fName, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="field">
+            <%= form.label(:lName, "Last Name") %>
+            <%= form.text_field :lName, id: :document_lName, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="field">
+            <%= form.label :phone %>
+            <%= form.text_field :phone, id: :document_phone, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="field">
+            <%= form.label(:email, "AU Email") %>
+            <%= form.text_field :email, id: :document_email, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="field">
+            <%= form.label :address %>
+            <%= form.text_field :address, id: :document_address, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="field">
+            <%= form.label :department %>
+            <%= form.text_field :department, id: :document_department, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= form.label(:typeOfApplication, "Please select the type of application you believe this would be") %>
+        <%= form.select :typeOfApplication, Document.typeOfApplications.keys, class: 'form-control' %>
+      </div>
+    </div> <!-- end section 1 -->
+    <div class="well">
+      <h2>Section 2</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="field">
+            <%= form.label(:project_title, "Project Title") %>
+            <%= form.text_field :project_title, id: :document_project_title, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
     </div>
+
+
+    <div class="field">
+      <%= form.label :sponsor_name %>
+      <%= form.text_field :sponsor_name, id: :document_sponsor_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :start_date %>
+      <%= form.date_select :start_date, id: :document_start_date %>
+    </div>
+
+    <div class="field">
+      <%= form.label :end_date %>
+      <%= form.date_select :end_date, id: :document_end_date %>
+    </div>
+
+    <div class="field">
+      <%= form.label :research_question %>
+      <%= form.text_field :research_question, id: :document_research_question %>
+    </div>
+
+    <div class="field">
+      <%= form.label :lit_review %>
+      <%= form.text_area :lit_review, id: :document_lit_review %>
+    </div>
+
+    <div class="field">
+      <%= form.label :procedure %>
+      <%= form.text_area :procedure, id: :document_procedure %>
+    </div>
+
+    <div class="field">
+      <%= form.label :pool_of_subjects %>
+      <%= form.text_area :pool_of_subjects, id: :document_pool_of_subjects %>
+    </div>
+
+    <div class="field">
+      <%= form.label :sub_recruitment %>
+      <%= form.text_area :sub_recruitment, id: :document_sub_recruitment %>
+    </div>
+
+    <div class="field">
+      <%= form.label :risks %>
+      <%= form.text_area :risks, id: :document_risks %>
+    </div>
+
+    <div class="field">
+      <%= form.label :opt_participation %>
+      <%= form.text_area :opt_participation, id: :document_opt_participation %>
+    </div>
+
+    <div class="field">
+      <%= form.label :confidentiality %>
+      <%= form.text_area :confidentiality, id: :document_confidentiality %>
+    </div>
+
+    <div class="field">
+      <%= form.label :authorities_consent %>
+      <%= form.text_area :authorities_consent, id: :document_authorities_consent %>
+    </div>
+
+    <div class="field">
+      <%= form.label :subjects_consent %>
+      <%= form.text_area :subjects_consent, id: :document_subjects_consent %>
+    </div>
+
+    <div class="field">
+      <%= form.label :parental_consent %>
+      <%= form.text_area :parental_consent, id: :document_parental_consent %>
+    </div>
+
+    <div class="field">
+      <%= form.label :advisor_sig %>
+      <%= form.text_field :advisor_sig, id: :document_advisor_sig %>
+    </div>
+
+    <div class="field">
+      <%= form.label :state %>
+      <%= form.select :state, Document.states.keys %>
+    </div>
+
+    <div class="field">
+      <%= form.label :is_archived %>
+      <%= form.select :is_archived, Document.is_archiveds.keys %>
+    </div>
+    <div class="field">
+        <%= form.label :questions_file %>
+        <%= form.file_field :questions_file, id: :document_questions_file %>
+    </div>
+
+    <div class="field">
+        <%= form.label :consent_file %>
+        <%= form.file_field :consent_file, id: :document_consent_file %>
+    </div>
+
+    <div class="field">
+        <%= form.label :child_assent_file %>
+        <%= form.file_field :child_assent_file, id: :document_child_assent_file %>
+    </div>
+
+    <div class="field">
+        <%= form.label :hsr_certificate_file %>
+        <%= form.file_field :hsr_certificate_file, id: :document_hsr_certificate_file %>
+    </div>
+
+    <div class="field">
+        <%= form.label :written_permission_file %>
+        <%= form.file_field :written_permission_file, id: :document_written_permission_file %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+
+  </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :fName %>
-    <%= form.text_field :fName, id: :document_fName %>
-  </div>
-
-  <div class="field">
-    <%= form.label :lName %>
-    <%= form.text_field :lName, id: :document_lName %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone, id: :document_phone %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email, id: :document_email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address, id: :document_address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :department %>
-    <%= form.text_field :department, id: :document_department %>
-  </div>
-
-  <div class="field">
-    <%= form.label :typeOfApplication %>
-    <%= form.select :typeOfApplication, Document.typeOfApplications.keys %>
-  </div>
-
-  <div class="field">
-    <%= form.label :project_title %>
-    <%= form.text_field :project_title, id: :document_project_title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :sponsor_name %>
-    <%= form.text_field :sponsor_name, id: :document_sponsor_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :start_date %>
-    <%= form.date_select :start_date, id: :document_start_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :end_date %>
-    <%= form.date_select :end_date, id: :document_end_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :research_question %>
-    <%= form.text_field :research_question, id: :document_research_question %>
-  </div>
-
-  <div class="field">
-    <%= form.label :lit_review %>
-    <%= form.text_area :lit_review, id: :document_lit_review %>
-  </div>
-
-  <div class="field">
-    <%= form.label :procedure %>
-    <%= form.text_area :procedure, id: :document_procedure %>
-  </div>
-
-  <div class="field">
-    <%= form.label :pool_of_subjects %>
-    <%= form.text_area :pool_of_subjects, id: :document_pool_of_subjects %>
-  </div>
-
-  <div class="field">
-    <%= form.label :sub_recruitment %>
-    <%= form.text_area :sub_recruitment, id: :document_sub_recruitment %>
-  </div>
-
-  <div class="field">
-    <%= form.label :risks %>
-    <%= form.text_area :risks, id: :document_risks %>
-  </div>
-
-  <div class="field">
-    <%= form.label :opt_participation %>
-    <%= form.text_area :opt_participation, id: :document_opt_participation %>
-  </div>
-
-  <div class="field">
-    <%= form.label :confidentiality %>
-    <%= form.text_area :confidentiality, id: :document_confidentiality %>
-  </div>
-
-  <div class="field">
-    <%= form.label :authorities_consent %>
-    <%= form.text_area :authorities_consent, id: :document_authorities_consent %>
-  </div>
-
-  <div class="field">
-    <%= form.label :subjects_consent %>
-    <%= form.text_area :subjects_consent, id: :document_subjects_consent %>
-  </div>
-
-  <div class="field">
-    <%= form.label :parental_consent %>
-    <%= form.text_area :parental_consent, id: :document_parental_consent %>
-  </div>
-
-  <div class="field">
-    <%= form.label :advisor_sig %>
-    <%= form.text_field :advisor_sig, id: :document_advisor_sig %>
-  </div>
-
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.select :state, Document.states.keys %>
-  </div>
-
-  <div class="field">
-    <%= form.label :is_archived %>
-    <%= form.select :is_archived, Document.is_archiveds.keys %>
-  </div>
-  <div class="field">
-      <%= form.label :questions_file %>
-      <%= form.file_field :questions_file, id: :document_questions_file %>
-  </div>
-
-  <div class="field">
-      <%= form.label :consent_file %>
-      <%= form.file_field :consent_file, id: :document_consent_file %>
-  </div>
-
-  <div class="field">
-      <%= form.label :child_assent_file %>
-      <%= form.file_field :child_assent_file, id: :document_child_assent_file %>
-  </div>
-
-  <div class="field">
-      <%= form.label :hsr_certificate_file %>
-      <%= form.file_field :hsr_certificate_file, id: :document_hsr_certificate_file %>
-  </div>
-
-  <div class="field">
-      <%= form.label :written_permission_file %>
-      <%= form.file_field :written_permission_file, id: :document_written_permission_file %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
