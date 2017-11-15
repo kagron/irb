@@ -1,7 +1,8 @@
 RailsAdmin.config do |config|
 
   ### Popular gems integration
-
+  #inherits from Application
+  config.parent_controller = 'ApplicationController'
   ## == Devise ==
   config.authenticate_with do
     warden.authenticate! scope: :user
