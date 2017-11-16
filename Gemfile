@@ -7,6 +7,8 @@ end
 gem 'delayed_job_active_record'
 gem 'sprockets-rails'
 
+# Use font awesome
+gem "font-awesome-rails"
 #install cancan gem
 gem 'cancancan'
 #install remotipart

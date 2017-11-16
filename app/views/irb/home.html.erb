@@ -1,2 +1,74 @@
-<h1>Irb#home</h1>
-<p>Find me in app/views/irb/home.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Institutional Review Board</h1>
+      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis egestas
+        velit, eu pretium magna. Praesent sodales tempus nisl id consectetur. Maecenas
+        varius ultricies neque elementum accumsan. Sed sem nibh, egestas sit amet mollis
+        ut, sodales vel urna. Donec metus lacus, luctus vitae purus non, mattis pellentesque
+        nunc. Vivamus suscipit eros sit amet mauris mollis, a iaculis massa iaculis.
+        Nulla varius elementum rutrum. Nullam eget molestie massa. Vestibulum lobortis
+        eget ligula id mollis. Donec vitae tellus quis urna ultrices condimentum. Morbi
+        eu odio ex. Donec eu tristique quam. Morbi ac quam eget risus vestibulum
+        vestibulum. Nulla ultrices suscipit facilisis. Duis a consectetur dolor,
+        et volutpat neque. </p>
+
+        <p>Ut dictum pretium enim eget posuere. Donec ipsum libero, venenatis et
+          mattis eleifend, auctor et felis. Orci varius natoque penatibus et magnis
+           dis parturient montes, nascetur ridiculus mus. Vivamus justo ligula,
+           faucibus nec aliquam id, ultricies sed tortor. Integer fringilla erat
+           vel enim ultricies sagittis. Etiam sodales sapien eu arcu rhoncus vulputate.
+           Aliquam erat volutpat. Nunc sollicitudin molestie velit, vitae placerat
+           est ornare et. Morbi hendrerit, felis a pulvinar luctus, dolor tortor
+           sodales urna, sed venenatis nibh orci nec velit. </p>
+
+           <p>Nullam ultrices ipsum ut magna condimentum ultrices. Praesent fermentum,
+              justo ut blandit pretium, eros tortor fringilla orci, sit amet varius
+              velit neque in leo. Proin semper leo sit amet urna mattis imperdiet.
+              Sed id laoreet risus, vitae accumsan est. Aliquam eget justo quam.
+              In lobortis ligula at augue condimentum, ut pellentesque nisl ullamcorper.
+              Pellentesque interdum tortor sit amet sem posuere, ac tempus magna hendrerit.
+              Morbi mollis mauris mi, sed ultricies tortor condimentum at. Cras posuere
+              dignissim dolor at lobortis. Morbi vehicula ante ut quam dapibus, non
+              iaculis augue suscipit. Nullam sed magna suscipit, iaculis tortor at,
+              cursus libero. Maecenas massa orci, imperdiet nec nulla sit amet,
+               viverra interdum tellus. Quisque maximus lorem at scelerisque ullamcorper.
+                Sed quis facilisis elit. </p>
+    </div>
+    <div class="col-md-4 well">
+      <% if !user_signed_in? %>
+      <h1>Log In</h1>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+        </div>
+
+        <% if devise_mapping.rememberable? -%>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end -%>
+
+        <div class="actions">
+          <%= f.submit "Log in", class: 'btn btn-default' %>
+        </div>
+      <% end %>
+
+      <%= render "devise/shared/links" %>
+      <% else %>
+        <h1>Get Started</h1>
+        <div class="text-center">
+          <%= link_to 'Start a New Application', documents_path, class: 'btn btn-primary btn-lg', style:'color: white' %>
+          <%= link_to 'View Old Applications', '#', class: 'btn btn-success btn-lg', style:'color: white; margin-top: 20px' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

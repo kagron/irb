@@ -52,3 +52,11 @@ if subjects are minors or members of a population classified as vulnerable (pris
 Section 4
 ---------
 Student Faculty Advisor signature,
+
+
+
+
+<%= form_tag(documents_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Applications", class: 'form-controll' %>
+<%= submit_tag "Search", :name => nil %>
+<% end %>

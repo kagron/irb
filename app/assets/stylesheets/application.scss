@@ -11,10 +11,14 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require font-awesome
  *= require_self
  */
  @import 'bootstrap';
-
+body, html {
+  padding: 0;
+  margin: 0;
+}
  //Target the alert notice class and hide it
  .flash-container {
      position: absolute;
@@ -23,7 +27,30 @@
  }
  .alert-notice, .alert-alert {
      text-align: center;
-     background: rgba(0, 0, 0, 0.3);
-     border-color: rgba(0,0,0,0.5);
+     background: white;
+     border-color: gray;
      color: black;
+ }
+ .logo {
+   height: 100px;
+ }
+ .navbar {
+   height: 150px;
+   background-color: rgba(0,70,127,1);
+ }
+ .navbar-default .navbar-nav > li{
+     color: black;
+     margin-top: 50px;
+     font-size: 14pt;
+     transition: 0.4s;
+ }
+ .navbar-default .navbar-nav > li > a {
+   color: white;
+ }
+ .nav > li > a {
+  margin-right: 30px;
+  padding-right: 0px;
+}
+ .navbar-default .navbar-nav > li > a:hover {
+   color: green;
  }

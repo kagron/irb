@@ -7,8 +7,35 @@ class Document < ApplicationRecord
   enum state: [:new_app, :approved, :rejected, :needs_revisions]
   enum typeOfApplication: [:standard, :expedited, :not_sure]
   enum is_archived: [:no, :yes]
-  
-  
+
+  validates :fName, presence: true
+  validates :lName, presence: true
+  validates :phone, presence: true
+  validates :email, presence: true
+  validates :address, presence: true
+  validates :department, presence: true
+  validates :typeOfApplication, presence: true
+  validates :project_title, presence: true
+  validates :sponsor_name, presence: true
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+  validates :research_question, presence: true
+  validates :lit_review, presence: true
+  validates :procedure, presence: true
+  validates :pool_of_subjects, presence: true
+  validates :sub_recruitment, presence: true
+  validates :risks, presence: true
+  validates :opt_participation, presence: true
+  validates :confidentiality, presence: true
+  validates :authorities_consent, presence: true
+  validates :subjects_consent, presence: true
+  validates :parental_consent, presence: true
+  validates :advisor_sig, presence: true
+  validates :questions_file, presence: true
+  validates :consent_file, presence: true
+  validates :hsr_certificate_file, presence: true
+  validates :written_permission_file, presence: true
+
   def self.search(search)
 	where("fName LIKE ? OR lName LIKE ?", "%#{search}%", "%#{search}%")
   end

@@ -1,153 +1,190 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<p>
-  <strong>Fname:</strong>
-  <%= @document.fName %>
-</p>
+  <p id="notice"><%= notice %></p>
+  <div class="well">
+    <h2>Section 1</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <strong>First Name</strong> <br>
+        <%= @document.fName %>
+      </div>
+      <div class="col-md-4">
+          <strong>Last Name</strong><br>
+          <%= @document.lName %>
+      </div>
+      <div class="col-md-4">
+          <strong>Phone</strong><br>
+          <%= @document.phone %>
+      </div>
+    </div>
+    <div class="row application">
+      <div class="col-md-4">
+        <strong>AU Email</strong><br>
+        <%= @document.email %>
+      </div>
+      <div class="col-md-4">
+        <strong>Address</strong><br>
+        <%= @document.address %>
+      </div>
+      <div class="col-md-4">
+        <strong>Department</strong><br>
+        <%= @document.department %>
+      </div>
+    </div>
+    <div class="row application">
+      <div class="col-md-4">
+        <strong>Type of Application</strong><br>
+        <%= @document.typeOfApplication %>
+      </div>
+    </div>
+  </div><!-- End section 1 -->
+  <div class="well">
+    <h2>Section 2</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <strong>Research Project Title</strong><br>
+        <%= @document.project_title %>
+      </div>
+      <div class="col-md-6">
+        <strong>Sponsor Name</strong><br>
+        <%= @document.sponsor_name %>
+      </div>
+    </div>
+    <div class="row application">
+      <div class="col-md-6">
+        <strong>Project Start Date</strong><br>
+        <%= @document.start_date %>
+      </div>
+      <div class="col-md-6">
+        <strong>Project End Date</strong><br>
+        <%= @document.end_date %>
+      </div>
+    </div>
+    <div class="row application">
+      <div class="col-md-12">
+        <strong>Research Question</strong><br>
+        <%= @document.research_question %>
+      </div>
+    </div>
+    <div class="row application">
+      <div class="col-md-12">
+        <strong>Brief Literature Review</strong><br>
+        <%= @document.lit_review %>
+      </div>
+    </div>
+    <div class="row application">
+      <div class="col-md-12">
+        <strong>Project description and the procedures to be followed.  You may
+          attach a copy of your procedure</strong><br>
+        <%= @document.procedure %>
+      </div>
+    </div>
+    <div class="row application">
+      <div class="col-md-12">
+        <strong>Describe the pool of subjects</strong><br>
+        <%= @document.pool_of_subjects %>
+      </div>
+    </div>
+    <div class="row application">
+      <div class="col-md-12">
+          <strong>Describe how the subjects will be recruited</strong><br>
+          <%= @document.sub_recruitment %>
+      </div>
+    </div>
+    <div class="row application">
+      <div class="col-md-12">
+          <strong>Describe the risks involved in your project</strong><br>
+          <%= @document.risks %>
+      </div>
+    </div>
+    <div class="row application">
+      <div class="col-md-12">
+          <strong>How will the subjects be informed that
+            they do not have to participate in the study, and that they may withdraw
+              at any time with no penalty?</strong><br>
+          <%= @document.opt_participation %>
+      </div>
+    </div>
+    <div class="row application">
+      <div class="col-md-12">
+        <strong>In what way have the confidentiality and privacy of the subjects’
+          responses been ensured?</strong><br>
+        <%= @document.confidentiality %>
+      </div>
+    </div>
+    <div class="row application">
+      <div class="col-md-12">
+        <strong>Has consent been obtained from the authorities where the
+           research is to be conducted?</strong><br>
+        <%= @document.authorities_consent %>
+      </div>
+    </div>
+  </div> <!-- end Section 2 -->
+  <div class="well">
+    <h2>Section 3</h2>
+    <div class="row">
+      <div class="col-md-12">
+          <strong>Subjects consent:</strong><br>
+          <%= @document.subjects_consent %>
+      </div>
+    </div>
+    <div class="row application">
+      <div class="col-md-12">
+          <strong>Parental consent:</strong><br>
+          <%= @document.parental_consent %>
+      </div>
+    </div>
+  </div>
+  <div class="well">
+    <h2>Section 4</h2>
+    <p>
+      <strong>List of Questions: </strong>
+      <%= link_to "Download PDF", @document.questions_file_url %>
+    </p>
 
-<p>
-  <strong>Lname:</strong>
-  <%= @document.lName %>
-</p>
+    <p>
+      <strong>Copy of Consent Form: </strong>
+      <%= link_to "Download PDF", @document.consent_file_url %>
+    </p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @document.phone %>
-</p>
+    <p>
+      <strong>Copy of Child Assent Form: </strong>
+      <%= link_to "Download PDF", @document.child_assent_file_url %>
+    </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @document.email %>
-</p>
+    <p>
+      <strong>Copy of Human Subjects Research Certificate: </strong>
+      <%= link_to "Download PDF", @document.hsr_certificate_file_url %>
+    </p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @document.address %>
-</p>
+    <p>
+      <strong>Written permission from the site where the research is to be conducted (if applicable):</strong>
+      <%= link_to "Download PDF", @document.written_permission_file_url %>
+    </p>
+    <div class="row application">
+      <div class="col-md-12">
+          <strong>Advisor sig:</strong><br>
+          <%= @document.advisor_sig %>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Department:</strong>
-  <%= @document.department %>
-</p>
 
-<p>
-  <strong>Typeofapplication:</strong>
-  <%= @document.typeOfApplication %>
-</p>
+  <p>
+  </p>
 
-<p>
-  <strong>Project title:</strong>
-  <%= @document.project_title %>
-</p>
+  <p>
+    <strong>State:</strong>
+    <%= @document.state %>
+  </p>
+  <p>
+    <strong>Archived:</strong>
+    <%= @document.is_archived %>
+  </p>
 
-<p>
-  <strong>Sponsor name:</strong>
-  <%= @document.sponsor_name %>
-</p>
 
-<p>
-  <strong>Start date:</strong>
-  <%= @document.start_date %>
-</p>
 
-<p>
-  <strong>End date:</strong>
-  <%= @document.end_date %>
-</p>
+  <%= link_to 'Edit', edit_document_path(@document) %> |
+  <%= link_to 'Back', documents_path %>
 
-<p>
-  <strong>Research question:</strong>
-  <%= @document.research_question %>
-</p>
-
-<p>
-  <strong>Lit review:</strong>
-  <%= @document.lit_review %>
-</p>
-
-<p>
-  <strong>Procedure:</strong>
-  <%= @document.procedure %>
-</p>
-
-<p>
-  <strong>Pool of subjects:</strong>
-  <%= @document.pool_of_subjects %>
-</p>
-
-<p>
-  <strong>Sub recruitment:</strong>
-  <%= @document.sub_recruitment %>
-</p>
-
-<p>
-  <strong>Risks:</strong>
-  <%= @document.risks %>
-</p>
-
-<p>
-  <strong>Opt participation:</strong>
-  <%= @document.opt_participation %>
-</p>
-
-<p>
-  <strong>Confidentiality:</strong>
-  <%= @document.confidentiality %>
-</p>
-
-<p>
-  <strong>Authorities consent:</strong>
-  <%= @document.authorities_consent %>
-</p>
-
-<p>
-  <strong>Subjects consent:</strong>
-  <%= @document.subjects_consent %>
-</p>
-
-<p>
-  <strong>Parental consent:</strong>
-  <%= @document.parental_consent %>
-</p>
-
-<p>
-  <strong>Advisor sig:</strong>
-  <%= @document.advisor_sig %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @document.state %>
-</p>
-<p>
-  <strong>Archived:</strong>
-  <%= @document.is_archived %>
-</p>
-
-<p>
-  <strong>List of Questions: </strong>
-  <%= link_to "Download PDF", @document.questions_file_url %>
-</p>
-
-<p>
-  <strong>Copy of Consent Form: </strong>
-  <%= link_to "Download PDF", @document.consent_file_url %>
-</p>
-
-<p>
-  <strong>Copy of Child Assent Form: </strong>
-  <%= link_to "Download PDF", @document.child_assent_file_url %>
-</p>
-
-<p>
-  <strong>Copy of Human Subjects Research Certificate: </strong>
-  <%= link_to "Download PDF", @document.hsr_certificate_file_url %>
-</p>
-
-<p>
-  <strong>Written permission from the site where the research is to be conducted (if applicable):</strong>
-  <%= link_to "Download PDF", @document.written_permission_file_url %>
-</p>
-
-<%= link_to 'Edit', edit_document_path(@document) %> |
-<%= link_to 'Back', documents_path %>
+</div>
