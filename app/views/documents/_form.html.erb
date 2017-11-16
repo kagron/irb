@@ -1,5 +1,5 @@
 <div class="container">
-  <%= form_with(model: document, local: true, html: { multipart: true }) do |form| %>
+  <%= form_with(model: document, local: true, html: { multipart: true }, id: 'myForm') do |form| %>
   <div class="form-group">
 
     <% if document.errors.any? %>
@@ -64,124 +64,140 @@
     <div class="well">
       <h2>Section 2</h2>
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="field">
-            <%= form.label(:project_title, "Project Title") %>
+            <%= form.label(:project_title, "Research Project Title") %>
             <%= form.text_field :project_title, id: :document_project_title, class: 'form-control' %>
           </div>
         </div>
+        <div class="col-md-6">
+          <div class="field">
+            <%= form.label(:sponsor_name, "Sponsor's Name (Only required if funded by external organization)") %>
+            <%= form.text_field :sponsor_name, id: :document_sponsor_name, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <div class="field">
+            <%= form.label(:start_date, "Project Start Date") %>
+            <%= form.date_select :start_date, id: :document_start_date, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="field">
+            <%= form.label(:end_date, "Project End Date") %>
+            <%= form.date_select :end_date, id: :document_end_date, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <%= form.label :research_question %>
+        <%= form.text_field :research_question, id: :document_research_question, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= form.label(:lit_review, "Brief Literature Review") %>
+        <%= form.text_area :lit_review, id: :document_lit_review, rows: '5', class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= form.label(:procedure,"Project Description and the procedures to be followed.  You may attach a copy of your procedure") %>
+        <%= form.text_area :procedure, id: :document_procedure, rows:'5', class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= form.label(:pool_of_subjects,"Describe the pool of subjects") %>
+        <%= form.text_area :pool_of_subjects, id: :document_pool_of_subjects, rows:'5', class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= form.label(:sub_recruitment,"Descibe how the subjects will be recruited") %>
+        <%= form.text_area :sub_recruitment, id: :document_sub_recruitment, rows:'5', class: 'form-control' %>
+      </div>
+
+      <p><b>Do you anticipate your project will have any discomfort/risks?</b>
+      <input type="radio" name="risks" value="yes" id="yesRisks"> Yes <input type="radio" name="risks" value="no" id="noRisks"> No </p>
+      <div class="field">
+        <%= form.label(:risks,"Describe the risks involved in your project", id: 'document_risks_label') %>
+        <%= form.text_area :risks, id: :document_risks, rows:'5', class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= form.label(:opt_participation, "How will the subjects be informed that
+          they do not have to participate in the study, and that they may withdraw
+            at any time with no penalty?") %>
+        <%= form.text_area :opt_participation, id: :document_opt_participation, rows:'5', class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= form.label(:confidentiality,"In what way have the confidentiality and privacy of the subjects’ responses been ensured?") %>
+        <%= form.text_area :confidentiality, id: :document_confidentiality, rows:'5', class: 'form-control'  %>
+      </div>
+
+      <div class="field">
+        <%= form.label(:authorities_consent,"Has consent been obtained from the authorities where the research is to be conducted?") %>
+        <%= form.text_area :authorities_consent, id: :document_authorities_consent, rows:'5', class: 'form-control' %>
       </div>
     </div>
 
+    <div class="well">
+      <h2>Section 3</h2>
+      <div class="field">
+        <%= form.label(:subjects_consent, "Consent to participate must be obtained
+          from the subjects if at all possible: Attach a copy of your written Informed
+          Consent form to this request. If it is not possible to obtain a written
+          consent form, describe, in written form and full detail, the explanation
+          which will be given to the subjects and through what means you will provide
+          this explanation: orally, use of an interpreter, other.  In this case, a
+            shortened written consent form may be appropriate. If written consent is
+            completely anonymous or impossible to gain without maintaining confidentiality,
+            please consider a waiver of consent.  See website for informed consent checklist,
+            sample, and waiver of consent") %>
+                <%= form.label :consent_file %>
+                <%= form.file_field :consent_file, id: :document_consent_file %>
+        <%= form.text_area :subjects_consent, id: :document_subjects_consent, rows:'5', class: 'form-control' %>
+      </div>
 
-    <div class="field">
-      <%= form.label :sponsor_name %>
-      <%= form.text_field :sponsor_name, id: :document_sponsor_name %>
-    </div>
-
-    <div class="field">
-      <%= form.label :start_date %>
-      <%= form.date_select :start_date, id: :document_start_date %>
-    </div>
-
-    <div class="field">
-      <%= form.label :end_date %>
-      <%= form.date_select :end_date, id: :document_end_date %>
-    </div>
-
-    <div class="field">
-      <%= form.label :research_question %>
-      <%= form.text_field :research_question, id: :document_research_question %>
-    </div>
-
-    <div class="field">
-      <%= form.label :lit_review %>
-      <%= form.text_area :lit_review, id: :document_lit_review %>
-    </div>
-
-    <div class="field">
-      <%= form.label :procedure %>
-      <%= form.text_area :procedure, id: :document_procedure %>
+      <p><b>Will any of the subjects be minors or members of a population classified
+        as vulnerable (prisoners, mentally disabled individuals, etc.)? </b>
+      <input type="radio" name="risks" value="yes" id="yesMinors"> Yes <input type="radio" name="risks" value="no" id="noMinors"> No </p>
+      <div class="field child_assent">
+          <%= form.label(:child_assent_file,"A parental/guardian consent is required
+            as well as assent of the subject. Include a copy of the parental/guardian
+            consent form you plan to use in such instances", id: 'child_assent_label') %>
+          <%= form.file_field :child_assent_file, id: :document_child_assent_file %>
+      </div>
     </div>
 
-    <div class="field">
-      <%= form.label :pool_of_subjects %>
-      <%= form.text_area :pool_of_subjects, id: :document_pool_of_subjects %>
+    <div class="well">
+      <h2>Section 4</h2>
+      <div class="field">
+          <%= form.label(:questions_file,"Please attach a copy of interview questions,
+            surveys, questionnaires, or other data gathering instruments that may be used in the research project") %>
+          <%= form.file_field :questions_file, id: :document_questions_file %>
+      </div>
+
+      <div class="field">
+          <%= form.label(:hsr_certificate_file, "Please attach copy of your human
+            subjects research training certificate from the National Institutes of
+            Health website or evidence of comparable training (see IRB webpage at www.aurora.edu)") %>
+          <%= form.file_field :hsr_certificate_file, id: :document_hsr_certificate_file %>
+      </div>
+
+      <div class="field">
+          <%= form.label(:written_permission_file,"Please attach a copy of written permission
+            from the site where the research is to be conducted (if applicable)") %>
+          <%= form.file_field :written_permission_file, id: :document_written_permission_file %>
+      </div>
+
+      <div class="field">
+        <%= form.label(:advisor_sig,"Student’s Faculty Advisor’s  (supervising the research) E-Signature;
+        your signature states that you have read the proposal and that you believe it is ready for submission to the IRB") %>
+        <%= form.text_field :advisor_sig, id: :document_advisor_sig, class: 'form-control' %>
+      </div>
     </div>
 
-    <div class="field">
-      <%= form.label :sub_recruitment %>
-      <%= form.text_area :sub_recruitment, id: :document_sub_recruitment %>
-    </div>
-
-    <div class="field">
-      <%= form.label :risks %>
-      <%= form.text_area :risks, id: :document_risks %>
-    </div>
-
-    <div class="field">
-      <%= form.label :opt_participation %>
-      <%= form.text_area :opt_participation, id: :document_opt_participation %>
-    </div>
-
-    <div class="field">
-      <%= form.label :confidentiality %>
-      <%= form.text_area :confidentiality, id: :document_confidentiality %>
-    </div>
-
-    <div class="field">
-      <%= form.label :authorities_consent %>
-      <%= form.text_area :authorities_consent, id: :document_authorities_consent %>
-    </div>
-
-    <div class="field">
-      <%= form.label :subjects_consent %>
-      <%= form.text_area :subjects_consent, id: :document_subjects_consent %>
-    </div>
-
-    <div class="field">
-      <%= form.label :parental_consent %>
-      <%= form.text_area :parental_consent, id: :document_parental_consent %>
-    </div>
-
-    <div class="field">
-      <%= form.label :advisor_sig %>
-      <%= form.text_field :advisor_sig, id: :document_advisor_sig %>
-    </div>
-
-    <div class="field">
-      <%= form.label :state %>
-      <%= form.select :state, Document.states.keys %>
-    </div>
-
-    <div class="field">
-      <%= form.label :is_archived %>
-      <%= form.select :is_archived, Document.is_archiveds.keys %>
-    </div>
-    <div class="field">
-        <%= form.label :questions_file %>
-        <%= form.file_field :questions_file, id: :document_questions_file %>
-    </div>
-
-    <div class="field">
-        <%= form.label :consent_file %>
-        <%= form.file_field :consent_file, id: :document_consent_file %>
-    </div>
-
-    <div class="field">
-        <%= form.label :child_assent_file %>
-        <%= form.file_field :child_assent_file, id: :document_child_assent_file %>
-    </div>
-
-    <div class="field">
-        <%= form.label :hsr_certificate_file %>
-        <%= form.file_field :hsr_certificate_file, id: :document_hsr_certificate_file %>
-    </div>
-
-    <div class="field">
-        <%= form.label :written_permission_file %>
-        <%= form.file_field :written_permission_file, id: :document_written_permission_file %>
-    </div>
 
     <div class="actions">
       <%= form.submit %>
