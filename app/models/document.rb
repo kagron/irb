@@ -24,17 +24,17 @@ class Document < ApplicationRecord
   validates :procedure, presence: true
   validates :pool_of_subjects, presence: true
   validates :sub_recruitment, presence: true
-  validates :risks, presence: true
+  #validates :risks, presence: true
   validates :opt_participation, presence: true
   validates :confidentiality, presence: true
   validates :authorities_consent, presence: true
   validates :subjects_consent, presence: true
-  validates :parental_consent, presence: true
+  #validates :parental_consent, presence: true
   validates :advisor_sig, presence: true
   validates :questions_file, presence: true
   validates :consent_file, presence: true
   validates :hsr_certificate_file, presence: true
-  validates :written_permission_file, presence: true
+  #validates :written_permission_file, presence: true
 
   def self.search(search)
 	where("fName LIKE ? OR lName LIKE ?", "%#{search}%", "%#{search}%")
