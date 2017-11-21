@@ -1,5 +1,6 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :check_user
 
   # GET /documents
   # GET /documents.json
@@ -62,6 +63,11 @@ class DocumentsController < ApplicationController
   end
 
   private
+    def check_user
+      if (!user_signed_in?)
+        redirect_to root_path, notice: 'You must log in to do that'
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_document
       @document = Document.find(params[:id])
