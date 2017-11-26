@@ -15,6 +15,7 @@ class DocumentsController < ApplicationController
   # GET /documents/new
   def new
     @document = Document.new
+    UserEmailMailer.submit_document(current_user.email).deliver
   end
 
   # GET /documents/1/edit
