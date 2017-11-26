@@ -3,6 +3,9 @@ class IrbController < ApplicationController
   end
 
   def ArchivedApps
+  
+  @data = Document.where(:is_archived => '1')
+  
   end
 
   def InProgressApps
