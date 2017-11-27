@@ -1,4 +1,9 @@
-
+<html>
+<div class="container">
+<%= form_tag(irb_ArchivedApps_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+<%= submit_tag "Search" %>
+<% end %></br>
 <table class="table">                         
   <tr>                          
     <th>id</th>
@@ -8,8 +13,6 @@
 	<th>Email</th>
     <th>Type</th>
 	<th>Date Submitted</th>
-    <th>Questions File</th>
-	<th>Consent File</th>
     <th>Advisor Signature</th>
   </tr>
 <% @data.each do |data| %> 
@@ -21,9 +24,9 @@
     <td><%= data.email %></td>
 	<td><%= data.typeOfApplication %></td>
     <td><%= data.created_at %></td>
-	<td><%= data.questions_file %></td>
-    <td><%= data.consent_file %></td>
 	<td><%= data.advisor_sig %></td>
   </tr>
 <% end %>                      
-</table> 
+</table>
+</div>
+</html>

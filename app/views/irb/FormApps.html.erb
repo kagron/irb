@@ -1,2 +1,32 @@
-<h1>Irb#FormApps</h1>
-<p>Find me in app/views/irb/FormApps.html.erb</p>
+<html>
+<div class="container">
+<%= form_tag(irb_FormApps_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+<%= submit_tag "Search" %>
+<% end %></br>
+<table class="table">                         
+  <tr>                          
+    <th>id</th>
+    <th>First Name</th>
+	<th>Last Name</th>
+    <th>Phone</th>
+	<th>Email</th>
+    <th>Type</th>
+	<th>Date Submitted</th>
+    <th>Advisor Signature</th>
+  </tr>
+<% @data.each do |data| %> 
+  <tr>
+    <td><%= data.id %></td>
+    <td><%= data.fName %></td>
+	<td><%= data.lName %></td>
+	<td><%= data.phone %></td>
+    <td><%= data.email %></td>
+	<td><%= data.typeOfApplication %></td>
+    <td><%= data.created_at %></td>
+	<td><%= data.advisor_sig %></td>
+  </tr>
+<% end %>                      
+</table> 
+</div>
+</html>
