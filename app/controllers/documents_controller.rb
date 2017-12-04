@@ -26,6 +26,7 @@ class DocumentsController < ApplicationController
   # POST /documents.json
   def create
     @document = Document.new(document_params)
+    UserEmailMailer.submit_document(current_user.email).deliver
 
     respond_to do |format|
       if @document.save
