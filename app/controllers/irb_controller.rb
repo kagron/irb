@@ -2,9 +2,9 @@ class IrbController < ApplicationController
   def FormApps
   
   if params[:search]
-    @data = Document.search(params[:search])#.where(:is_archived => '0') #1isArchived
+    @data = Document.search(params[:search]).order("created_at DESC")#.where(:is_archived => '0') #1isArchived
   else
-    @data = Document.all#.where(:is_archived => '0')
+    @data = Document.all.order("created_at DESC")#.where(:is_archived => '0')
 	
   end
   
@@ -14,9 +14,9 @@ class IrbController < ApplicationController
   
   
    if params[:search]
-    @data = Document.search(params[:search]).where(:is_archived => '1')
+    @data = Document.search(params[:search]).where(:is_archived => '1').order("created_at DESC")
   else
-    @data = Document.where(:is_archived => '1')
+    @data = Document.where(:is_archived => '1').order("created_at DESC")
   
   end
   
