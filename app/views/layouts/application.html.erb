@@ -28,7 +28,7 @@
     <ul class="nav navbar-nav navbar-right">
       <li><%= link_to "Home", root_path %></li>
       <% if user_signed_in? %>
-        <li><%= link_to "Forms Submitted", irb_FormApps_path %></li>
+        <li><%= link_to "All Applications Submitted", irb_FormApps_path %></li>
       <% end %>
       <li><%= link_to "New Application", new_document_path %></li>
     </ul>

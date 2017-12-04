@@ -53,9 +53,9 @@
 <p><a href="../../../documents/academics/resources/irb/sample-student-assent-form-with-audiotaping.docx">Sample Child Assent Form</a> (DOCX)</p>
 <p>(The one exception to this rule is when a teacher is conducting action research, trying out an instructional technique to see how well it works.&#160; The technique cannot involve audio or videotaping students, surveying them, or interviewing them. These research methods require parent and student permission. Action research consists of usual classroom activities.)</p>
 
-   </div>
-    
-    <div class="col-md-4 well">
+   </div> <!-- end left column -->
+
+    <div class="col-md-4 well"> <!-- start right column -->
       <% if !user_signed_in? %>
       <h1>Log In</h1>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -92,6 +92,6 @@
           <%= link_to 'View Your Applications', irb_ArchivedApps_path, class: 'btn btn-success btn-lg', style:'color: white; margin-top: 20px' %>
         </div>
       <% end %>
-    </div>
-	</div>
-</div>
+    </div> <!-- end right column -->
+	</div> <!-- end row -->
+</div> <!-- end container -->
