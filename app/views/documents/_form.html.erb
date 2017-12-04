@@ -1,4 +1,3 @@
-<div class="container">
   <%= form_with(model: document, local: true, html: { multipart: true }, id: 'myForm') do |form| %>
   <div class="form-group">
 
@@ -116,8 +115,6 @@
         <%= form.text_area :sub_recruitment, id: :document_sub_recruitment, rows:'5', class: 'form-control' %>
       </div>
 
-      <p><b>Do you anticipate your project will have any discomfort/risks?</b>
-      <input type="radio" name="risks" value="yes" id="yesRisks"> Yes <input type="radio" name="risks" value="no" id="noRisks"> No </p>
       <div class="field">
         <%= form.label(:risks,"Describe the risks involved in your project", id: 'document_risks_label') %>
         <%= form.text_area :risks, id: :document_risks, rows:'5', class: 'form-control' %>
@@ -199,10 +196,10 @@
     </div>
 
 
-    <div class="actions">
-      <%= form.submit %>
-    </div>
 
   </div>
+  <div class="app-buttons">
+    <%= link_to 'Back', root_path, class: 'btn btn-default' %>
+    <%= form.submit 'Submit', class: 'btn btn-primary' %>
+  </div>
   <% end %>
-</div>
