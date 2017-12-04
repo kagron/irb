@@ -66,8 +66,8 @@
         <h1>Get Started</h1>
         <div class="text-center">
           <%= link_to 'Start a New Application', new_document_path, class: 'btn btn-primary btn-lg', style:'color: white' %>
-          <% if current_user.superadmin_role == true %>
-            <%= link_to 'View All Applications', irb_ArchivedApps_path, class: 'btn btn-warning btn-lg', style:'color: white; margin-top: 20px' %>
+          <% if current_user.supervisor_role == true %>
+            <%= link_to 'View All Applications', documents_path, class: 'btn btn-warning btn-lg', style:'color: white; margin-top: 20px' %>
           <% end %>
           <%= link_to 'View Your Applications', irb_ArchivedApps_path, class: 'btn btn-success btn-lg', style:'color: white; margin-top: 20px' %>
         </div>

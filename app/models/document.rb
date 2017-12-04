@@ -1,4 +1,5 @@
 class Document < ApplicationRecord
+
   mount_uploader :questions_file, QuestionsAttachmentUploader # Tells rails to use this uploader for this model.
   mount_uploader :consent_file, ConsentUploader # Tells rails to use this uploader for this model.
   mount_uploader :child_assent_file, ChildAssentUploader # Tells rails to use this uploader for this model.
@@ -35,8 +36,10 @@ class Document < ApplicationRecord
   validates :consent_file, presence: true
   validates :hsr_certificate_file, presence: true
   #validates :written_permission_file, presence: true
+  belongs_to :user
 
   def self.search(search)
 	where("id LIKE ? OR fName LIKE ? OR lName LIKE ? OR phone LIKE ? OR email LIKE ? OR department LIKE ? OR typeOfApplication LIKE ? OR project_title LIKE ? OR sponsor_name LIKE ? OR start_date LIKE ? OR end_date LIKE ? OR state LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%")
   end
+
 end

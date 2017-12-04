@@ -21,6 +21,7 @@
     <tbody>
       <% @documents.each do |document| %>
         <tr>
+
           <td><%= document.fName + " " + document.lName %></td>
           <td><%= document.department %></td>
           <td><%= document.typeOfApplication %></td>
@@ -33,6 +34,7 @@
           <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white'  %></td>
           <td><%= link_to 'Edit', edit_document_path(document), class: 'btn btn-warning', style: 'color: white'  %></td>
           <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger', style: 'color: white'  %></td>
+
         </tr>
       <% end %>
     </tbody>

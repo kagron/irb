@@ -1,6 +1,5 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
-  before_action :check_user
 
   # GET /documents
   # GET /documents.json
@@ -15,7 +14,8 @@ class DocumentsController < ApplicationController
 
   # GET /documents/new
   def new
-    @document = Document.new
+    @user = current_user
+    @document = @user.documents.new
   end
 
   # GET /documents/1/edit
@@ -25,11 +25,12 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    @document = Document.new(document_params)
-    UserEmailMailer.submit_document(current_user.email).deliver
+    @user = current_user
+    @document = @user.documents.new(document_params)
 
     respond_to do |format|
       if @document.save
+        UserEmailMailer.submit_document(current_user.email).deliver
         format.html { redirect_to @document, notice: 'Document was successfully created.' }
         format.json { render :show, status: :created, location: @document }
       else
@@ -81,6 +82,6 @@ class DocumentsController < ApplicationController
          :end_date, :research_question, :lit_review, :procedure, :pool_of_subjects,
          :sub_recruitment, :risks, :opt_participation, :confidentiality, :authorities_consent,
          :subjects_consent, :parental_consent, :state, :is_archived, :questions_file, :advisor_sig,
-       :consent_file, :child_assent_file, :hsr_certificate_file, :written_permission)
+       :consent_file, :child_assent_file, :hsr_certificate_file, :written_permission, :users_id)
     end
 end

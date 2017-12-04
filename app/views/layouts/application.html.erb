@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Irb</title>
+    <title>Aurora University Institutional Review Board</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <body>
    <nav class="navbar navbar-default" role="navigation">
      <div class="container">
 
@@ -30,7 +30,6 @@
       <% if user_signed_in? %>
         <li><%= link_to "Forms Submitted", irb_FormApps_path %></li>
       <% end %>
-      <!--<li><%= link_to "About", about_path %></li> -->
       <li><%= link_to "New Application", new_document_path %></li>
     </ul>
    </div>
@@ -38,7 +37,7 @@
  </div>
     </nav>
 
-  <body>
+
     <p class="text-center">
   <!-- If the user is signed in then displays who is currently logged in.
        Underneath who is logged in, it links to editing his/her profile, and
