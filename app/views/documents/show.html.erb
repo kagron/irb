@@ -1,5 +1,9 @@
 <div class="container">
-
+  <h2>Your application is <span style="color: #ec971f">Approved Pending Revisions</span></h2>
+  <h4>Please revise your application based on the comments provided and hit resubmit once
+  you are finished</h4>
+<div class="row">
+  <div class="col-md-9">
   <div class="well">
     <h2>Section 1</h2>
     <div class="row">
@@ -15,7 +19,7 @@
           <strong>Phone</strong><br>
           <%= @document.phone %>
       </div>
-    </div>
+    </div> <!-- end first row -->
     <div class="row application">
       <div class="col-md-4">
         <strong>AU Email</strong><br>
@@ -29,13 +33,13 @@
         <strong>Department</strong><br>
         <%= @document.department %>
       </div>
-    </div>
+    </div> <!-- end second row -->
     <div class="row application">
       <div class="col-md-4">
         <strong>Type of Application</strong><br>
         <%= @document.typeOfApplication %>
       </div>
-    </div>
+    </div> <!-- end third row -->
   </div><!-- End section 1 -->
   <div class="well">
     <h2>Section 2</h2>
@@ -48,7 +52,7 @@
         <strong>Sponsor Name</strong><br>
         <%= @document.sponsor_name %>
       </div>
-    </div>
+    </div> <!-- end row 1  -->
     <div class="row application">
       <div class="col-md-6">
         <strong>Project Start Date</strong><br>
@@ -58,7 +62,7 @@
         <strong>Project End Date</strong><br>
         <%= @document.end_date %>
       </div>
-    </div>
+    </div> <!-- end row 2 -->
     <div class="row application">
       <div class="col-md-12">
         <strong>Research Question</strong><br>
@@ -166,24 +170,35 @@
           <%= @document.advisor_sig %>
       </div>
     </div>
-  </div>
+  </div> <!-- end section 4 -->
+</div><!-- end left side -->
+  <div class="col-md-3"> <!-- Comment section -->
+    <h3 style="margin-top: 0">Comments</h3>
+    <div class=" comment-block">
+      <p class="comment"><strong>Tom Cruise</strong> Section 2 needs more in the procedure</p>
+      <p class="comment-time">1 hr</p>
+    </div>
+    <div class=" comment-block">
+      <p class="comment"><strong>Tom Cruise</strong> Section 2 needs more in the procedure</p>
+      <p class="comment-time">1 hr</p>
+    </div>
+    <div class=" comment-block">
+      <p class="comment"><strong>Tom Cruise</strong> Section 2 needs more in the procedure</p>
+      <p class="comment-time">1 hr</p>
+    </div>
+    <div class=" comment-block">
+      <p class="comment"><strong>Tom Cruise</strong> Section 2 needs more in the procedure</p>
+      <p class="comment-time">1 hr</p>
+    </div>
+    <div class=" comment-block">
+      <p class="comment"><strong>Tom Cruise</strong> Section 2 needs more in the procedure</p>
+      <p class="comment-time">1 hr</p>
+    </div>
+    <textarea rows="4" class="form-control txtComment" id="txtCommentBox" placeholder="Write a comment..."></textarea>
+    <button type="button" id="btnSubmitComment" class="btn btn-primary">Submit</button>
+  </div> <!-- end comment section -->
+</div><!-- end page row -->
 
-
-  <p>
-  </p>
-
-  <p>
-    <strong>State:</strong>
-    <%= @document.state %>
-  </p>
-  <p>
-    <strong>Archived:</strong>
-    <%= @document.is_archived %>
-  </p>
-
-
-
-  <%= link_to 'Edit', edit_document_path(@document) %> |
-  <%= link_to 'Back', documents_path %>
+  <%= link_to 'Back', documents_path, class: 'btn btn-default' %>
 
 </div>

@@ -29,7 +29,7 @@ class Document < ApplicationRecord
   validates :opt_participation, presence: true
   validates :confidentiality, presence: true
   validates :authorities_consent, presence: true
-  validates :subjects_consent, presence: true
+  # validates :subjects_consent, presence: true
   #validates :parental_consent, presence: true
   validates :advisor_sig, presence: true
   validates :questions_file, presence: true

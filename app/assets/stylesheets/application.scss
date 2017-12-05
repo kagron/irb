@@ -54,3 +54,14 @@ body, html {
  .navbar-default .navbar-nav > li > a:hover {
    color: green;
  }
+ a:hover {
+   background-color: rgba(0,0,0,0);
+ }
+ .comment-time {
+   text-align: right;
+   color: gray;
+ }
+ .txtComment {
+   margin-top: 20px;
+   margin-bottom: 20px;
+ }

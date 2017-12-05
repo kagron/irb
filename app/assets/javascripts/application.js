@@ -22,7 +22,6 @@ $(document).on('turbolinks:load', function(){
   $('#document_child_assent_file').hide();
   $('#child_assent_label').hide();
 
-
   $('#yesMinors').on('change', function() {
     $('#document_child_assent_file').show(500);
     $('#child_assent_label').show(500);
