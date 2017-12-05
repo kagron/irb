@@ -26,8 +26,24 @@ $(document).on('turbolinks:load', function(){
     $('#document_child_assent_file').show(500);
     $('#child_assent_label').show(500);
   });
+
   $('#noMinors').on('change', function() {
-    $('#document_child_assent_file').hide(500);
-    $('#child_assent_label').hide(500);
+    $('#document_child_assent_file').show(500);
+    $('#child_assent_label').show(500);
+  });
+
+  $('.check').on('change', function() {
+    $('#document_child_assent_file').show(500);
+    $('#child_assent_label').show(500);
+  });
+
+  $('#showCheck').click(function() {
+    $('.checkLabel').toggle('slow', function() {
+      // Animation complete.
+    });
+  });
+
+  $("#checkAll").click(function(){
+    $('input:checkbox').not(this).prop('checked', this.checked);
   });
 });
