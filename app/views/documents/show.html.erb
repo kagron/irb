@@ -1,7 +1,12 @@
 <div class="container">
+
+<% if current_user.supervisor_role %>
+ <h2>This application is <span style="color: #ec971f">Approved Pending Revisions</span></h2>
+<% else %>
   <h2>Your application is <span style="color: #ec971f">Approved Pending Revisions</span></h2>
   <h4>Please revise your application based on the comments provided and hit resubmit once
   you are finished</h4>
+  <% end %>
 <div class="row">
   <div class="col-md-9">
   <div class="well">
@@ -194,6 +199,7 @@
       <p class="comment"><strong>Tom Cruise</strong> Section 2 needs more in the procedure</p>
       <p class="comment-time">1 hr</p>
     </div>
+	<% if current_user.supervisor_role %>
     <textarea rows="4" class="form-control txtComment" id="txtCommentBox" placeholder="Write a comment..."></textarea>
     <button type="button" id="btnSubmitComment" class="btn btn-primary">Submit</button></br>
 	<div class="text-center">
@@ -207,6 +213,7 @@
 	<button type="button" id="reject" class ="btn-danger">Reject</button>
 	</div>
 	</div>
+	<% end %>
 	</div>
   </div> <!-- end comment section -->
 </div><!-- end page row -->
