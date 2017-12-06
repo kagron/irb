@@ -41,6 +41,10 @@ $(document).on('turbolinks:load', function(){
     $('.checkLabel').toggle('slow', function() {
       // Animation complete.
     });
+    $('.assignCombo').show(500);
+    $('.assignBtn').toggle('slow', function() {
+      // Animation complete.
+    });
   });
 
   $("#checkAll").click(function(){
