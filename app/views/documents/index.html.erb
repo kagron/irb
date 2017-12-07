@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <table class="table table-striped">
+  <table class="table table-default">
     <thead>
       <tr>
         <th> <label class="checkLabel" style="display: none"><input type="checkbox" name="" value="" id="checkAll"> Check All</label></th>
@@ -35,7 +35,15 @@
 
     <tbody>
       <% @documents.each do |document| %>
-        <tr>
+      <% if document.state == 'new_app' %>
+        <tr class="alert-info">
+      <% elsif document.state == 'approved' %>
+        <tr class="alert-success">
+      <% elsif document.state == 'rejected' %>
+        <tr class="alert-danger">
+      <% elsif document.state == 'needs_revisions' %>
+        <tr class="alert-warning">
+      <% end %>
           <td> <label class="checkLabel" style="display: none"><input type="checkbox" name="" value="" class="checks"></label> </td>
           <td><%= document.fName + " " + document.lName %></td>
           <td><%= document.department %></td>
