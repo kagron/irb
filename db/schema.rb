@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171204192101) do
+ActiveRecord::Schema.define(version: 20171207011057) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20171204192101) do
     t.string "advisor_sig"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "state"
+    t.integer "state", default: 0
     t.integer "is_archived", limit: 2
     t.string "questions_file"
     t.string "consent_file"

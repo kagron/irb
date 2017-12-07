@@ -15,8 +15,8 @@ gem 'cancancan'
 gem 'remotipart', github: 'mshibuya/remotipart'
 #install rails admin
 gem 'rails_admin'
-#install pry
-gem 'pry-rails'
+# Use Hirb for better irb console
+gem 'hirb', '~> 0.7.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use jquery as the JavaScript library

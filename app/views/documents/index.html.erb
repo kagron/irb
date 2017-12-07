@@ -1,27 +1,42 @@
-<div class="container-fluid">
+<div class="container">
 
   <h1>Applications</h1>
+  <div class="row">
+    <% if current_user.supervisor_role %>
+      <button id="showCheck" type="button" onclick="ShowCheck()" class=" btn btn-default">Assign Documents</button>
+    <% end %>
+    <div class="col-md-4 pull-right">
+      <%= form_tag(documents_path, :method => "get", id: "search-form", class: 'form-group') do %>
+        <div class="input-group">
+          <%= text_field_tag :search, params[:search], placeholder: "Search applications...", class: 'form-control' %>
+          <span class="input-group-btn">
+            <%= submit_tag "Search", class: 'btn btn-default' %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
   <table class="table table-striped">
     <thead>
       <tr>
+        <th> <label class="checkLabel" style="display: none"><input type="checkbox" name="" value="" id="checkAll"> Check All</label></th>
         <th>Name</th>
         <th>Department</th>
-        <th>Type of Application</th>
+        <th>Type</th>
         <th>Project Title</th>
         <th>Sponsor</th>
         <th>Start Date</th>
         <th>End Date</th>
         <th>State</th>
-        <th>Archived</th>
-        <th colspan="3"></th>
+        <th></th>
       </tr>
     </thead>
 
     <tbody>
       <% @documents.each do |document| %>
         <tr>
-
+          <td> <label class="checkLabel" style="display: none"><input type="checkbox" name="" value="" class="checks"></label> </td>
           <td><%= document.fName + " " + document.lName %></td>
           <td><%= document.department %></td>
           <td><%= document.typeOfApplication %></td>
@@ -30,16 +45,20 @@
           <td><%= document.start_date %></td>
           <td><%= document.end_date %></td>
           <td><%= document.state %></td>
-          <td><%= document.is_archived %></td>
           <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white'  %></td>
-          <td><%= link_to 'Edit', edit_document_path(document), class: 'btn btn-warning', style: 'color: white'  %></td>
-          <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger', style: 'color: white'  %></td>
-
         </tr>
       <% end %>
     </tbody>
   </table>
-
+  <label class="checkLabel" style="display: none">
+      <th> Assign Document to: </th>
+      <select class=".assignCombo">
+        <option value="">Tom Cruise</option>
+        <option value="">Mila Kunis</option>
+        <option value="">Chris Pratt</option>
+      </select>
+      <button class=".assignBtn btn btn-default" > Assign Members! </button>
+      </label>
   <br>
 
   <%= link_to 'New Document', new_document_path, class: 'btn btn-default' %>

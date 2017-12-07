@@ -42,7 +42,7 @@ $(document).on('turbolinks:load', function(){
       // Animation complete.
     });
     $('.assignCombo').show(500);
-    $('.assignBtn').toggle('slow', function() {
+    $('#assignBtn').toggle('slow', function() {
       // Animation complete.
     });
   });
