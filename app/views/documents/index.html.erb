@@ -2,10 +2,16 @@
 
   <h1>Applications</h1>
   <div class="row">
-    <% if current_user.supervisor_role %>
-      <button id="showCheck" type="button" onclick="ShowCheck()" class=" btn btn-default">Assign Documents</button>
-    <% end %>
-    <div class="col-md-4 pull-right">
+    <div class="col-md-8">
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">All</a></li>
+        <li role="presentation"><a href="#">Approved</a></li>
+        <li role="presentation"><a href="#">Approved Pending Revisions</a></li>
+        <li role="presentation"><a href="#">Rejected</a></li>
+        <li role="presentation"><a href="#">Archived</a></li>
+      </ul>
+    </div>
+    <div class="col-md-4">
       <%= form_tag(documents_path, :method => "get", id: "search-form", class: 'form-group') do %>
         <div class="input-group">
           <%= text_field_tag :search, params[:search], placeholder: "Search applications...", class: 'form-control' %>
@@ -17,7 +23,7 @@
     </div>
   </div>
 
-  <table class="table table-default">
+  <table class="table table-default table-bordered">
     <thead>
       <tr>
         <th> <label class="checkLabel" style="display: none"><input type="checkbox" name="" value="" id="checkAll"> Check All</label></th>
@@ -58,17 +64,22 @@
       <% end %>
     </tbody>
   </table>
-  <label class="checkLabel" style="display: none">
-      <th> Assign Document to: </th>
-      <select class=".assignCombo">
-        <option value="">Tom Cruise</option>
-        <option value="">Mila Kunis</option>
-        <option value="">Chris Pratt</option>
-      </select>
-      <button class=".assignBtn btn btn-default" > Assign Members! </button>
-      </label>
+
   <br>
 
   <%= link_to 'New Document', new_document_path, class: 'btn btn-default' %>
+  <% if current_user.supervisor_role %>
+    <button id="showCheck" type="button" onclick="ShowCheck()" class=" btn btn-default">Assign Documents</button>
+  <% end %>
+  <br>
+  <label class="checkLabel" style="display: none">
+  Assign Document to:
+  <select class=".assignCombo">
+    <option value="">Tom Cruise</option>
+    <option value="">Mila Kunis</option>
+    <option value="">Chris Pratt</option>
+  </select>
+  <button class=".assignBtn btn btn-default" > Assign Members! </button>
+  </label>
 
 </div>
