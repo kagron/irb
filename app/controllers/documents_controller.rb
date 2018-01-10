@@ -49,9 +49,19 @@ class DocumentsController < ApplicationController
   # PATCH/PUT /documents/1.json
   def update
     respond_to do |format|
-      if @document.update(document_params)
+	
+		@oldstate = @document.state
+	  
+		if @document.update(document_params)
         format.html { redirect_to @document, notice: 'Document was successfully updated.' }
         format.json { render :show, status: :ok, location: @document }
+		
+		@newstate = @document.state
+		
+		if (oldstate != newstate)
+		UserEmailMailer.update_document(current_user.email).deliver
+		format.json { render :show, status: :ok, location: @document }
+				
       else
         format.html { render :edit }
         format.json { render json: @document.errors, status: :unprocessable_entity }
