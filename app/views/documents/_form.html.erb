@@ -58,6 +58,8 @@
       <div class="form-group">
         <%= form.label(:typeOfApplication, "Please select the type of application you believe this would be") %>
         <%= form.select :typeOfApplication, Document.typeOfApplications.keys, class: 'form-control' %>
+        <%= form.label(:state, "Please select the state of application you believe this would be") %>
+        <%= form.select :state, Document.states.keys, class: 'form-control' %>
       </div>
     </div> <!-- end section 1 -->
     <div class="well">
