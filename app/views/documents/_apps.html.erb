@@ -1,0 +1,69 @@
+
+<div class="col-md-4">
+  <%= form_tag(documents_path, :method => "get", id: "search-form", class: 'form-group') do %>
+    <div class="input-group">
+      <%= text_field_tag :search, params[:search], placeholder: "Search applications...", class: 'form-control' %>
+      <span class="input-group-btn">
+        <%= submit_tag "Search", class: 'btn btn-default' %>
+      </span>
+    </div>
+  <% end %>
+</div>
+</div>
+
+<table class="table table-default table-bordered">
+<thead>
+  <tr>
+    <th><label class="checkLabel" style="display: none"><input type="checkbox" name="" value="" id="checkAll">Check All</label></th>
+    <th>Name</th>
+    <th>Department</th>
+    <th>Type</th>
+    <th>Project Title</th>
+    <th>Sponsor</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th></th>
+  </tr>
+</thead>
+
+<tbody>
+  <% @documents.each do |document| %>
+  <% if document.state == 'new_app' %>
+    <tr class="alert-info">
+  <% elsif document.state == 'approved' %>
+    <tr class="alert-success">
+  <% elsif document.state == 'rejected' %>
+    <tr class="alert-danger">
+  <% elsif document.state == 'needs_revisions' %>
+    <tr class="alert-warning">
+  <% end %>
+      <td><label class="checkLabel" style="display: none"><input type="checkbox" name="" value="" class="checks"></label></td>
+      <td><%= document.fName + " " + document.lName %></td>
+      <td><%= document.department %></td>
+      <td><%= document.typeOfApplication %></td>
+      <td><%= document.project_title %></td>
+      <td><%= document.sponsor_name %></td>
+      <td><%= document.start_date %></td>
+      <td><%= document.end_date %></td>
+      <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white'  %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Document', new_document_path, class: 'btn btn-default' %>
+<% if current_user.supervisor_role %>
+<button id="showCheck" type="button" onclick="ShowCheck()" class=" btn btn-default">Assign Documents</button>
+<% end %>
+<br>
+<label class="checkLabel" style="display: none">
+Assign Document to:
+<select class=".assignCombo">
+<option value="">Tom Cruise</option>
+<option value="">Mila Kunis</option>
+<option value="">Chris Pratt</option>
+</select>
+<button class=".assignBtn btn btn-default" > Assign Members! </button>
+</label>

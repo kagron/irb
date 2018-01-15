@@ -2,8 +2,8 @@ class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :check_user
 
-  # GET /documents
-  # GET /documents.json
+  # GET /applications
+  # GET /applications.json
   def index
     if params[:search]
       @documents = Document.search(params[:search]).order("created_at DESC")#.where(:is_archived => '0') #1isArchived
@@ -12,23 +12,43 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # GET /documents/1
-  # GET /documents/1.json
+  # GET /applications/approved
+  def approved
+    @documents = Document.where(state: 'new_app').order("created_at DESC")
+  end
+
+  # GET /applications/needs_revisions
+  def needs_revisions
+    @documents = Document.where(state: 'needs_revisions').order("created_at DESC")
+  end
+
+  # GET /applications/rejected
+  def rejected
+    @documents = Document.where(state: 'rejected').order("created_at DESC")
+  end
+
+  # GET /applications/rejected
+  def archived
+    @documents = Document.where(is_archived: 'yes').order("created_at DESC")
+  end
+
+  # GET /applications/1
+  # GET /applications/1.json
   def show
   end
 
-  # GET /documents/new
+  # GET /applications/new
   def new
     @user = current_user
     @document = @user.documents.new
   end
 
-  # GET /documents/1/edit
+  # GET /applications/1/edit
   def edit
   end
 
-  # POST /documents
-  # POST /documents.json
+  # POST /applications
+  # POST /applications.json
   def create
     @user = current_user
     @document = @user.documents.new(document_params)
@@ -45,8 +65,8 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /documents/1
-  # PATCH/PUT /documents/1.json
+  # PATCH/PUT /applications/1
+  # PATCH/PUT /applications/1.json
   def update
     respond_to do |format|
 
@@ -67,8 +87,8 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # DELETE /documents/1
-  # DELETE /documents/1.json
+  # DELETE /applications/1
+  # DELETE /applications/1.json
   def destroy
     @document.destroy
     respond_to do |format|
