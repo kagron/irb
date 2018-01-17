@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'applications/rejected', :to => 'documents#rejected'
   get 'applications/needs_revisions', :to => 'documents#needs_revisions'
   get 'applications/archived', :to => 'documents#archived'
+  get 'applications/new_apps', :to => 'documents#new_apps'
 
   resources :applications, as: 'documents', controller: 'documents'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

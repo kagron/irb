@@ -14,7 +14,7 @@
 <table class="table table-default table-bordered">
 <thead>
   <tr>
-    <th><label class="checkLabel" style="display: none"><input type="checkbox" name="" value="" id="checkAll">Check All</label></th>
+    <th style="padding: 0px;"><label class="checkLabel" style="display: none;"><input type="checkbox" name="" value="" id="checkAll">Check All</label></th>
     <th>Name</th>
     <th>Department</th>
     <th>Type</th>
@@ -37,7 +37,7 @@
   <% elsif document.state == 'needs_revisions' %>
     <tr class="alert-warning">
   <% end %>
-      <td><label class="checkLabel" style="display: none"><input type="checkbox" name="" value="" class="checks"></label></td>
+      <td style="padding: 0px;"><label class="checkLabel" style="display: none"><input type="checkbox" name="" value="" class="checks"></label></td>
       <td><%= document.fName + " " + document.lName %></td>
       <td><%= document.department %></td>
       <td><%= document.typeOfApplication %></td>

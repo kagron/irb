@@ -12,9 +12,13 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def new_apps
+    @documents = Document.where(state: 'new_app').order("created_at DESC")
+  end
+  
   # GET /applications/approved
   def approved
-    @documents = Document.where(state: 'new_app').order("created_at DESC")
+    @documents = Document.where(state: 'approved').order("created_at DESC")
   end
 
   # GET /applications/needs_revisions

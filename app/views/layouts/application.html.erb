@@ -29,9 +29,9 @@
       <li><%= link_to "Home", root_path %></li>
       <% if user_signed_in? %>
         <% if current_user.supervisor_role %>
-          <li><%= link_to "All Applications Submitted", documents_path %></li>
+          <li><%= link_to "All Applications Submitted", applications_new_apps_path %></li>
         <% end %>
-        <li><%= link_to "Your Applications", documents_path %></li>
+        <li><%= link_to "Your Applications", applications_new_apps_path %></li>
       <% end %>
       <li><%= link_to "New Application", new_document_path %></li>
     </ul>
