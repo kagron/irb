@@ -13,12 +13,32 @@ class DocumentsController < ApplicationController
   end
 
   def new_apps
-    @documents = Document.where(state: 'new_app').order("created_at DESC")
+  
+	if current_user.supervisor_role
+	
+	@documents = Document.where(state: 'new_app').order("created_at DESC")
+	
+	else
+	
+	@documents = Document.where(state: 'new_app').where(:email => current_user.email).order("created_at DESC")
+	
+	
+	end
   end
   
   # GET /applications/approved
   def approved
-    @documents = Document.where(state: 'approved').order("created_at DESC")
+    
+	if current_user.supervisor_role
+	
+	@documents = Document.where(state: 'approved').order("created_at DESC")
+	
+	else
+	
+	@documents = Document.where(state: 'approved').where(:email => current_user.email).order("created_at DESC")
+	
+	
+	end
   end
 
   # GET /applications/needs_revisions
@@ -33,7 +53,17 @@ class DocumentsController < ApplicationController
 
   # GET /applications/rejected
   def archived
-    @documents = Document.where(is_archived: 'yes').order("created_at DESC")
+  
+  if current_user.supervisor_role
+	
+	@documents = Document.where(is_archived: 'yes').order("created_at DESC")
+	
+	else
+	
+	@documents = Document.where(is_archived: 'yes').where(:email => current_user.email).order("created_at DESC")
+	
+	end
+    
   end
 
   # GET /applications/1
