@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :admins
 
+  post 'applications/:id', :to => 'comments#create'
   get 'irb/ArchivedApps'
   devise_for :users
   root 'irb#home'

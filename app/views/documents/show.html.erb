@@ -1,12 +1,39 @@
 <div class="container">
 
-<% if current_user.supervisor_role %>
- <h2>This application is <span style="color: #ec971f">Approved Pending Revisions</span></h2>
-<% else %>
-  <h2>Your application is <span style="color: #ec971f">Approved Pending Revisions</span></h2>
-  <h4>Please revise your application based on the comments provided and hit resubmit once
-  you are finished</h4>
+<% if @document.state == 'new_app' %>
+  <% if current_user.supervisor_role %>
+   <h2>This application is <span style="color: #31708f">New</span></h2>
+  <% else %>
+    <h2>Your application is <span style="color: #31708f">New</span></h2>
+    <h4>Please wait while the board reviews your application</h4>
   <% end %>
+<% end %>
+
+<% if @document.state == 'approved' %>
+  <% if current_user.supervisor_role %>
+   <h2>This application is <span style="color: green">Approved</span></h2>
+  <% else %>
+    <h2>Your application is <span style="color: green">Approved</span></h2>
+  <% end %>
+<% end %>
+
+<% if @document.state == 'rejected' %>
+  <% if current_user.supervisor_role %>
+   <h2>This application is <span style="color: red">Rejected</span></h2>
+  <% else %>
+    <h2>Your application is <span style="color: red">Rejected</span></h2>
+  <% end %>
+<% end %>
+
+<% if @document.state == 'needs_revisions' %>
+  <% if current_user.supervisor_role %>
+   <h2>This application is <span style="color: #ec971f">Approved Pending Revisions</span></h2>
+  <% else %>
+    <h2>Your application is <span style="color: #ec971f">Approved Pending Revisions</span></h2>
+    <h4>Please revise your application based on the comments provided and hit resubmit once
+    you are finished</h4>
+  <% end %>
+<% end %>
 <div class="row">
   <div class="col-md-9">
   <div class="well">
@@ -179,29 +206,18 @@
 </div><!-- end left side -->
   <div class="col-md-3"> <!-- Comment section -->
     <h3 style="margin-top: 0">Comments</h3>
+    <% @comments.each do |c| %>
     <div class=" comment-block">
-      <p class="comment"><strong>Tom Cruise</strong> Section 2 needs more in the procedure</p>
+      <p class="comment"><strong><%= c.fname + " " + c.lname %></strong> <%= c.content %></p>
       <p class="comment-time">1 hr</p>
     </div>
-    <div class=" comment-block">
-      <p class="comment"><strong>Tom Cruise</strong> Section 2 needs more in the procedure</p>
-      <p class="comment-time">1 hr</p>
-    </div>
-    <div class=" comment-block">
-      <p class="comment"><strong>Tom Cruise</strong> Section 2 needs more in the procedure</p>
-      <p class="comment-time">1 hr</p>
-    </div>
-    <div class=" comment-block">
-      <p class="comment"><strong>Tom Cruise</strong> Section 2 needs more in the procedure</p>
-      <p class="comment-time">1 hr</p>
-    </div>
-    <div class=" comment-block">
-      <p class="comment"><strong>Tom Cruise</strong> Section 2 needs more in the procedure</p>
-      <p class="comment-time">1 hr</p>
-    </div>
+    <% end %>
 	<% if current_user.supervisor_role %>
-    <textarea rows="4" class="form-control txtComment" id="txtCommentBox" placeholder="Write a comment..."></textarea>
-    <button type="button" id="btnSubmitComment" class="btn btn-primary">Submit</button></br>
+    <%= form_for @comment, url: @document do |form| %>
+      <%= form.text_area :content, id: :comment_content, rows: '5', class: 'form-control txtComment' %>
+
+      <%= submit_tag('Submit', class: 'btn btn-primary', id: 'btnSubmitComment') %>
+    <% end %>
 	<div class="text-center">
 	<div></br>
 	<button type="button" id="approve" class ="btn btn-success">Approve</button>

@@ -15,7 +15,7 @@ class DocumentsController < ApplicationController
   def new_apps
     @documents = Document.where(state: 'new_app').order("created_at DESC")
   end
-  
+
   # GET /applications/approved
   def approved
     @documents = Document.where(state: 'approved').order("created_at DESC")
@@ -39,6 +39,12 @@ class DocumentsController < ApplicationController
   # GET /applications/1
   # GET /applications/1.json
   def show
+    @user = current_user
+    @comment = Comment.new
+    @comment.documents_id = @document.id
+    @comment.users_id = @user.id
+
+    @comments = Comment.all
   end
 
   # GET /applications/new
