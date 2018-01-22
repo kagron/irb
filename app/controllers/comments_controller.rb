@@ -4,8 +4,10 @@ class CommentsController < ApplicationController
     @user = current_user
     @comment = Comment.new(comment_params)
     @document = Document.find(params[:id])
-    @comment.documents_id = @document.id
-    @comment.users_id = @user.id
+    @comment.document_id = @document.id
+    @comment.user_id = @user.id
+    @comment.fname = @user.first_name
+    @comment.lname = @user.last_name
 
     respond_to do |format|
       if @comment.save

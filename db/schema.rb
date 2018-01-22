@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180117160447) do
+ActiveRecord::Schema.define(version: 20180122160447) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -33,12 +33,12 @@ ActiveRecord::Schema.define(version: 20180117160447) do
     t.string "fname"
     t.string "lname"
     t.text "content"
-    t.bigint "documents_id"
-    t.bigint "users_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["documents_id"], name: "index_comments_on_documents_id"
-    t.index ["users_id"], name: "index_comments_on_users_id"
+    t.bigint "document_id"
+    t.bigint "user_id"
+    t.index ["document_id"], name: "index_comments_on_document_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -94,9 +94,13 @@ ActiveRecord::Schema.define(version: 20180117160447) do
     t.boolean "superadmin_role"
     t.boolean "supervisor_role"
     t.boolean "user_role", default: true
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "documents"
+  add_foreign_key "comments", "users"
   add_foreign_key "documents", "users"
 end

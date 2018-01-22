@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   post 'applications/:id', :to => 'comments#create'
   get 'irb/ArchivedApps'
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'registrations' }
   root 'irb#home'
 
 

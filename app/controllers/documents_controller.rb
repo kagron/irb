@@ -41,10 +41,10 @@ class DocumentsController < ApplicationController
   def show
     @user = current_user
     @comment = Comment.new
-    @comment.documents_id = @document.id
-    @comment.users_id = @user.id
+    @comment.document_id = @document.id
+    @comment.user_id = @user.id
 
-    @comments = Comment.all
+    @comments = Comment.where(document_id: @document.id)
   end
 
   # GET /applications/new
