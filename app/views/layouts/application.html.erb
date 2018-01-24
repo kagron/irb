@@ -25,35 +25,36 @@
      <div class="collapse navbar-collapse" id="main-nav-collapse">
 
 
-<% if current_user.superadmin_role %>
+       <% if user_signed_in? %>
 
-<ul class="nav navbar-nav navbar-right">
+       <% if current_user.superadmin_role %>
 
-  <li><%= link_to "Home", root_path %></li>
-  <li><%= link_to "Applications", applications_new_apps_path %></li>
-  <li><%= link_to "New Application", new_document_path %></li>
-</ul>
+       <ul class="nav navbar-nav navbar-right">
 
-<% elsif current_user.supervisor_role %>
-<ul class="nav navbar-nav navbar-right">
+         <li><%= link_to "Home", root_path %></li>
+         <li><%= link_to "Applications", applications_new_apps_path %></li>
+         <li><%= link_to "New Application", new_document_path %></li>
+       </ul>
 
-  <li><%= link_to "Home", root_path %></li>
-  <li><%= link_to "Applications", applications_rejected_path %></li>
-  <li><%= link_to "New Application", new_document_path %></li>
-</ul>
+       <% elsif current_user.supervisor_role %>
+       <ul class="nav navbar-nav navbar-right">
 
-<% else %>
+         <li><%= link_to "Home", root_path %></li>
+         <li><%= link_to "Applications", applications_assignments_path %></li>
+         <li><%= link_to "New Application", new_document_path %></li>
+       </ul>
 
-<ul class="nav navbar-nav navbar-right">
+       <% else %>
 
-  <li><%= link_to "Home", root_path %></li>
-  <li><%= link_to "Applications", applications_new_apps_path %></li>
-  <li><%= link_to "New Application", new_document_path %></li>
-</ul>
+       <ul class="nav navbar-nav navbar-right">
 
-<% end %>
+         <li><%= link_to "Home", root_path %></li>
+         <li><%= link_to "Applications", applications_new_apps_path %></li>
+         <li><%= link_to "New Application", new_document_path %></li>
+       </ul>
 
-
+       <% end %>
+       <% end %>
    </div>
 
  </div>
