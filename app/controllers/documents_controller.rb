@@ -2,6 +2,7 @@ class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :check_user
 
+
   # GET /applications
   # GET /applications.json
   def index
@@ -28,6 +29,8 @@ class DocumentsController < ApplicationController
   # GET /applications/approved
   def approved
 
+  @users = User.where(supervisor_role: '1')
+
 	if current_user.supervisor_role
 
 	@documents = Document.where(state: 'approved').order("created_at DESC")
@@ -42,16 +45,20 @@ class DocumentsController < ApplicationController
 
   # GET /applications/needs_revisions
   def needs_revisions
+    @users = User.where(supervisor_role: '1')
     @documents = Document.where(state: 'needs_revisions').order("created_at DESC")
   end
 
   # GET /applications/rejected
   def assignments
+    @users = User.where(supervisor_role: '1')
     @documents = Document.where(state: 'new_app').order("created_at DESC")
   end
 
   # GET /applications/rejected
   def archived
+
+  @users = User.where(supervisor_role: '1')
 
   if current_user.supervisor_role
 
