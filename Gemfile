@@ -9,6 +9,8 @@ gem 'sprockets-rails'
 
 # Use font awesome
 gem "font-awesome-rails"
+# Use Whenever for scheduling
+gem 'whenever', require: false
 #install cancan gem
 gem 'cancancan'
 #install remotipart
