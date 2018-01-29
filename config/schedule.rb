@@ -20,6 +20,6 @@
 # Learn more: http://github.com/javan/whenever
 ENV['RAILS_ENV'] = "development"
 set :output, 'log/whenever.log'
-every 1.day, :at => '11:41 am' do
-  rake "whenever:demo_task"
+every 1.day, :at => '12:00 am' do
+  rake "whenever:demo_task", :environment => 'development'
 end
