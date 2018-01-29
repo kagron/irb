@@ -14,16 +14,15 @@ class DocumentsController < ApplicationController
 
   def new_apps
 
-	if current_user.supervisor_role
+    @user = User.where(supervisor_role: '1')
 
-	@documents = Document.where(state: 'new_app').order("created_at DESC")
+	   if current_user.supervisor_role
+	      @documents = Document.where(state: 'new_app').order("created_at DESC")
+	   else
+	      @documents = Document.where(state: 'new_app').where(:email => current_user.email).order("created_at DESC")
 
-	else
 
-	@documents = Document.where(state: 'new_app').where(:email => current_user.email).order("created_at DESC")
-
-
-	end
+	     end
   end
 
   # GET /applications/approved
