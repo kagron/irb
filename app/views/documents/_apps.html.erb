@@ -14,7 +14,6 @@
 <table class="table table-default table-bordered">
 <thead>
   <tr>
-    <th style="padding: 0px;"><label class="checkLabel" style="display: none;"><input type="checkbox" name="" value="" id="checkAll">Check All</label></th>
     <th>Name</th>
     <th>Department</th>
     <th>Type</th>
@@ -59,10 +58,10 @@
 <br>
 <label class="checkLabel" style="display: none">
 Assign Document to:
-<select class=".assignCombo">
-<option value="">Tom Cruise</option>
-<option value="">Mila Kunis</option>
-<option value="">Chris Pratt</option>
-</select>
-<button class=".assignBtn btn btn-default" > Assign Members! </button>
+<form>
+<% @users.each do |user| %>
+ <input type="checkbox"><%= user.first_name + " " + user.last_name %></input></br>
+<%end%>
+</form>
+<button class=".assignBtn btn btn-default" > Assign </button>
 </label>
