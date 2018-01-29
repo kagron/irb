@@ -6,6 +6,7 @@ class DocumentsController < ApplicationController
   # GET /applications
   # GET /applications.json
   def index
+    @users = User.where(supervisor_role: '1')
     if params[:search]
       @documents = Document.search(params[:search]).order("created_at DESC")#.where(:is_archived => '0') #1isArchived
     else
