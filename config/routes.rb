@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'applications/approved', :to => 'documents#approved'
-  get 'applications/rejected', :to => 'documents#rejected'
+  get 'applications/assignments', :to => 'documents#assignments'
   get 'applications/needs_revisions', :to => 'documents#needs_revisions'
   get 'applications/archived', :to => 'documents#archived'
   get 'applications/new_apps', :to => 'documents#new_apps'

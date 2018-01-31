@@ -2,9 +2,11 @@ class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :check_user
 
+
   # GET /applications
   # GET /applications.json
   def index
+    @users = User.where(supervisor_role: '1')
     if params[:search]
       @documents = Document.search(params[:search]).order("created_at DESC")#.where(:is_archived => '0') #1isArchived
     else
@@ -14,13 +16,12 @@ class DocumentsController < ApplicationController
 
   def new_apps
 
+  @users = User.where(supervisor_role: '1')
+
 	if current_user.supervisor_role
-
-	@documents = Document.where(state: 'new_app').order("created_at DESC")
-
+	   @documents = Document.where(state: 'new_app').order("created_at DESC")
 	else
-
-	@documents = Document.where(state: 'new_app').where(:email => current_user.email).order("created_at DESC")
+	   @documents = Document.where(state: 'new_app').where(:email => current_user.email).order("created_at DESC")
 
 
 	end
@@ -43,12 +44,14 @@ class DocumentsController < ApplicationController
 
   # GET /applications/needs_revisions
   def needs_revisions
+    @users = User.where(supervisor_role: '1')
     @documents = Document.where(state: 'needs_revisions').order("created_at DESC")
   end
 
   # GET /applications/rejected
-  def rejected
-    @documents = Document.where(state: 'rejected').order("created_at DESC")
+  def assignments
+    @users = User.where(supervisor_role: '1')
+    @documents = Document.where(state: 'new_app').order("created_at DESC")
   end
 
   # GET /applications/rejected
