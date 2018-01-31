@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124162250) do
+ActiveRecord::Schema.define(version: 20180131154940) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -30,8 +30,16 @@ ActiveRecord::Schema.define(version: 20180124162250) do
   end
 
   create_table "assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "documents_id"
+    t.bigint "users_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "document_id"
+    t.bigint "user_id"
+    t.index ["document_id"], name: "index_assignments_on_document_id"
+    t.index ["documents_id"], name: "index_assignments_on_documents_id"
+    t.index ["user_id"], name: "index_assignments_on_user_id"
+    t.index ["users_id"], name: "index_assignments_on_users_id"
   end
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -105,6 +113,18 @@ ActiveRecord::Schema.define(version: 20180124162250) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "votes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "document_id"
+    t.integer "user_id"
+    t.integer "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["document_id"], name: "index_votes_on_document_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
+  end
+
+  add_foreign_key "assignments", "documents"
+  add_foreign_key "assignments", "users"
   add_foreign_key "comments", "documents"
   add_foreign_key "comments", "users"
   add_foreign_key "documents", "users"
