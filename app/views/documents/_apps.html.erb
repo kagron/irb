@@ -53,9 +53,9 @@
 
 <br>
 
-<% if current_user.superadmin_role %>
-<button id="showCheck" type="button" onclick="ShowCheck()" class=" btn btn-default">Assign Documents</button>
-<% end %>
+<% if current_user.superadmin_role && @users %>
+  <button id="showCheck" type="button" onclick="ShowCheck()" class=" btn btn-default">Assign Documents</button>
+
 <br>
 <label class="checkLabel" style="display: none">
 Assign Document to:
@@ -66,3 +66,4 @@ Assign Document to:
 </form>
 <button class=".assignBtn btn btn-default" > Assign </button>
 </label>
+<% end %>
