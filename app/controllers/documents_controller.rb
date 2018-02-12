@@ -61,6 +61,8 @@ class DocumentsController < ApplicationController
     @comment.document_id = @document.id
     @comment.user_id = @user.id
 
+    @votes = Vote.where(document_id: @document.id)
+    @your_votes = Vote.where(document_id: @document.id, user_id: @user.id)
     @comments = Comment.where(document_id: @document.id)
   end
 
