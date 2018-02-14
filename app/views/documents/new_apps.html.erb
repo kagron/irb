@@ -29,6 +29,12 @@
         </div>
         </div>
 
+
+
+
+<%= form_tag(applications_new_apps_path, :method => "get", id: "assignForm", class: 'form-group') do %>
+
+
     <div class="table-responsive col-md-10">
 
 
@@ -104,12 +110,14 @@
       </tbody>
     </table>
 
-    <button class=".assignBtn btn btn-default" > Assign </button>
+    <%= submit_tag('Assign', class: 'btn btn-primary', id: 'btnAssign') %>
     </div>
 
 
 
 
+
+    <% end %>
 
     <% end %>
 
