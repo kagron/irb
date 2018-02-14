@@ -10,8 +10,8 @@ class AssignmentsController < ApplicationController
     @assignment.lname = @user.last_name
 
     respond_to do |format|
-      if @comment.save
-        format.html { redirect_to applications_new_apps_path,notice: 'Comment was successfully added' }
+      if @assignment.save
+        format.html { redirect_to applications_new_apps_path,notice: 'ADocument assigned succesfully' }
         format.json { render :show, status: :created, location: @assignment }
       else
         format.html { render :new }

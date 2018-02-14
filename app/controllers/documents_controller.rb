@@ -16,6 +16,8 @@ class DocumentsController < ApplicationController
 
   def new_apps
     @users = User.where(supervisor_role: '1')
+    @assignment = Assignment.new
+  
   	if current_user.supervisor_role
   	   @documents = Document.where(state: 'new_app').order("created_at DESC")
   	else
