@@ -1,3 +1,5 @@
+
+
 <div class="container">
 
   <h1>Applications</h1>
@@ -32,10 +34,12 @@
 
 
 
-<%= form_tag(applications_new_apps_path, :method => "get", id: "assignForm", class: 'form-group') do %>
+<% if current_user.superadmin_role %>
+
+      <%= form_tag(applications_new_apps_path, :method => "get", id: "assignForm", class: 'form-group') do %>
 
 
-    <div class="table-responsive col-md-10">
+        <div class="table-responsive col-md-10">
 
 
       <% end %>
@@ -82,8 +86,6 @@
 
     <br>
 
-    <% if current_user.superadmin_role && @users %>
-
 
     <br>
 
@@ -115,11 +117,13 @@
 
 
 
-
-
-    <% end %>
-
-    <% end %>
-
-
 </div>
+
+<% else %>
+
+
+<%= render 'apps'%>
+
+<% end %>
+
+<% end %>
