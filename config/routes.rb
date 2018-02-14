@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'applications/needs_revisions', :to => 'documents#needs_revisions'
   get 'applications/archived', :to => 'documents#archived'
   get 'applications/new_apps', :to => 'documents#new_apps'
+  post 'applications/:id/approve', :to => 'votes#approve', as: 'approve_app'
+  post 'applications/:id/revise', :to => 'votes#revise', as: 'revise_app'
+  post 'applications/:id/reject', :to => 'votes#reject', as: 'reject_app'
 
   resources :applications, as: 'documents', controller: 'documents'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
@@ -13,6 +16,7 @@ Rails.application.routes.draw do
   get 'irb/ArchivedApps'
   devise_for :users, :controllers => { registrations: 'registrations' }
   root 'irb#home'
+
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -58,7 +58,7 @@
       <div class="form-group">
         <%= form.label(:typeOfApplication, "Please select the type of application you believe this would be") %>
         <%= form.select :typeOfApplication, Document.typeOfApplications.keys, class: 'form-control' %>
-      
+
       </div>
     </div> <!-- end section 1 -->
     <div class="well">
@@ -81,13 +81,13 @@
         <div class="col-md-5">
           <div class="field">
             <%= form.label(:start_date, "Project Start Date") %>
-            <%= form.date_select :start_date, id: :document_start_date, class: 'form-control' %>
+            <%= form.date_select :start_date, id: :document_start_date, class: 'form-control', start_year: Date.today.year %>
           </div>
         </div>
         <div class="col-md-5">
           <div class="field">
             <%= form.label(:end_date, "Project End Date") %>
-            <%= form.date_select :end_date, id: :document_end_date, class: 'form-control' %>
+            <%= form.date_select :end_date, id: :document_end_date, class: 'form-control', start_year: Date.today.year %>
           </div>
         </div>
       </div>
