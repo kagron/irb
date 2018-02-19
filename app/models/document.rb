@@ -32,13 +32,14 @@ class Document < ApplicationRecord
   # validates :subjects_consent, presence: true
   #validates :parental_consent, presence: true
   validates :advisor_sig, presence: true
-  validates :questions_file, presence: true
-  validates :consent_file, presence: true
-  validates :hsr_certificate_file, presence: true
+  # validates :questions_file, presence: true
+  # validates :consent_file, presence: true
+  # validates :hsr_certificate_file, presence: true
   #validates :written_permission_file, presence: true
   belongs_to :user
   has_many :comments
   has_many :votes
+  has_many :assignments
 
   def self.search(search)
 	where("id LIKE ? OR fName LIKE ? OR lName LIKE ? OR phone LIKE ? OR email LIKE ? OR department LIKE ? OR typeOfApplication LIKE ? OR project_title LIKE ? OR sponsor_name LIKE ? OR start_date LIKE ? OR end_date LIKE ? OR state LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%")
