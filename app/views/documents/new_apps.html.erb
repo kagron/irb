@@ -1,3 +1,5 @@
+
+
 <div class="container">
 
   <h1>Applications</h1>
@@ -19,6 +21,109 @@
     </div>
 
 
-	<%= render 'apps'%>
+    <div class="col-md-4">
+      <%= form_tag(documents_path, :method => "get", id: "search-form", class: 'form-group') do %>
+        <div class="input-group">
+          <%= text_field_tag :search, params[:search], placeholder: "Search applications...", class: 'form-control' %>
+          <span class="input-group-btn">
+            <%= submit_tag "Search", class: 'btn btn-default' %>
+          </span>
+        </div>
+        </div>
+
+
+
+
+<% if current_user.superadmin_role %>
+
+      <%= form_tag(applications_new_apps_path, :method => "get", id: "assignForm", class: 'form-group') do %>
+
+
+        <div class="table-responsive col-md-10">
+
+
+      <% end %>
+    <table class="table table-default table-bordered">
+    <thead>
+      <tr>
+        <th style="padding: 0px;"></th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Type</th>
+        <th>Project Title</th>
+        <th>Sponsor</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @documents.each do |document| %>
+      <% if document.state == 'new_app' %>
+        <tr class="alert-info">
+      <% elsif document.state == 'approved' %>
+        <tr class="alert-success">
+      <% elsif document.state == 'rejected' %>
+        <tr class="alert-danger">
+      <% elsif document.state == 'needs_revisions' %>
+        <tr class="alert-warning">
+      <% end %>
+          <td><%= check_box_tag 'document', "<option>document.id</option>" %></td>
+          <td><%= document.fName + " " + document.lName %></td>
+          <td><%= document.department %></td>
+          <td><%= document.typeOfApplication %></td>
+          <td><%= document.project_title %></td>
+          <td><%= document.sponsor_name %></td>
+          <td><%= document.start_date %></td>
+          <td><%= document.end_date %></td>
+          <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white'  %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+    </div>
+
+    <br>
+
+
+    <br>
+
+    <div class="table-responsive col-md-2">
+        <table class="table table-default table-bordered">
+        <thead>
+          <tr>
+            <th style="padding: 0px;"></th>
+            <th>Board Member</th>
+            </th>
+          </tr>
+        </thead>
+
+
+    <tbody>
+        <% @users.each do |user| %>
+
+          <tr>
+            <td><%= check_box_tag 'user_id', "<option>user.id</option>" %></td>
+            <td><%= user.first_name + " " + user.last_name %></td>
+          </tr>
+        <% end %>
+
+      </tbody>
+    </table>
+
+    <%= submit_tag('Assign', class: 'btn btn-primary', id: 'btnAssign') %>
+    </div>
+
+
 
 </div>
+
+<% else %>
+
+
+<%= render 'apps'%>
+
+<% end %>
+
+<% end %>
