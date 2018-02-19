@@ -84,7 +84,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.save
-        UserEmailMailer.submit_document(current_user.email).deliver
+        UserEmailMailer.submit_document(@document.email).deliver
         format.html { redirect_to @document, notice: 'Document was successfully created.' }
         format.json { render :show, status: :created, location: @document }
       else
@@ -105,7 +105,7 @@ class DocumentsController < ApplicationController
     		@newstate = @document.state
 
     		if (@oldstate != @newstate)
-      		UserEmailMailer.update_document(current_user.email).deliver
+      		UserEmailMailer.update_document(@document.email).deliver
         end
         format.html { redirect_to @document, notice: 'Document was successfully updated.' }
         format.json { render :show, status: :ok, location: @document }

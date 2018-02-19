@@ -4,8 +4,8 @@ class VotesController < ApplicationController
     @document = Document.find(params[:id])
     if (current_user.superadmin_role)
       @document.state = 'approved'
-      @document.save
-      UserEmailMailer.update_document(current_user.email).deliver
+      @document.save(document_params)
+      UserEmailMailer.update_document(@document.email).deliver
       redirect_to @document, notice: 'You successfully changed the state to Approved'
     else
       @vote = Vote.new
@@ -23,7 +23,7 @@ class VotesController < ApplicationController
     if (current_user.superadmin_role)
       @document.state = 'needs_revisions'
       @document.save
-      UserEmailMailer.update_document(current_user.email).deliver
+      UserEmailMailer.update_document(@document.email).deliver
       redirect_to @document, notice: 'You successfully changed the state to Approved Pending Revisions'
     else
       @vote = Vote.new
@@ -41,7 +41,7 @@ class VotesController < ApplicationController
     if (current_user.superadmin_role)
       @document.state = 'rejected'
       @document.save
-      UserEmailMailer.update_document(current_user.email).deliver
+      UserEmailMailer.update_document(@document.email).deliver
       redirect_to @document, notice: 'You successfully changed the state to Rejected'
     else
       @vote = Vote.new
@@ -63,5 +63,10 @@ class VotesController < ApplicationController
       # if (!current_user.superadmin_role)
       #   redirect_to root_path, notice: 'You do not have permissions to do that'
       # end
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def document_params
+      params.require(:document).permit(:state)
     end
 end
