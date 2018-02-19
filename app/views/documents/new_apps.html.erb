@@ -36,7 +36,7 @@
 
 <% if current_user.superadmin_role %>
 
-      <%= form_tag(applications_new_apps_path, :method => "get", id: "assignForm", class: 'form-group') do %>
+      <%= form_tag(applications_new_apps_path, :method => "post", id: "assignForm", class: 'form-group') do %>
 
 
         <div class="table-responsive col-md-10">

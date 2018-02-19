@@ -17,7 +17,7 @@ class DocumentsController < ApplicationController
   def new_apps
     @users = User.where(supervisor_role: '1')
     @assignment = Assignment.new
-  
+
   	if current_user.supervisor_role
   	   @documents = Document.where(state: 'new_app').order("created_at DESC")
   	else
@@ -42,8 +42,17 @@ class DocumentsController < ApplicationController
 
   # GET /applications/rejected
   def assignments
-    @users = User.where(supervisor_role: '1')
-    @documents = Document.where(state: 'new_app').order("created_at DESC")
+
+    @assignments = Assignment.where(user_id: 1)
+    @array = Array.new
+    @assignments.each do |a|
+
+      @array.push(a.document_id)
+
+    end
+
+
+    @documents = Document.where(id: @array, state: 'new_app').order("created_at DESC")
   end
 
   # GET /applications/rejected

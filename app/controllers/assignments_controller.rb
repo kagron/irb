@@ -1,7 +1,7 @@
 class AssignmentsController < ApplicationController
 
   def create
-    @user = current_user
+    @users = User.where(supervisor_role: '1')
     @assignment = Assignment.new(assignment_params)
     @document = Document.find(params[:id])
     @assignment.document_id = @document.id
@@ -11,7 +11,7 @@ class AssignmentsController < ApplicationController
 
     respond_to do |format|
       if @assignment.save
-        format.html { redirect_to applications_new_apps_path,notice: 'ADocument assigned succesfully' }
+        format.html { redirect_to applications_new_apps_path, notice: 'Document assigned succesfully' }
         format.json { render :show, status: :created, location: @assignment }
       else
         format.html { render :new }
