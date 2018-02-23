@@ -96,6 +96,16 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       if @document.save
         UserEmailMailer.submit_document(@document.email).deliver
+        # Create empty votes for every board member
+        @array = Array.new
+        @board = User.where('supervisor_role' == true)
+        @board.each do |b|
+          @current_user = User.find(b.id)
+          @empty_vote = @document.votes.new
+          @empty_vote.state = 'new_app'
+          @empty_vote.user_id = @current_user.id
+          @empty_vote.save
+        end
         format.html { redirect_to @document, notice: 'Document was successfully created.' }
         format.json { render :show, status: :created, location: @document }
       else

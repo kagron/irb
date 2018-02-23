@@ -8,8 +8,8 @@ class VotesController < ApplicationController
       UserEmailMailer.update_document(@document.email).deliver
       redirect_to @document, notice: 'You successfully changed the state to Approved'
     else
-      @vote = Vote.new
       @user = current_user
+      @vote = Vote.where(user_id: @user.id)
       @vote.document_id = @document.id
       @vote.user_id = @user.id
       @vote.state = 'approved'

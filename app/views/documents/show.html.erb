@@ -238,11 +238,17 @@
     <% end %>
 
 	</div>
-  <% @votes.each do |v| %>
-    <% @user = User.find(v.user_id) %>
-    <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be " + v.state %></p>
-  <% end %>
+  <% if @votes.present? %>
+    <% @votes.each do |v| %>
+      <% @user = User.find(v.user_id) %>
+      <% if v.state == 'new_app' %>
+        <p><%= @user.first_name + " " + @user.last_name + " has not voted yet" %></p>
+      <% else %>
+        <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be " + v.state %></p>
+        <% end %>
+    <% end %>
 	<% end %>
+  <% end %>
   </div> <!-- end comment section -->
 </div><!-- end page row -->
 
