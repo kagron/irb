@@ -43,7 +43,7 @@ class DocumentsController < ApplicationController
   # GET /applications/rejected
   def assignments
 
-    @assignments = Assignment.where(user_id: 1)
+    @assignments = Assignment.where(user_id: current_user.id)
     @array = Array.new
     @assignments.each do |a|
 
