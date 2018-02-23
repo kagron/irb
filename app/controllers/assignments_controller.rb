@@ -3,11 +3,9 @@ class AssignmentsController < ApplicationController
   def create
     @users = User.where(supervisor_role: '1')
     @assignment = Assignment.new(assignment_params)
-    @document = Document.find(params[:id])
-    @assignment.document_id = @document.id
-    @assignment_params.user_id = @user.id
-    @assignment.fname = @user.first_name
-    @assignment.lname = @user.last_name
+    @assignment.document_id = params[:document_id]
+    @assignment.user_id = params[:user_id]
+
 
     respond_to do |format|
       if @assignment.save
@@ -22,6 +20,6 @@ class AssignmentsController < ApplicationController
 
   private
     def assignment_params
-      params.require(:comment).permit(:documents_id,:users_id)
+      params.require(:assignment).permit(:documents_id,:users_id)
     end
 end

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :admins
 
+  post 'applications/assignments', :to => 'assignments#create'
   post 'applications/:id', :to => 'comments#create'
   get 'irb/ArchivedApps'
   devise_for :users, :controllers => { registrations: 'registrations' }
