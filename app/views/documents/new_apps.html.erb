@@ -27,6 +27,8 @@
           <%= text_field_tag :search, params[:search], placeholder: "Search applications...", class: 'form-control' %>
           <span class="input-group-btn">
             <%= submit_tag "Search", class: 'btn btn-default' %>
+
+            <% end %>
           </span>
         </div>
         </div>
@@ -36,13 +38,13 @@
 
 <% if current_user.superadmin_role %>
 
-      <%= form_tag(applications_new_apps_path, :method => "post", id: "assignForm", class: 'form-group') do %>
+      <%= form_for @assignment, url: applications_assignments_path do |form| %>
 
 
         <div class="table-responsive col-md-10">
 
 
-      <% end %>
+
     <table class="table table-default table-bordered">
     <thead>
       <tr>
@@ -69,7 +71,8 @@
       <% elsif document.state == 'needs_revisions' %>
         <tr class="alert-warning">
       <% end %>
-          <td><%= check_box_tag 'document', "<option>document.id</option>" %></td>
+
+          <td><%= form.check_box :document_id, {}, document.id %></td>
           <td><%= document.fName + " " + document.lName %></td>
           <td><%= document.department %></td>
           <td><%= document.typeOfApplication %></td>
@@ -104,8 +107,10 @@
         <% @users.each do |user| %>
 
           <tr>
-            <td><%= check_box_tag 'user_id', "<option>user.id</option>" %></td>
+
+            <td><%= form.check_box :user_id, {}, user.id %></td>
             <td><%= user.first_name + " " + user.last_name %></td>
+
           </tr>
         <% end %>
 
@@ -115,6 +120,8 @@
     <%= submit_tag('Assign', class: 'btn btn-primary', id: 'btnAssign') %>
     </div>
 
+    <% end %>
+
 
 
 </div>
@@ -123,7 +130,5 @@
 
 
 <%= render 'apps'%>
-
-<% end %>
 
 <% end %>
