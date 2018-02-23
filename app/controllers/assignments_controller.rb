@@ -12,7 +12,7 @@ class AssignmentsController < ApplicationController
         format.html { redirect_to applications_new_apps_path, notice: 'Document assigned succesfully' }
         format.json { render :show, status: :created, location: @assignment }
       else
-        format.html { render :new }
+        format.html { redirect_to applications_new_apps_path, notice: 'There was a problem assigning the document'}
         format.json { render json: @assignment.errors, status: :unprocessable_entity }
       end
     end
