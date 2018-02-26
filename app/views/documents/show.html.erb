@@ -220,15 +220,10 @@
     <%= form_for @comment, url: @document do |form| %>
       <%= form.text_area :content, id: :comment_content, rows: '5', class: 'form-control txtComment', placeholder: 'Add a comment...' %>
 
-      <%= submit_tag('Submit', class: 'btn btn-primary', id: 'btnSubmitComment') %>
+      <%= submit_tag('Submit', class: 'btn btn-primary submit-btn', id: 'btnSubmitComment', style: 'margin-bottom: 20px') %>
     <% end %>
 	<div class="text-center well">
-    <% if current_user.superadmin_role %>
-      <h4>Determine the state of the application:</h4>
-      <%= button_to 'Approve', approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to approve this application?' } %>
-      <%= button_to 'Approve Pending Revisions', revise_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to make this application approved pending revisions?' } %>
-      <%= button_to 'Reject', reject_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to reject this application?' } %>
-    <% elsif (!@your_votes.present? && @your_votes.state != 'new_app') %>
+    <% if (@your_votes[0].state == 'new_app') %>
       <h4>Vote for the state you believe this application should be:</h4>
       <%= button_to 'Approve', approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to vote to approve this application?' } %>
       <%= button_to 'Approve Pending Revisions', revise_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to vote to make this application approved pending revisions?' } %>
@@ -249,6 +244,14 @@
     <% end %>
 	<% end %>
   <% end %>
+  <div class="well">
+    <% if current_user.superadmin_role %>
+      <h4>Determine the state of the application:</h4>
+      <%= button_to 'Approve', approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to approve this application?' } %>
+      <%= button_to 'Approve Pending Revisions', revise_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to make this application approved pending revisions?' } %>
+      <%= button_to 'Reject', reject_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to reject this application?' } %>
+    <% end %>
+  </div>
   </div> <!-- end comment section -->
 </div><!-- end page row -->
 

@@ -2,36 +2,32 @@ class VotesController < ApplicationController
   before_action :check_user
   def approve
     @document = Document.find(params[:id])
-    if (current_user.superadmin_role)
+    @user = current_user
+    @vote = Vote.where(user_id: @user.id, document_id: @document.id)
+    if (current_user.superadmin_role && @vote[0].state != 'new_app')
       @document.state = 'approved'
-      @document.save(document_params)
+      @document.update(document_params)
       UserEmailMailer.update_document(@document.email).deliver
       redirect_to @document, notice: 'You successfully changed the state to Approved'
     else
-      @user = current_user
-      @vote = Vote.where(user_id: @user.id)
-      @vote.document_id = @document.id
-      @vote.user_id = @user.id
-      @vote.state = 'approved'
-      @vote.save
+      @vote[0].state = 'approved'
+      @vote[0].save
       redirect_to @document, notice: 'You successfully voted to change the state to Approved'
     end
   end
 
   def revise
-    @document = Document.find(params[:id])
+    @document = Document.find(ms[:id])
     if (current_user.superadmin_role)
       @document.state = 'needs_revisions'
       @document.save
       UserEmailMailer.update_document(@document.email).deliver
       redirect_to @document, notice: 'You successfully changed the state to Approved Pending Revisions'
     else
-      @vote = Vote.new
       @user = current_user
-      @vote.document_id = @document.id
-      @vote.user_id = @user.id
-      @vote.state = 'needs_revisions'
-      @vote.save
+      @vote = Vote.where(user_id: @user.id, document_id: @document.id)
+      @vote[0].state = 'needs_revisions'
+      @vote[0].save
       redirect_to @document, notice: 'You successfully voted to change the state to Approved Pending Revisions'
     end
   end
@@ -44,12 +40,10 @@ class VotesController < ApplicationController
       UserEmailMailer.update_document(@document.email).deliver
       redirect_to @document, notice: 'You successfully changed the state to Rejected'
     else
-      @vote = Vote.new
       @user = current_user
-      @vote.document_id = @document.id
-      @vote.user_id = @user.id
-      @vote.state = 'rejected'
-      @vote.save
+      @vote = Vote.where(user_id: @user.id, document_id: @document.id)
+      @vote[0].state = 'rejected'
+      @vote[0].save
       redirect_to @document, notice: 'You successfully voted to change the state to Rejected'
     end
   end
@@ -67,6 +61,6 @@ class VotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:state)
+      params.permit(:state)
     end
 end
