@@ -98,7 +98,7 @@ class DocumentsController < ApplicationController
         UserEmailMailer.submit_document(@document.email).deliver
         # Create empty votes for every board member
         @array = Array.new
-        @board = User.where('supervisor_role' == true)
+        @board = User.where(supervisor_role: true)
         @board.each do |b|
           @current_user = User.find(b.id)
           @empty_vote = @document.votes.new
