@@ -28,8 +28,9 @@
           <span class="input-group-btn">
             <%= submit_tag "Search", class: 'btn btn-default' %>
 
-            <% end %>
           </span>
+            <% end %>
+
         </div>
         </div>
 
@@ -72,7 +73,7 @@
         <tr class="alert-warning">
       <% end %>
 
-          <td><%= form.check_box :document_id, {}, document.id %></td>
+          <td><%= form.check_box :document_id, document_ids[], document.id %></td>
           <td><%= document.fName + " " + document.lName %></td>
           <td><%= document.department %></td>
           <td><%= document.typeOfApplication %></td>
@@ -108,7 +109,7 @@
 
           <tr>
 
-            <td><%= form.check_box :user_id, {}, user.id %></td>
+            <td><%= form.check_box :user_id, {}, user.id, user.id %></td>
             <td><%= user.first_name + " " + user.last_name %></td>
 
           </tr>
