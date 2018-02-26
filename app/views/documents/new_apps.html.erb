@@ -72,7 +72,8 @@
         <tr class="alert-warning">
       <% end %>
 
-          <td><%= form.check_box :document_id, {}, document.id %></td>
+
+          <td><input type="checkbox" name="document_id[]" value="<%= document.id %>"></td>
           <td><%= document.fName + " " + document.lName %></td>
           <td><%= document.department %></td>
           <td><%= document.typeOfApplication %></td>
@@ -108,7 +109,8 @@
 
           <tr>
 
-            <td><%= form.check_box :user_id, {}, user.id %></td>
+
+            <td><input type="checkbox" name="user_id[]" value="<%= user.id %>"></td>
             <td><%= user.first_name + " " + user.last_name %></td>
 
           </tr>

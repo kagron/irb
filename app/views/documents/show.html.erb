@@ -228,7 +228,7 @@
       <%= button_to 'Approve', approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to approve this application?' } %>
       <%= button_to 'Approve Pending Revisions', revise_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to make this application approved pending revisions?' } %>
       <%= button_to 'Reject', reject_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to reject this application?' } %>
-    <% elsif !@your_votes.present? %>
+    <% elsif (!@your_votes.present? && @your_votes.state != 'new_app') %>
       <h4>Vote for the state you believe this application should be:</h4>
       <%= button_to 'Approve', approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to vote to approve this application?' } %>
       <%= button_to 'Approve Pending Revisions', revise_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to vote to make this application approved pending revisions?' } %>
