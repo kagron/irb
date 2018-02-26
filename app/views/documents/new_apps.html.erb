@@ -21,6 +21,8 @@
     </div>
 
 
+<% if current_user.superadmin_role %>
+
     <div class="col-md-4">
       <%= form_tag(documents_path, :method => "get", id: "search-form", class: 'form-group') do %>
         <div class="input-group">
@@ -37,7 +39,7 @@
 
 
 
-<% if current_user.superadmin_role %>
+
 
       <%= form_for @assignment, url: applications_assignments_path do |form| %>
 
