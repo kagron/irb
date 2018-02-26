@@ -55,8 +55,9 @@
         <th>Type</th>
         <th>Project Title</th>
         <th>Sponsor</th>
-        <th>Start Date</th>
-        <th>End Date</th>
+        <!-- <th>Start Date</th> -->
+        <!-- <th>End Date</th> -->
+        <th>Assigned to</th>
         <th></th>
       </tr>
     </thead>
@@ -73,14 +74,16 @@
         <tr class="alert-warning">
       <% end %>
 
-          <td><%= form.check_box :document_id, document_ids[], document.id %></td>
+
+          <td><input type="checkbox" name="document_id[]" value="<%= document.id %>"></td>
           <td><%= document.fName + " " + document.lName %></td>
           <td><%= document.department %></td>
           <td><%= document.typeOfApplication %></td>
           <td><%= document.project_title %></td>
           <td><%= document.sponsor_name %></td>
-          <td><%= document.start_date %></td>
-          <td><%= document.end_date %></td>
+          <!-- <td><%= document.start_date %></td> -->
+          <!-- <td><%= document.end_date %></td> -->
+          <td></td>
           <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white'  %></td>
         </tr>
       <% end %>
@@ -109,7 +112,8 @@
 
           <tr>
 
-            <td><%= form.check_box :user_id, {}, user.id, user.id %></td>
+
+            <td><input type="checkbox" name="user_id[]" value="<%= user.id %>"></td>
             <td><%= user.first_name + " " + user.last_name %></td>
 
           </tr>
