@@ -85,11 +85,11 @@
 
             <% if @first %>
 
-              <% @str += a.user_id.to_s; @first = false %>
+              <% @str += @users.find(a.user_id).first_name; @first = false %>
 
             <% else %>
 
-              <% @str += ", " + a.user_id.to_s %>
+              <% @str += ", " + @users.find(a.user_id).first_name %>
 
             <% end %>
 
