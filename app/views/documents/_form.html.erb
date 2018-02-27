@@ -18,13 +18,13 @@
         <div class="col-md-4">
           <div class="form-group">
             <%= form.label(:fName, "First Name") %>
-            <%= form.text_field :fName, id: :document_fName, class: 'form-control' %>
+            <%= form.text_field :fName, id: :document_fName, class: 'form-control', value: current_user.first_name %>
           </div>
         </div>
         <div class="col-md-4">
           <div class="field">
             <%= form.label(:lName, "Last Name") %>
-            <%= form.text_field :lName, id: :document_lName, class: 'form-control' %>
+            <%= form.text_field :lName, id: :document_lName, class: 'form-control', value: current_user.last_name %>
           </div>
         </div>
         <div class="col-md-4">
@@ -38,7 +38,7 @@
         <div class="col-md-4">
           <div class="field">
             <%= form.label(:email, "AU Email") %>
-            <%= form.text_field :email, id: :document_email, class: 'form-control' %>
+            <%= form.text_field :email, id: :document_email, class: 'form-control', value: current_user.email %>
           </div>
         </div>
         <div class="col-md-4">

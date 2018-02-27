@@ -17,15 +17,15 @@ class VotesController < ApplicationController
   end
 
   def revise
-    @document = Document.find(ms[:id])
-    if (current_user.superadmin_role)
+    @document = Document.find(params[:id])
+    @user = current_user
+    @vote = Vote.where(user_id: @user.id, document_id: @document.id)
+    if (current_user.superadmin_role && @vote[0].state != 'new_app')
       @document.state = 'needs_revisions'
-      @document.save
+      @document.update(document_params)
       UserEmailMailer.update_document(@document.email).deliver
       redirect_to @document, notice: 'You successfully changed the state to Approved Pending Revisions'
     else
-      @user = current_user
-      @vote = Vote.where(user_id: @user.id, document_id: @document.id)
       @vote[0].state = 'needs_revisions'
       @vote[0].save
       redirect_to @document, notice: 'You successfully voted to change the state to Approved Pending Revisions'
@@ -34,14 +34,14 @@ class VotesController < ApplicationController
 
   def reject
     @document = Document.find(params[:id])
-    if (current_user.superadmin_role)
+    @user = current_user
+    @vote = Vote.where(user_id: @user.id, document_id: @document.id)
+    if (current_user.superadmin_role && @vote[0].state != 'new_app')
       @document.state = 'rejected'
-      @document.save
+      @document.update(document_params)
       UserEmailMailer.update_document(@document.email).deliver
       redirect_to @document, notice: 'You successfully changed the state to Rejected'
     else
-      @user = current_user
-      @vote = Vote.where(user_id: @user.id, document_id: @document.id)
       @vote[0].state = 'rejected'
       @vote[0].save
       redirect_to @document, notice: 'You successfully voted to change the state to Rejected'

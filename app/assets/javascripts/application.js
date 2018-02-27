@@ -18,7 +18,7 @@
 //= require bootstrap-sprockets
 //= require jquery3
 $(document).on('turbolinks:load', function(){
-  $('.alert').delay(2000).fadeOut(2000);
+  $('.alert').delay(5000).fadeOut(2000);
   $('#document_child_assent_file').hide();
   $('#child_assent_label').hide();
 

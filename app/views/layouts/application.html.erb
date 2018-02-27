@@ -75,7 +75,10 @@
 
     <div class="container flash-container">
       <% flash.each do |type, msg| %>
-        <%= content_tag :div, msg, class: "alert alert-#{type}" %>
+        <div class="alert alert-<%= type %>">
+          <%= msg.html_safe %>
+          <a class='close' data-dismiss='alert'>&times;</a>
+        </div>
       <% end %>
     </div>
     <%= yield %>
