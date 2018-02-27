@@ -3,6 +3,7 @@ class DocumentsController < ApplicationController
   before_action :check_user
 
 
+
   # GET /applications
   # GET /applications.json
   def index
@@ -17,6 +18,7 @@ class DocumentsController < ApplicationController
   def new_apps
     @users = User.where(supervisor_role: '1')
     @assignment = Assignment.new
+    @a = Assignment.all
 
   	if current_user.supervisor_role
   	   @documents = Document.where(state: 'new_app').order("created_at DESC")
@@ -91,6 +93,7 @@ class DocumentsController < ApplicationController
   # POST /applications.json
   def create
     @user = current_user
+    @test = Assignment.all
     @document = @user.documents.new(document_params)
 
     respond_to do |format|

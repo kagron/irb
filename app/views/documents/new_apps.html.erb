@@ -76,6 +76,25 @@
         <tr class="alert-warning">
       <% end %>
 
+      <% @str = "" %>
+      <% @first = true %>
+
+        <% @a.each do |a| %>
+
+          <% if a.document_id == document.id %>
+
+            <% if @first %>
+
+              <% @str += a.user_id.to_s; @first = false %>
+
+            <% else %>
+
+              <% @str += ", " + a.user_id.to_s %>
+
+            <% end %>
+
+        <% end %>
+        <% end %>
 
           <td><input type="checkbox" name="document_id[]" value="<%= document.id %>"></td>
           <td><%= document.fName + " " + document.lName %></td>
@@ -85,7 +104,7 @@
           <td><%= document.sponsor_name %></td>
           <!-- <td><%= document.start_date %></td> -->
           <!-- <td><%= document.end_date %></td> -->
-          <td></td>
+          <td><%= @str %></td>
           <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white'  %></td>
         </tr>
       <% end %>
