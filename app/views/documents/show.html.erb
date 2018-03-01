@@ -14,6 +14,7 @@
    <h2>This application is <span style="color: green">Approved</span></h2>
   <% else %>
     <h2>Your application is <span style="color: green">Approved</span></h2>
+    <h4>Please print out your stamped forms at the bottom of this page</h4>
   <% end %>
 <% end %>
 
@@ -22,6 +23,7 @@
    <h2>This application is <span style="color: red">Rejected</span></h2>
   <% else %>
     <h2>Your application is <span style="color: red">Rejected</span></h2>
+    <h4>If you would like to resubmit your application, please create a new application</h4>
   <% end %>
 <% end %>
 
@@ -32,6 +34,9 @@
     <h2>Your application is <span style="color: #ec971f">Approved Pending Revisions</span></h2>
     <h4>Please revise your application based on the comments provided and hit resubmit once
     you are finished</h4>
+    <div class="text-center">
+      <%= button_to 'Edit Application', edit_document_path, method: :get, class: 'btn btn-primary', style: 'margin-bottom: 20px;' %>
+    </div>
   <% end %>
 <% end %>
 <div class="row">
@@ -206,7 +211,7 @@
 </div><!-- end left side -->
   <div class="col-md-3"> <!-- Comment section -->
     <h3 style="margin-top: 0">Comments</h3>
-    <% if @comments %>
+    <% if @comments.present? %>
       <% @comments.each do |c| %>
         <div class=" comment-block">
           <p class="comment"><strong><%= c.fname + " " + c.lname %></strong> <%= c.content %></p>
@@ -238,20 +243,22 @@
       <% @user = User.find(v.user_id) %>
       <% if v.state == 'new_app' %>
         <p><%= @user.first_name + " " + @user.last_name + " has not voted yet" %></p>
+      <% elsif v.state == 'needs_revisions' %>
+        <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be approved pending revisions" %></p>
       <% else %>
         <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be " + v.state %></p>
-        <% end %>
+      <% end %>
     <% end %>
 	<% end %>
   <% end %>
-  <div class="well">
     <% if current_user.superadmin_role %>
+    <div class="well">
       <h4>Determine the state of the application:</h4>
       <%= button_to 'Approve', approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to approve this application?' } %>
       <%= button_to 'Approve Pending Revisions', revise_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to make this application approved pending revisions?' } %>
       <%= button_to 'Reject', reject_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to reject this application?' } %>
+    </div>
     <% end %>
-  </div>
   </div> <!-- end comment section -->
 </div><!-- end page row -->
 
