@@ -15,12 +15,12 @@
 <thead>
   <tr>
     <th>Name</th>
+    <th>Project Title</th>
     <th>Department</th>
     <th>Type</th>
-    <th>Project Title</th>
-    <th>Sponsor</th>
-    <!-- <th>Start Date</th> -->
-    <!-- <th>End Date</th> -->
+    <!-- <th>Sponsor</th> -->
+    <th>Start Date</th>
+    <th>End Date</th>
     <th></th>
   </tr>
 </thead>
@@ -37,12 +37,12 @@
     <tr class="alert-warning">
   <% end %>
       <td><%= document.fName + " " + document.lName %></td>
+      <td><%= document.project_title %></td>
       <td><%= document.department %></td>
       <td><%= document.typeOfApplication %></td>
-      <td><%= document.project_title %></td>
-      <td><%= document.sponsor_name %></td>
-      <!-- <td><%= document.start_date %></td> -->
-      <!-- <td><%= document.end_date %></td> -->
+      <!-- <td><%= document.sponsor_name %></td> -->
+      <td><%= document.start_date %></td>
+      <td><%= document.end_date %></td>
       <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white'  %></td>
     </tr>
   <% end %>
