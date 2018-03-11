@@ -3,15 +3,23 @@ class AssignmentsController < ApplicationController
   def create
     # "document_id"=>["5", "1"], "user_id"=>["1", "3"],
     @isAllCorrect = true
+    # create an empty error string
     @errorStr = Array.new
+    # go through EACH user AND document passed through the POST request
+    # params stores POST and GET data
     params[:document_id].each do |d|
       params[:user_id].each do |u|
         @assignment = Assignment.new()
         @assignment.document_id = d
         @assignment.user_id = u
+        # check if assignment already exists
         if !assignment_check(@assignment)
+          # if assignment does NOT exist, save the assignment and check for votes
           @assignment.save
+          vote_check(u, d)
         else
+          # assignment already exists, so we add to the error string and change
+          # @isAllCorrect to false so it will display error string
           @current_document = Document.find(d)
           @current_user = User.find(u)
           @isAllCorrect = false
@@ -21,55 +29,41 @@ class AssignmentsController < ApplicationController
       end
     end
     if @isAllCorrect
+      # if everything is correct, display no errors
       redirect_to applications_new_apps_path, notice: "Application(s) assigned successfully" and return
     else
+      # if something is wrong, display the error instead
       redirect_to applications_new_apps_path, notice: @errorStr.join("<br />").html_safe and return
     end
-    # redirect_to applications_new_apps_path, notice: "success"
-    # @users = User.where(supervisor_role: '1')
-    # @assignment = Assignment.new()
-    # @assignment.document_id = params[:document_id][0]
-    # @assignment.user_id = params[:user_id][0]
-
-    # if !assignment_check(@assignment)
-    #   respond_to do |format|
-    #       if @assignment.save!
-    #         format.html { redirect_to applications_new_apps_path, notice: 'Application assigned succesfully' }
-    #         format.json { render :show, status: :created, location: @assignment }
-    #       else
-    #         format.html { redirect_to applications_new_apps_path, notice: 'There was a problem assigning that application'}
-    #         format.json { render json: @assignment.errors, status: :unprocessable_entity }
-    #       end
-    #
-    #   end
-    # else
-    #   redirect_to applications_new_apps_path, notice: 'That person has already been assigned to that application'
-    # end
   end
 
   private
     def assignment_params
       params.require(:assignment).permit(:document_id,:user_id)
     end
-
+    def vote_check(user_id, document_id)
+      # Checks if current user has a vote associated with that document
+      @vote = Vote.where(user_id: user_id, document_id: document_id)
+      if !@vote.present?
+        # if vote is NOT present, it will create one
+        @newVote = Vote.new
+        @newVote.user_id = user_id
+        @newVote.document_id = document_id
+        @newVote.state = 'new_app'
+        @newVote.save
+      end
+    end
     def assignment_check(assignment)
-
+      # check to see if that current assignment already exists
       @assignment_ids = Assignment.ids
       @assignment_to_check = assignment
       @old_assignment = Assignment.where(user_id: @assignment_to_check.user_id, document_id: @assignment_to_check.document_id)
       if @old_assignment.present?
+        # if that assignment already exists, return true
         @isAssigned = true
       else
         @isAssigned = false
       end
-
-      # @assignment_ids.each do |a|
-      #   if a == @assignment_to_check.document_id
-      #     @isAssigned = false
-      #   else
-      #     @isAssigned = true
-      #   end
-      # end
       return @isAssigned
     end
 
