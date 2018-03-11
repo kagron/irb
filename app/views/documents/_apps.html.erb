@@ -10,7 +10,7 @@
   <% end %>
 </div>
 </div>
-
+<% if @documents.present? %>
 <table class="table table-default table-bordered">
 <thead>
   <tr>
@@ -52,5 +52,8 @@
   <% end %>
 </tbody>
 </table>
+<% else %>
+  <h4>There doesn't seem to be anything here yet... </h4>
+<% end %>
 
 <br>
