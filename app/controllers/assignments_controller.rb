@@ -7,6 +7,11 @@ class AssignmentsController < ApplicationController
     @errorStr = Array.new
     # go through EACH user AND document passed through the POST request
     # params stores POST and GET data
+    if !params[:document_id].present?
+      redirect_to applications_new_apps_path, notice: 'Please select one or more applications' and return
+    elsif !params[:user_id].present?
+      redirect_to applications_new_apps_path, notice: 'Please select one or more board members' and return
+    end
     params[:document_id].each do |d|
       params[:user_id].each do |u|
         @assignment = Assignment.new()
