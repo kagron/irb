@@ -16,7 +16,7 @@ gem 'cancancan'
 #install remotipart
 gem 'remotipart', github: 'mshibuya/remotipart'
 #install rails admin
-gem 'rails_admin'
+gem 'rails_admin', '~> 1.3.0'
 # Use Hirb for better irb console
 gem 'hirb', '~> 0.7.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
