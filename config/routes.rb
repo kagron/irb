@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post 'applications/:id/approve', :to => 'votes#approve', as: 'approve_app'
   post 'applications/:id/revise', :to => 'votes#revise', as: 'revise_app'
   post 'applications/:id/reject', :to => 'votes#reject', as: 'reject_app'
+  post 'applications/:id/comments/:comment_id', :to => 'comments#destroy', as: 'delete_comment'
 
   resources :applications, as: 'documents', controller: 'documents'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

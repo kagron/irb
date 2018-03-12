@@ -214,7 +214,9 @@
     <% if @comments.present? %>
       <% @comments.each do |c| %>
         <div class="comment-block">
-          <span class="delete-comment"><a class='close' data-confirm="Are you sure?">&times;</a></span>
+          <% if c.user_id == current_user.id %>
+            <span class="delete-comment"><%= button_to(delete_comment_path(@document, c), class: 'close', data: {confirm: "Are you sure you want to delete your comment?"}) do %>&times;<% end %></span>
+          <% end %>
           <p class="comment"><strong><%= c.fname + " " + c.lname %></strong> <%= c.content %></p>
           <p class="comment-time"><%= c.created_at.strftime("%b %d %I:%M%p") %></p>
         </div>
