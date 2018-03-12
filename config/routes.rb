@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   devise_for :admins
 
   # resources :assignments, only: [:create, :destroy], :collection =>  {:destroy => :delete }
-  # delete 'applications/new_apps', :to => 'assignments#destroy', as: 'delete_assign'
+  delete 'applications/new_apps', :to => 'assignments#destroy', as: 'delete_assign'
   post 'applications/assignments', :to => 'assignments#create'
   post 'applications/:id', :to => 'comments#create'
   get 'irb/ArchivedApps'

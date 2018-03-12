@@ -148,8 +148,8 @@
     </table>
 
     <%= submit_tag('Assign', class: 'btn btn-primary', id: 'btnAssign') %>
-    <%= submit_tag('Delete') %>
-    
+    <%= submit_tag('Delete', class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete the assignment(s)?"}) %>
+
     </div>
 
     <% end %>
