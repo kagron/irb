@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 gem 'delayed_job_active_record'
 gem 'sprockets-rails'
-
+gem 'will_paginate-bootstrap'
 # Use font awesome
 gem "font-awesome-rails"
 # Use Whenever for scheduling
@@ -47,6 +47,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'will_paginate', '~> 3.1.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
