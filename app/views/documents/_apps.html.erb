@@ -10,17 +10,17 @@
   <% end %>
 </div>
 </div>
-
+<% if @documents.present? %>
 <table class="table table-default table-bordered">
 <thead>
   <tr>
     <th>Name</th>
+    <th>Project Title</th>
     <th>Department</th>
     <th>Type</th>
-    <th>Project Title</th>
-    <th>Sponsor</th>
-    <!-- <th>Start Date</th> -->
-    <!-- <th>End Date</th> -->
+    <!-- <th>Sponsor</th> -->
+    <th>Start Date</th>
+    <th>End Date</th>
     <th></th>
   </tr>
 </thead>
@@ -37,16 +37,23 @@
     <tr class="alert-warning">
   <% end %>
       <td><%= document.fName + " " + document.lName %></td>
-      <td><%= document.department %></td>
-      <td><%= document.typeOfApplication %></td>
       <td><%= document.project_title %></td>
-      <td><%= document.sponsor_name %></td>
-      <!-- <td><%= document.start_date %></td> -->
-      <!-- <td><%= document.end_date %></td> -->
+      <td><%= document.department %></td>
+      <% if document.typeOfApplication == 'not_sure' %>
+        <td><%= "not sure" %></td>
+      <% else %>
+        <td><%= document.typeOfApplication %></td>
+      <% end %>
+      <!-- <td><%= document.sponsor_name %></td> -->
+      <td><%= document.start_date.strftime("%b %e %Y") %></td>
+      <td><%= document.end_date.strftime("%b %e %Y")  %></td>
       <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white'  %></td>
     </tr>
   <% end %>
 </tbody>
 </table>
+<% else %>
+  <h4>There doesn't seem to be anything here yet... </h4>
+<% end %>
 
 <br>

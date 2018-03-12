@@ -1,6 +1,7 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :check_user
+  before_action :check_document, only: [:show, :edit, :update, :destroy]
 
 
 
@@ -87,6 +88,7 @@ class DocumentsController < ApplicationController
 
   # GET /applications/1/edit
   def edit
+
   end
 
   # POST /applications
@@ -154,6 +156,11 @@ class DocumentsController < ApplicationController
     def check_user
       if (!user_signed_in?)
         redirect_to root_path, notice: 'You must log in to do that'
+      end
+    end
+    def check_document
+      if (@document.user_id != current_user.id && !current_user.supervisor_role)
+        redirect_to root_path, notice: 'You can only view your own applications'
       end
     end
     # Use callbacks to share common setup or constraints between actions.
