@@ -20,6 +20,12 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:comment_id])
+    @comment.destroy
+    redirect_to document_path, notice: "Comment successfully deleted"
+  end
+
   private
     def comment_params
       params.require(:comment).permit(:content, :title, :fname, :lname, :documents_id,

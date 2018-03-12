@@ -100,7 +100,11 @@
           <td><input type="checkbox" name="document_id[]" value="<%= document.id %>"></td>
           <td><%= document.fName + " " + document.lName %></td>
           <td><%= document.department %></td>
-          <td><%= document.typeOfApplication %></td>
+          <% if document.typeOfApplication == 'not_sure' %>
+            <td><%= "not sure" %></td>
+          <% else %>
+            <td><%= document.typeOfApplication %></td>
+          <% end %>
           <td><%= document.project_title %></td>
           <td><%= document.sponsor_name %></td>
           <!-- <td><%= document.start_date %></td> -->
