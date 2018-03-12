@@ -21,7 +21,7 @@ class DocumentsController < ApplicationController
     @assignment = Assignment.new
     @a = Assignment.all
 
-  	if current_user.supervisor_role
+  	if current_user.supervisor_role || current_user.readonly_role
   	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(state: 'new_app').order("created_at DESC")
   	else
   	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(state: 'new_app').where(:email => current_user.email).order("created_at DESC")
@@ -30,7 +30,7 @@ class DocumentsController < ApplicationController
 
   # GET /applications/approved
   def approved
-  	if current_user.supervisor_role
+  	if current_user.supervisor_role || current_user.readonly_role
   	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(state: 'approved').order("created_at DESC")
   	else
   	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(state: 'approved').where(:email => current_user.email).order("created_at DESC")
@@ -60,7 +60,7 @@ class DocumentsController < ApplicationController
 
   # GET /applications/rejected
   def archived
-    if current_user.supervisor_role
+    if current_user.supervisor_role || current_user.readonly_role
   	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(is_archived: 'yes').order("created_at DESC")
   	else
     	@documents = Document.paginate(:page => params[:page], :per_page => 10).where(is_archived: 'yes').where(:email => current_user.email).order("created_at DESC")
@@ -159,7 +159,7 @@ class DocumentsController < ApplicationController
       end
     end
     def check_document
-      if (@document.user_id != current_user.id && !current_user.supervisor_role)
+      if (@document.user_id != current_user.id && !current_user.supervisor_role && !current_user.readonly_role)
         redirect_to root_path, notice: 'You can only view your own applications'
       end
     end

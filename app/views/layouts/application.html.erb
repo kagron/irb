@@ -36,13 +36,21 @@
          <li><%= link_to "New Application", new_document_path %></li>
        </ul>
 
-       <% elsif current_user.supervisor_role %>
+       <% elsif current_user.supervisor_role%>
        <ul class="nav navbar-nav navbar-right">
 
          <li><%= link_to "Home", root_path %></li>
          <li><%= link_to "Applications", applications_assignments_path %></li>
          <li><%= link_to "New Application", new_document_path %></li>
        </ul>
+
+       <% elsif current_user.readonly_role%>
+       <ul class="nav navbar-nav navbar-right">
+
+         <li><%= link_to "Home", root_path %></li>
+         <li><%= link_to "Applications", documents_path %></li>
+         <li><%= link_to "New Application", new_document_path %></li>
+       </ul
 
        <% else %>
 

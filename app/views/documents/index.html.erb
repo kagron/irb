@@ -4,11 +4,19 @@
   <div class="row">
     <div class="col-md-8">
       <ul class="nav nav-tabs">
-        <li role="presentation"><%= link_to 'Assignments', applications_assignments_path %></li>
-        <li role="presentation"><%= link_to 'New', applications_new_apps_path %></li>
-        <li role="presentation" class="active"><%= link_to 'All', documents_path %></li>
-        <li role="presentation"><%= link_to 'Archived', applications_archived_path %></li>
-      </ul>
+      <% if current_user.supervisor_role%>
+          <li role="presentation"><%= link_to 'Assignments', applications_assignments_path %></li>
+          <li role="presentation"><%= link_to 'New', applications_new_apps_path %></li>
+          <li role="presentation" class = "active"><%= link_to 'All', documents_path %></li>
+          <li role="presentation"><%= link_to 'Archived', applications_archived_path %></li>
+
+      <% elsif current_user.readonly_role %>
+          <li role="presentation"><%= link_to 'New', applications_new_apps_path %></li>
+          <li role="presentation" class = "active"><%= link_to 'All', documents_path %></li>
+          <li role="presentation"><%= link_to 'Archived', applications_archived_path %></li>
+        </ul>
+      <% end %>
     </div>
+
   <%= render 'apps'%>
 </div>

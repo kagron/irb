@@ -93,12 +93,15 @@
         <h1>Get Started</h1>
         <div class="text-center">
           <%= link_to 'Start a New Application', new_document_path, class: 'btn btn-primary btn-lg state-btn', style:'color: white' %>
-          <% if current_user.superadmin_role == true %>
-            <%= link_to 'View All Applications', applications_new_apps_path, class: 'btn btn-default btn-lg state-btn' %>
-            <% elsif current_user.supervisor_role == true %>
-              <%= link_to 'View Your Assigned Applications', applications_assignments_path, class: 'btn btn-default btn-lg state-btn' %>
-          <% end %>
+          <% if current_user.superadmin_role%>
+            <%= link_to 'View New Applications', applications_new_apps_path, class: 'btn btn-default btn-lg state-btn' %>
+            <% elsif current_user.supervisor_role%>
+            <%= link_to 'View Your Assigned Applications', applications_assignments_path, class: 'btn btn-default btn-lg state-btn' %>
+            <% elsif current_user.readonly_role%>
+            <%= link_to 'View All Applications', documents_path, class: 'btn btn-default btn-lg state-btn' %>
+            <%else%>
           <%= link_to 'View Your Applications', applications_new_apps_path, class: 'btn btn-default btn-lg state-btn' %>
+          <% end %>
         </div>
       <% end %>
     </div> <!-- end right column -->
