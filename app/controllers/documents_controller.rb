@@ -21,9 +21,9 @@ class DocumentsController < ApplicationController
     @a = Assignment.all
 
   	if current_user.supervisor_role
-  	   @documents = Document.where(state: 'new_app').order("created_at DESC")
+  	   @documents = Document.where(state: 'new_app').order("created_at DESC").paginate(:page => params[:page])
   	else
-  	   @documents = Document.where(state: 'new_app').where(:email => current_user.email).order("created_at DESC")
+  	   @documents = Document.where(state: 'new_app').where(:email => current_user.email).order("created_at DESC").paginate(:page => params[:page])
 	  end
   end
 
