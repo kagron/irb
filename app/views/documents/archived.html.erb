@@ -10,6 +10,11 @@
             <li role="presentation"><%= link_to 'All', documents_path %></li>
             <li role="presentation" class = "active"><%= link_to 'Archived', applications_archived_path %></li>
           </ul>
+        <% elsif current_user.readonly_role %>
+              <li role="presentation"><%= link_to 'New', applications_new_apps_path %></li>
+              <li role="presentation"><%= link_to 'All', documents_path %></li>
+              <li role="presentation" class = "active"><%= link_to 'Archived', applications_archived_path %></li>
+            </ul>
 	   <% else%>
         <li role="presentation"><%= link_to 'My New Applications', applications_new_apps_path %></li>
         <li role="presentation"><%= link_to 'In Progress', applications_approved_path %></li>
