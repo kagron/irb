@@ -77,7 +77,7 @@ class DocumentsController < ApplicationController
 
     @votes = Vote.where(document_id: @document.id)
     @your_votes = Vote.where(document_id: @document.id, user_id: @user.id)
-    @comments = Comment.where(document_id: @document.id)
+    @comments = Comment.paginate(:page => params[:page], :per_page => 5).where(document_id: @document.id)
   end
 
   # GET /applications/new

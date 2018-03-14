@@ -221,15 +221,22 @@
           <p class="comment-time"><%= c.created_at.strftime("%b %d %I:%M%p") %></p>
         </div>
       <% end %>
+
+      <%= will_paginate @comments, :renderer => BootstrapPagination::Rails %>
+
     <% else %>
       <p class="comment">There doesn't seem to be any comments here...</p>
     <% end %>
+
 	<% if current_user.supervisor_role %>
     <%= form_for @comment, url: @document do |form| %>
       <%= form.text_area :content, id: :comment_content, rows: '5', class: 'form-control txtComment', placeholder: 'Add a comment...' %>
 
       <%= submit_tag('Submit', class: 'btn btn-primary submit-btn', id: 'btnSubmitComment', style: 'margin-bottom: 20px') %>
     <% end %>
+
+
+
 	<div class="text-center well">
     <% if @your_votes.present? %>
       <% if (@your_votes[0].state == 'new_app') %>
