@@ -28,7 +28,12 @@
 <% end %>
 
 <% if @document.state == 'needs_revisions' %>
-  <% if current_user.supervisor_role %>
+  <% if current_user.supervisor_role && @document.user_id == current_user.id %>
+    <h2>This application is <span style="color: #ec971f">Approved Pending Revisions</span></h2>
+    <div class="text-center">
+        <%= button_to 'Edit Application', edit_document_path, method: :get, class: 'btn btn-primary', style: 'margin-bottom: 20px;' %>
+    </div>
+  <% elsif current_user.supervisor_role %>
    <h2>This application is <span style="color: #ec971f">Approved Pending Revisions</span></h2>
   <% else %>
     <h2>Your application is <span style="color: #ec971f">Approved Pending Revisions</span></h2>
@@ -232,11 +237,11 @@
     <% end %>
 	<div class="text-center well">
     <% if @your_votes.present? %>
-      <% if (@your_votes[0].state == 'new_app') %>
+      <% if (@your_votes[0].state == 'new_app' || @your_votes[0].state == 'needs_revisions') %>
         <h4>Vote for the state you believe this application should be:</h4>
-        <%= button_to 'Approve', approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to vote to approve this application?' } %>
-        <%= button_to 'Approve Pending Revisions', revise_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to vote to make this application approved pending revisions?' } %>
-        <%= button_to 'Reject', reject_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to vote to reject this application?' } %>
+        <%= button_to 'Approve', approve_vote_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to vote to approve this application?' } %>
+        <%= button_to 'Approve Pending Revisions', revise_vote_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to vote to make this application approved pending revisions?' } %>
+        <%= button_to 'Reject', reject_vote_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to vote to reject this application?' } %>
       <% else %>
       <h4>You already voted on this application</h4>
       <% end %>
@@ -256,7 +261,7 @@
     <% end %>
 	<% end %>
   <% end %>
-    <% if current_user.superadmin_role %>
+    <% if current_user.superadmin_role && (@document.state == 'new_app' || @document.state == 'needs_revisions')%>
     <div class="well">
       <h4>Determine the state of the application:</h4>
       <%= button_to 'Approve', approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to approve this application?' } %>
