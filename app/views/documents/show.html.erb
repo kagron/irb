@@ -90,7 +90,11 @@
           <div class="row application">
             <div class="col-md-4">
               <strong>Type of Application</strong><br>
-              <%= @document.typeOfApplication %>
+              <% if @document.typeOfApplication == 'not_sure' %>
+                not sure
+              <% else %>
+                <%= @document.typeOfApplication %>
+              <% end %>
             </div>
           </div>
           <!-- end third row -->
@@ -112,11 +116,11 @@
           <div class="row application">
             <div class="col-md-6">
               <strong>Project Start Date</strong><br>
-              <%= @document.start_date.strftime("%b %e %Y") %>
+              <%= @document.start_date.strftime("%B %e %Y") %>
             </div>
             <div class="col-md-6">
               <strong>Project End Date</strong><br>
-              <%= @document.end_date.strftime("%b %e %Y") %>
+              <%= @document.end_date.strftime("%B %e %Y") %>
             </div>
           </div>
           <!-- end row 2 -->
@@ -181,13 +185,23 @@
           <div class="row">
             <div class="col-md-12">
               <strong>Subjects consent:</strong><br>
-              <%= @document.subjects_consent %>
+              <% if @document.subjects_consent.present? %>
+                <%= @document.subjects_consent %>
+              <% else %>
+                <%= link_to "Download PDF", @document.consent_file_url %>
+              <% end %>
+              </p>
             </div>
           </div>
           <div class="row application">
             <div class="col-md-12">
-              <strong>Parental consent:</strong><br>
-              <%= @document.parental_consent %>
+              <% if @document.child_assent_file.present? %>
+                <p>
+                  <strong>Copy of Child Assent Form:
+                  </strong>
+                  <%= link_to "Download PDF", @document.child_assent_file_url %>
+                </p>
+              <% end %>
             </div>
           </div>
         </div>
@@ -200,27 +214,16 @@
           </p>
 
           <p>
-            <strong>Copy of Consent Form:
-            </strong>
-            <%= link_to "Download PDF", @document.consent_file_url %>
-          </p>
-
-          <p>
-            <strong>Copy of Child Assent Form:
-            </strong>
-            <%= link_to "Download PDF", @document.child_assent_file_url %>
-          </p>
-
-          <p>
             <strong>Copy of Human Subjects Research Certificate:
             </strong>
             <%= link_to "Download PDF", @document.hsr_certificate_file_url %>
           </p>
-
-          <p>
-            <strong>Written permission from the site where the research is to be conducted (if applicable):</strong>
-            <%= link_to "Download PDF", @document.written_permission_file_url %>
-          </p>
+          <% if @document.written_permission_file.present? %>
+            <p>
+              <strong>Written permission from the site where the research is to be conducted (if applicable):</strong>
+              <%= link_to "Download PDF", @document.written_permission_file_url %>
+            </p>
+          <% end %>
           <div class="row application">
             <div class="col-md-12">
               <strong>Advisor sig:</strong><br>

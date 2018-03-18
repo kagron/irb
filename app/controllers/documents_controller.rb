@@ -170,7 +170,7 @@ class DocumentsController < ApplicationController
          :end_date, :research_question, :lit_review, :procedure, :pool_of_subjects,
          :sub_recruitment, :risks, :opt_participation, :confidentiality, :authorities_consent,
          :subjects_consent, :parental_consent, :state, :is_archived, :questions_file, :advisor_sig,
-       :consent_file, :child_assent_file, :hsr_certificate_file, :written_permission, :users_id, :created_at,
+       :consent_file, :child_assent_file, :hsr_certificate_file, :written_permission_file, :users_id, :created_at,
      :updated_at)
     end
 end

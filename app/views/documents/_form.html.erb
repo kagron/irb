@@ -147,6 +147,13 @@
       written consent is completely anonymous or impossible to gain without maintaining confidentiality, please consider a waiver of consent. See website for informed consent checklist, sample, and waiver of consent") %>
       <%= form.label :consent_file %>
       <%= form.file_field :consent_file, id: :document_consent_file %>
+      <% if @document.consent_file.present? %>
+        <p>
+          <strong>Your current version:
+          </strong>
+          <%= link_to "Download", @document.consent_file_url %>
+        </p>
+      <% end %>
       <%= form.text_area :subjects_consent, id: :document_subjects_consent, rows:'5', class: 'form-control' %>
     </div>
 
@@ -161,6 +168,13 @@
     <div class="field child_assent">
       <%= form.label(:child_assent_file,"A parental/guardian consent is required as well as assent of the subject. Include a copy of the parental/guardian consent form you plan to use in such instances", id: 'child_assent_label') %>
       <%= form.file_field :child_assent_file, id: :document_child_assent_file %>
+      <% if @document.child_assent_file.present? %>
+        <p>
+          <strong>Copy of Child Assent Form:
+          </strong>
+          <%= link_to "Download", @document.child_assent_file_url %>
+        </p>
+      <% end %>
     </div>
   </div>
 
@@ -168,16 +182,37 @@
     <h2>Section 4</h2>
     <div class="field">
       <%= form.label(:questions_file,"Please attach a copy of interview questions, surveys, questionnaires, or other data gathering instruments that may be used in the research project") %>
+      <% if @document.questions_file.present? %>
+        <p>
+          <strong>Your current version:
+          </strong>
+          <%= link_to "Download", @document.questions_file_url %>
+        </p>
+      <% end %>
       <%= form.file_field :questions_file, id: :document_questions_file %>
     </div>
 
     <div class="field">
       <%= form.label(:hsr_certificate_file, "Please attach copy of your human subjects research training certificate from the National Institutes of Health website or evidence of comparable training (see IRB webpage at www.aurora.edu)") %>
+      <% if @document.hsr_certificate_file.present? %>
+        <p>
+          <strong>Your current version:
+          </strong>
+          <%= link_to "Download", @document.hsr_certificate_file_url %>
+        </p>
+      <% end %>
       <%= form.file_field :hsr_certificate_file, id: :document_hsr_certificate_file %>
     </div>
 
     <div class="field">
       <%= form.label(:written_permission_file,"Please attach a copy of written permission from the site where the research is to be conducted (if applicable)") %>
+      <% if @document.written_permission_file.present? %>
+        <p>
+          <strong>Your current version:
+          </strong>
+          <%= link_to "Download", @document.written_permission_file_url %>
+        </p>
+      <% end %>
       <%= form.file_field :written_permission_file, id: :document_written_permission_file %>
     </div>
 
