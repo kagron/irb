@@ -48,9 +48,14 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'will_paginate', '~> 3.1.0'
-
+# Use Prawn for pdf generation, specifically the stamp
 gem 'prawn'
+# Use combine_pdf for putting the stamp on every pdf
 gem 'combine_pdf'
+# Use Yomu for reading doc and docx
+gem 'yomu'
+gem 'pdfkit'
+gem 'wkhtmltopdf-binary'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
