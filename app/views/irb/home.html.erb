@@ -84,7 +84,7 @@
         <% end -%>
 
         <div class="actions">
-          <%= f.submit "Log in", class: 'btn btn-default' %>
+          <%= f.submit "Log in", class: 'btn btn-primary' %>
         </div>
       <% end %>
 
@@ -92,15 +92,25 @@
       <% else %>
         <h1>Get Started</h1>
         <div class="text-center">
-          <%= link_to 'Start a New Application', new_document_path, class: 'btn btn-primary btn-lg state-btn', style:'color: white' %>
+          <%= link_to new_document_path, class: 'btn btn-primary btn-lg state-btn', style:'color: white' do %>
+            <i class="fa fa-file"></i> Start a New Application
+          <% end %>
           <% if current_user.superadmin_role%>
-            <%= link_to 'View New Applications', applications_new_apps_path, class: 'btn btn-default btn-lg state-btn' %>
+            <%= link_to applications_new_apps_path, class: 'btn btn-default btn-lg state-btn' do %>
+              <i class="fa fa-th-list"></i> View New Applications
+            <% end %>
             <% elsif current_user.supervisor_role%>
-            <%= link_to 'View Your Assigned Applications', applications_assignments_path, class: 'btn btn-default btn-lg state-btn' %>
+            <%= link_to applications_assignments_path, class: 'btn btn-default btn-lg state-btn' do %>
+              <i class="fa fa-th-list"></i> View Your Assigned Applications
+            <% end %>
             <% elsif current_user.readonly_role%>
-            <%= link_to 'View All Applications', documents_path, class: 'btn btn-default btn-lg state-btn' %>
+            <%= link_to documents_path, class: 'btn btn-default btn-lg state-btn' do %>
+              <i class="fa fa-th-list"></i> View All Applications
+            <% end %>
             <%else%>
-          <%= link_to 'View Your Applications', applications_new_apps_path, class: 'btn btn-default btn-lg state-btn' %>
+          <%= link_to applications_new_apps_path, class: 'btn btn-default btn-lg state-btn' do %>
+            <i class="fa fa-th-list"></i> View Your Applications
+          <% end %>
           <% end %>
         </div>
       <% end %>

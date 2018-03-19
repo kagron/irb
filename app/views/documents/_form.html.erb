@@ -224,7 +224,9 @@
 
 </div>
 <div class="app-buttons">
-  <%= link_to 'Back', root_path, class: 'btn btn-default' %>
+  <%= link_to documents_path, class: 'btn btn-default' do %>
+    <i class="fa fa-angle-double-left"></i> Go Back
+  <% end %>
   <%= form.submit 'Submit', class: 'btn btn-primary' %>
 </div>
 <% end %>

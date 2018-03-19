@@ -31,7 +31,10 @@
         <div class="input-group">
           <%= text_field_tag :search, params[:search], placeholder: "Search applications...", class: 'form-control' %>
           <span class="input-group-btn">
-            <%= submit_tag "Search", class: 'btn btn-default' %>
+
+            <%= button_tag(type: "submit", class: "btn btn-default") do %>
+                <i class="fa fa-search"></i> Search
+            <% end %>
 
           </span>
         <% end %>
@@ -45,7 +48,7 @@
       <table class="table table-default table-bordered">
         <thead>
           <tr>
-            <!-- <th style="padding: 0px;"></th> -->
+            <th style="padding: 0px;"></th>
             <th>Name</th>
             <th>Project Title</th>
             <th>Department</th>
@@ -88,7 +91,10 @@
                                   <!-- <td><%= document.start_date %></td> -->
                                   <!-- <td><%= document.end_date %></td> -->
                                   <td><%= @str %></td>
-                                  <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white' %></td>
+                                  <td><%= link_to document, class: 'btn btn-primary', style: 'color: white' do %>
+                                      <i class="fa fa-eye"></i> View
+                                    <% end %>
+                                  </td>
                                 </tr>
                               <% end %>
                             </tbody>

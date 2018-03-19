@@ -46,7 +46,9 @@
                   <!-- <td><%= document.sponsor_name %></td> -->
                   <td><%= document.start_date.strftime("%b %e %Y") %></td>
                   <td><%= document.end_date.strftime("%b %e %Y") %></td>
-                  <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white' %></td>
+                  <td><%= link_to document, class: 'btn btn-primary', style: 'color: white' do %>
+                      <i class="fa fa-eye"></i> View
+                    <% end %></td>
                 </tr>
               <% end %>
             </tbody>
