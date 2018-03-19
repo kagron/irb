@@ -19,8 +19,9 @@
           <li role="presentation" class="active"><%= link_to 'My New Applications', applications_new_apps_path %></li>
           <li role="presentation"><%= link_to 'In Progress', applications_approved_path %></li>
           <li role="presentation"><%= link_to 'Archived', applications_archived_path %></li>
-        </ul>
+
       <%end%>
+      </ul>
 
     </div>
 
@@ -37,10 +38,12 @@
             <% end %>
 
           </span>
+          </div>
         <% end %>
 
-      </div>
+
     </div>
+  <!-- </div> -->
 
     <%= form_for @assignment, url: applications_assignments_path do |form| %>
 
@@ -74,9 +77,9 @@
                               <% @a.each do |a| %>
                                 <% if a.document_id == document.id %>
                                   <% if @first %>
-                                    <% @str += @users.find(a.user_id).first_name; @first = false %>
+                                    <% @str += @users.find(a.user_id).first_name + " " + @users.find(a.user_id).last_name; @first = false %>
                                     <% else %>
-                                      <% @str += ", " + @users.find(a.user_id).first_name %><% end %>
+                                      <% @str += ", " + @users.find(a.user_id).first_name + " " + @users.find(a.user_id).last_name %><% end %>
                                     <% end %>
                                   <% end %>
                                   <td><input type="checkbox" name="document_id[]" value="<%= document.id %>"></td>
@@ -109,7 +112,7 @@
                               <tr>
                                 <th style="padding: 0px;"></th>
                                 <th>Board Member</th>
-                              </th>
+
                             </tr>
                           </thead>
 
