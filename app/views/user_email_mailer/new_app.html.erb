@@ -1,0 +1,6 @@
+<h3>A new application has been submitted</h3>
+
+<p>Dear <%= @chair.first_name %>,</p>
+
+<p>A new application "<%= @document.project_title %>" by <%= @user.first_name + " " + @user.last_name %> has been submitted.
+  Please check it <%= link_to "here", @document %></p>

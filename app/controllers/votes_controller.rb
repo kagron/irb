@@ -47,7 +47,7 @@ class VotesController < ApplicationController
     # merge the stamp in a loop
     if @files.present?
       @files.each do |file|
-        stamp = CombinePDF.load("stamp.pdf").pages[0]
+        stamp = CombinePDF.load("#{Rails.root}/stamp.pdf").pages[0]
         pdf = CombinePDF.load(file)
         pdf.pages.each {|page| page << stamp}
         pdf.save file
@@ -61,6 +61,7 @@ class VotesController < ApplicationController
     # Change document state to needs_revisions
     @document = Document.find(params[:id])
     @document.state = 'needs_revisions'
+    @document.is_resubmitted = false
     @document.update(document_params)
     # Email User that their document has been reviewed
     UserEmailMailer.update_document(@document.email).deliver

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320180412) do
+ActiveRecord::Schema.define(version: 20180320201421) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20180320180412) do
     t.string "hsr_certificate_file"
     t.bigint "user_id"
     t.string "written_permission_file"
+    t.boolean "is_resubmitted"
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
