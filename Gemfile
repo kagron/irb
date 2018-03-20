@@ -13,6 +13,8 @@ gem "font-awesome-rails"
 gem 'whenever', require: false
 #install cancan gem
 gem 'cancancan'
+# Use redcarpet for markdown parsing
+gem 'redcarpet', '~> 3.3', '>= 3.3.4'
 #install remotipart
 gem 'remotipart', github: 'mshibuya/remotipart'
 #install rails admin
