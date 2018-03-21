@@ -1,13 +1,12 @@
-
 <div class="col-md-4">
   <%= form_tag(documents_path, :method => "get", id: "search-form", class: 'form-group') do %>
-    <div class="input-group">
-      <%= text_field_tag :search, params[:search], placeholder: "Search applications...", class: 'form-control' %>
-      <span class="input-group-btn">
-        <%= submit_tag "Search", class: 'btn btn-default' %>
-      </span>
-    </div>
-  <% end %>
+  <div class="input-group">
+    <%= text_field_tag :search, params[:search], placeholder: "Search applications...", class: 'form-control' %>
+    <span class="input-group-btn">
+      <%= submit_tag "Search", class: 'btn btn-default' %>
+    </span>
+  </div>
+<% end %>
 </div>
 </div>
 <% if @documents.present? %>
@@ -27,36 +26,43 @@
 
 <tbody>
   <% @documents.each do |document| %>
-  <% if document.state == 'new_app' %>
-    <tr class="alert-info">
-  <% elsif document.state == 'approved' %>
-    <tr class="alert-success">
-  <% elsif document.state == 'rejected' %>
-    <tr class="alert-danger">
-  <% elsif document.state == 'needs_revisions' %>
-    <tr class="alert-warning">
-  <% end %>
-      <td><%= document.fName + " " + document.lName %></td>
-      <td><%= document.project_title %></td>
-      <td><%= document.department %></td>
-      <% if document.typeOfApplication == 'not_sure' %>
-        <td><%= "not sure" %></td>
-      <% else %>
-        <td><%= document.typeOfApplication %></td>
-      <% end %>
-      <!-- <td><%= document.sponsor_name %></td> -->
-      <td><%= document.start_date.strftime("%b %e %Y") %></td>
-      <td><%= document.end_date.strftime("%b %e %Y")  %></td>
-      <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white'  %></td>
-    </tr>
-  <% end %>
-</tbody>
-</table>
+    <% if document.state == 'new_app' %>
+      <tr class="alert-info">
+        <% elsif document.state == 'approved' %>
+          <tr class="alert-success">
+            <% elsif document.state == 'rejected' %>
+              <tr class="alert-danger">
+                <% elsif document.state == 'needs_revisions' %>
+                  <tr class="alert-warning">
+                  <% end %>
+                  <td><%= document.fName + " " + document.lName %></td>
+                  <td><%= document.project_title %></td>
+                  <td><%= document.department %></td>
+                  <% if document.typeOfApplication == 'not_sure' %>
+                    <td><%= "not sure" %></td>
+                  <% else %>
+                    <td><%= document.typeOfApplication %></td>
+                  <% end %>
+                  <!-- <td><%= document.sponsor_name %></td> -->
+                  <td><%= document.start_date.strftime("%b %e %Y") %></td>
+                  <td><%= document.end_date.strftime("%b %e %Y") %></td>
+                  <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white' %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
 
-<%= will_paginate @documents, :renderer => BootstrapPagination::Rails %>
+          <%= will_paginate @documents, :renderer => BootstrapPagination::Rails %>
 
+<<<<<<< HEAD
 <% else %>
   <h4>There does not seem to be anything here yet... </h4>
 <% end %>
+=======
+        <% else %>
+          <h4>There doesn't seem to be anything here yet...
+          </h4>
+        <% end %>
+>>>>>>> 15b6a27195f6061ee703d49e73fae2a9dafb3c42
 
-<br>
+        <br>

@@ -1,279 +1,305 @@
 <div class="container">
 
-<% if @document.state == 'new_app' %>
-  <% if current_user.supervisor_role %>
-   <h2>This application is <span style="color: #31708f">New</span></h2>
-  <% else %>
-    <h2>Your application is <span style="color: #31708f">New</span></h2>
-    <h4>Please wait while the board reviews your application</h4>
+  <% if @document.state == 'new_app' %>
+    <% if current_user.supervisor_role %>
+      <h2>This application is
+        <span style="color: #31708f">New</span></h2>
+    <% else %>
+      <h2>Your application is
+        <span style="color: #31708f">New</span></h2>
+      <h4>Please wait while the board reviews your application</h4>
+    <% end %>
   <% end %>
-<% end %>
 
-<% if @document.state == 'approved' %>
-  <% if current_user.supervisor_role %>
-   <h2>This application is <span style="color: green">Approved</span></h2>
-  <% else %>
-    <h2>Your application is <span style="color: green">Approved</span></h2>
-    <h4>Please print out your stamped forms at the bottom of this page</h4>
+  <% if @document.state == 'approved' %>
+    <% if current_user.supervisor_role %>
+      <h2>This application is
+        <span style="color: green">Approved</span></h2>
+    <% else %>
+      <h2>Your application is
+        <span style="color: green">Approved</span></h2>
+      <h4>Please print out your stamped forms at the bottom of this page</h4>
+    <% end %>
   <% end %>
-<% end %>
 
-<% if @document.state == 'rejected' %>
-  <% if current_user.supervisor_role %>
-   <h2>This application is <span style="color: red">Rejected</span></h2>
-  <% else %>
-    <h2>Your application is <span style="color: red">Rejected</span></h2>
-    <h4>If you would like to resubmit your application, please create a new application</h4>
+  <% if @document.state == 'rejected' %>
+    <% if current_user.supervisor_role %>
+      <h2>This application is
+        <span style="color: red">Rejected</span></h2>
+    <% else %>
+      <h2>Your application is
+        <span style="color: red">Rejected</span></h2>
+      <h4>If you would like to resubmit your application, please create a new application</h4>
+    <% end %>
   <% end %>
-<% end %>
 
-<% if @document.state == 'needs_revisions' %>
-  <% if current_user.supervisor_role %>
-   <h2>This application is <span style="color: #ec971f">Approved Pending Revisions</span></h2>
-  <% else %>
-    <h2>Your application is <span style="color: #ec971f">Approved Pending Revisions</span></h2>
-    <h4>Please revise your application based on the comments provided and hit resubmit once
-    you are finished</h4>
-    <div class="text-center">
-      <%= button_to 'Edit Application', edit_document_path, method: :get, class: 'btn btn-primary', style: 'margin-bottom: 20px;' %>
-    </div>
-  <% end %>
-<% end %>
-<div class="row">
-  <div class="col-md-9">
-  <div class="well">
-    <h2>Section 1</h2>
-    <div class="row">
-      <div class="col-md-4">
-        <strong>First Name</strong> <br>
-        <%= @document.fName %>
+  <% if @document.state == 'needs_revisions' %>
+    <% if current_user.supervisor_role && @document.user_id == current_user.id %>
+      <h2>This application is
+        <span style="color: #ec971f">Approved Pending Revisions</span></h2>
+      <div class="text-center">
+        <%= button_to 'Edit Application', edit_document_path, method: :get, class: 'btn btn-primary', style: 'margin-bottom: 20px;' %>
       </div>
-      <div class="col-md-4">
-          <strong>Last Name</strong><br>
-          <%= @document.lName %>
-      </div>
-      <div class="col-md-4">
-          <strong>Phone</strong><br>
-          <%= @document.phone %>
-      </div>
-    </div> <!-- end first row -->
-    <div class="row application">
-      <div class="col-md-4">
-        <strong>AU Email</strong><br>
-        <%= @document.email %>
-      </div>
-      <div class="col-md-4">
-        <strong>Address</strong><br>
-        <%= @document.address %>
-      </div>
-      <div class="col-md-4">
-        <strong>Department</strong><br>
-        <%= @document.department %>
-      </div>
-    </div> <!-- end second row -->
-    <div class="row application">
-      <div class="col-md-4">
-        <strong>Type of Application</strong><br>
-        <%= @document.typeOfApplication %>
-      </div>
-    </div> <!-- end third row -->
-  </div><!-- End section 1 -->
-  <div class="well">
-    <h2>Section 2</h2>
-    <div class="row">
-      <div class="col-md-6">
-        <strong>Research Project Title</strong><br>
-        <%= @document.project_title %>
-      </div>
-      <div class="col-md-6">
-        <strong>Sponsor Name</strong><br>
-        <%= @document.sponsor_name %>
-      </div>
-    </div> <!-- end row 1  -->
-    <div class="row application">
-      <div class="col-md-6">
-        <strong>Project Start Date</strong><br>
-        <%= @document.start_date.strftime("%b %e %Y") %>
-      </div>
-      <div class="col-md-6">
-        <strong>Project End Date</strong><br>
-        <%= @document.end_date.strftime("%b %e %Y") %>
-      </div>
-    </div> <!-- end row 2 -->
-    <div class="row application">
-      <div class="col-md-12">
-        <strong>Research Question</strong><br>
-        <%= @document.research_question %>
-      </div>
-    </div>
-    <div class="row application">
-      <div class="col-md-12">
-        <strong>Brief Literature Review</strong><br>
-        <%= @document.lit_review %>
-      </div>
-    </div>
-    <div class="row application">
-      <div class="col-md-12">
-        <strong>Project description and the procedures to be followed.  You may
-          attach a copy of your procedure</strong><br>
-        <%= @document.procedure %>
-      </div>
-    </div>
-    <div class="row application">
-      <div class="col-md-12">
-        <strong>Describe the pool of subjects</strong><br>
-        <%= @document.pool_of_subjects %>
-      </div>
-    </div>
-    <div class="row application">
-      <div class="col-md-12">
-          <strong>Describe how the subjects will be recruited</strong><br>
-          <%= @document.sub_recruitment %>
-      </div>
-    </div>
-    <div class="row application">
-      <div class="col-md-12">
-          <strong>Describe the risks involved in your project</strong><br>
-          <%= @document.risks %>
-      </div>
-    </div>
-    <div class="row application">
-      <div class="col-md-12">
-          <strong>How will the subjects be informed that
-            they do not have to participate in the study, and that they may withdraw
-              at any time with no penalty?</strong><br>
-          <%= @document.opt_participation %>
-      </div>
-    </div>
-    <div class="row application">
-      <div class="col-md-12">
-        <strong>In what way have the confidentiality and privacy of the subjects’
-          responses been ensured?</strong><br>
-        <%= @document.confidentiality %>
-      </div>
-    </div>
-    <div class="row application">
-      <div class="col-md-12">
-        <strong>Has consent been obtained from the authorities where the
-           research is to be conducted?</strong><br>
-        <%= @document.authorities_consent %>
-      </div>
-    </div>
-  </div> <!-- end Section 2 -->
-  <div class="well">
-    <h2>Section 3</h2>
-    <div class="row">
-      <div class="col-md-12">
-          <strong>Subjects consent:</strong><br>
-          <%= @document.subjects_consent %>
-      </div>
-    </div>
-    <div class="row application">
-      <div class="col-md-12">
-          <strong>Parental consent:</strong><br>
-          <%= @document.parental_consent %>
-      </div>
-    </div>
-  </div>
-  <div class="well">
-    <h2>Section 4</h2>
-    <p>
-      <strong>List of Questions: </strong>
-      <%= link_to "Download PDF", @document.questions_file_url %>
-    </p>
-
-    <p>
-      <strong>Copy of Consent Form: </strong>
-      <%= link_to "Download PDF", @document.consent_file_url %>
-    </p>
-
-    <p>
-      <strong>Copy of Child Assent Form: </strong>
-      <%= link_to "Download PDF", @document.child_assent_file_url %>
-    </p>
-
-    <p>
-      <strong>Copy of Human Subjects Research Certificate: </strong>
-      <%= link_to "Download PDF", @document.hsr_certificate_file_url %>
-    </p>
-
-    <p>
-      <strong>Written permission from the site where the research is to be conducted (if applicable):</strong>
-      <%= link_to "Download PDF", @document.written_permission_file_url %>
-    </p>
-    <div class="row application">
-      <div class="col-md-12">
-          <strong>Advisor sig:</strong><br>
-          <%= @document.advisor_sig %>
-      </div>
-    </div>
-  </div> <!-- end section 4 -->
-</div><!-- end left side -->
-  <div class="col-md-3"> <!-- Comment section -->
-    <h3 style="margin-top: 0">Comments</h3>
-    <% if @comments.present? %>
-      <% @comments.each do |c| %>
-        <div class="comment-block">
-          <% if c.user_id == current_user.id %>
-            <span class="delete-comment"><%= button_to(delete_comment_path(@document, c), class: 'close', data: {confirm: "Are you sure you want to delete your comment?"}) do %>&times;<% end %></span>
-          <% end %>
-          <p class="comment"><strong><%= c.fname + " " + c.lname %></strong> <%= c.content %></p>
-          <p class="comment-time"><%= c.created_at.strftime("%b %d %I:%M%p") %></p>
+      <% elsif current_user.supervisor_role %>
+        <h2>This application is
+          <span style="color: #ec971f">Approved Pending Revisions</span></h2>
+      <% else %>
+        <h2>Your application is
+          <span style="color: #ec971f">Approved Pending Revisions</span></h2>
+        <h4>Please revise your application based on the comments provided and hit resubmit once you are finished</h4>
+        <div class="text-center">
+          <%= button_to 'Edit Application', edit_document_path, method: :get, class: 'btn btn-primary', style: 'margin-bottom: 20px;' %>
         </div>
       <% end %>
-
-      <%= will_paginate @comments, :renderer => BootstrapPagination::Rails %>
-
-    <% else %>
-      <p class="comment">There do not seem to be any comments here...</p>
     <% end %>
+    <div class="row">
+      <div class="col-md-9">
+        <div class="well">
+          <h2>Section 1</h2>
+          <div class="row">
+            <div class="col-md-4">
+              <strong>First Name</strong>
+              <br>
+              <%= @document.fName %>
+            </div>
+            <div class="col-md-4">
+              <strong>Last Name</strong><br>
+              <%= @document.lName %>
+            </div>
+            <div class="col-md-4">
+              <strong>Phone</strong><br>
+              <%= @document.phone %>
+            </div>
+          </div>
+          <!-- end first row -->
+          <div class="row application">
+            <div class="col-md-4">
+              <strong>AU Email</strong><br>
+              <%= @document.email %>
+            </div>
+            <div class="col-md-4">
+              <strong>Address</strong><br>
+              <%= @document.address %>
+            </div>
+            <div class="col-md-4">
+              <strong>Department</strong><br>
+              <%= @document.department %>
+            </div>
+          </div>
+          <!-- end second row -->
+          <div class="row application">
+            <div class="col-md-4">
+              <strong>Type of Application</strong><br>
+              <%= @document.typeOfApplication %>
+            </div>
+          </div>
+          <!-- end third row -->
+        </div>
+        <!-- End section 1 -->
+        <div class="well">
+          <h2>Section 2</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <strong>Research Project Title</strong><br>
+              <%= @document.project_title %>
+            </div>
+            <div class="col-md-6">
+              <strong>Sponsor Name</strong><br>
+              <%= @document.sponsor_name %>
+            </div>
+          </div>
+          <!-- end row 1 -->
+          <div class="row application">
+            <div class="col-md-6">
+              <strong>Project Start Date</strong><br>
+              <%= @document.start_date.strftime("%b %e %Y") %>
+            </div>
+            <div class="col-md-6">
+              <strong>Project End Date</strong><br>
+              <%= @document.end_date.strftime("%b %e %Y") %>
+            </div>
+          </div>
+          <!-- end row 2 -->
+          <div class="row application">
+            <div class="col-md-12">
+              <strong>Research Question</strong><br>
+              <%= @document.research_question %>
+            </div>
+          </div>
+          <div class="row application">
+            <div class="col-md-12">
+              <strong>Brief Literature Review</strong><br>
+              <%= @document.lit_review %>
+            </div>
+          </div>
+          <div class="row application">
+            <div class="col-md-12">
+              <strong>Project description and the procedures to be followed. You may attach a copy of your procedure</strong><br>
+              <%= @document.procedure %>
+            </div>
+          </div>
+          <div class="row application">
+            <div class="col-md-12">
+              <strong>Describe the pool of subjects</strong><br>
+              <%= @document.pool_of_subjects %>
+            </div>
+          </div>
+          <div class="row application">
+            <div class="col-md-12">
+              <strong>Describe how the subjects will be recruited</strong><br>
+              <%= @document.sub_recruitment %>
+            </div>
+          </div>
+          <div class="row application">
+            <div class="col-md-12">
+              <strong>Describe the risks involved in your project</strong><br>
+              <%= @document.risks %>
+            </div>
+          </div>
+          <div class="row application">
+            <div class="col-md-12">
+              <strong>How will the subjects be informed that they do not have to participate in the study, and that they may withdraw at any time with no penalty?</strong><br>
+              <%= @document.opt_participation %>
+            </div>
+          </div>
+          <div class="row application">
+            <div class="col-md-12">
+              <strong>In what way have the confidentiality and privacy of the subjects’ responses been ensured?</strong><br>
+              <%= @document.confidentiality %>
+            </div>
+          </div>
+          <div class="row application">
+            <div class="col-md-12">
+              <strong>Has consent been obtained from the authorities where the research is to be conducted?</strong><br>
+              <%= @document.authorities_consent %>
+            </div>
+          </div>
+        </div>
+        <!-- end Section 2 -->
+        <div class="well">
+          <h2>Section 3</h2>
+          <div class="row">
+            <div class="col-md-12">
+              <strong>Subjects consent:</strong><br>
+              <%= @document.subjects_consent %>
+            </div>
+          </div>
+          <div class="row application">
+            <div class="col-md-12">
+              <strong>Parental consent:</strong><br>
+              <%= @document.parental_consent %>
+            </div>
+          </div>
+        </div>
+        <div class="well">
+          <h2>Section 4</h2>
+          <p>
+            <strong>List of Questions:
+            </strong>
+            <%= link_to "Download PDF", @document.questions_file_url %>
+          </p>
 
-	<% if current_user.supervisor_role %>
-    <%= form_for @comment, url: @document do |form| %>
-      <%= form.text_area :content, id: :comment_content, rows: '5', class: 'form-control txtComment', placeholder: 'Add a comment...' %>
+          <p>
+            <strong>Copy of Consent Form:
+            </strong>
+            <%= link_to "Download PDF", @document.consent_file_url %>
+          </p>
 
-      <%= submit_tag('Submit', class: 'btn btn-primary submit-btn', id: 'btnSubmitComment', style: 'margin-bottom: 20px') %>
-    <% end %>
+          <p>
+            <strong>Copy of Child Assent Form:
+            </strong>
+            <%= link_to "Download PDF", @document.child_assent_file_url %>
+          </p>
 
+          <p>
+            <strong>Copy of Human Subjects Research Certificate:
+            </strong>
+            <%= link_to "Download PDF", @document.hsr_certificate_file_url %>
+          </p>
 
+          <p>
+            <strong>Written permission from the site where the research is to be conducted (if applicable):</strong>
+            <%= link_to "Download PDF", @document.written_permission_file_url %>
+          </p>
+          <div class="row application">
+            <div class="col-md-12">
+              <strong>Advisor sig:</strong><br>
+              <%= @document.advisor_sig %>
+            </div>
+          </div>
+        </div>
+        <!-- end section 4 -->
+      </div>
+      <!-- end left side -->
+      <div class="col-md-3">
+        <!-- Comment section -->
+        <h3 style="margin-top: 0">Comments</h3>
+        <% if @comments.present? %>
+          <% @comments.each do |c| %>
+            <div class="comment-block">
+              <% if c.user_id == current_user.id %>
+                <span class="delete-comment"><%= button_to(delete_comment_path(@document, c), class: 'close', data: {confirm: "Are you sure you want to delete your comment?"}) do %>&times;<% end %>
+              </span>
+            <% end %>
+            <p class="comment">
+              <strong><%= c.fname + " " + c.lname %></strong>
+              <%= c.content %></p>
+            <p class="comment-time"><%= c.created_at.strftime("%b %d %I:%M%p") %></p>
+          </div>
+        <% end %>
 
-	<div class="text-center well">
-    <% if @your_votes.present? %>
-      <% if (@your_votes[0].state == 'new_app') %>
-        <h4>Vote for the state you believe this application should be:</h4>
-        <%= button_to 'Approve', approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to vote to approve this application?' } %>
-        <%= button_to 'Approve Pending Revisions', revise_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to vote to make this application approved pending revisions?' } %>
-        <%= button_to 'Reject', reject_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to vote to reject this application?' } %>
+        <%= will_paginate @comments, :renderer => BootstrapPagination::Rails %>
+
       <% else %>
-      <h4>You already voted on this application</h4>
+        <p class="comment">There do not seem to be any comments here...</p>
       <% end %>
-    <% end %>
 
-	</div>
-  <% if @votes.present? %>
-    <% @votes.each do |v| %>
-      <% @user = User.find(v.user_id) %>
-      <% if v.state == 'new_app' %>
-        <p><%= @user.first_name + " " + @user.last_name + " has not voted yet" %></p>
-      <% elsif v.state == 'needs_revisions' %>
-        <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be approved pending revisions" %></p>
-      <% else %>
-        <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be " + v.state %></p>
+      <% if current_user.supervisor_role %>
+        <%= form_for @comment, url: @document do |form| %>
+        <%= form.text_area :content, id: :comment_content, rows: '5', class: 'form-control txtComment', placeholder: 'Add a comment...' %>
+
+        <%= submit_tag('Submit', class: 'btn btn-primary submit-btn', id: 'btnSubmitComment', style: 'margin-bottom: 20px') %>
       <% end %>
-    <% end %>
-	<% end %>
-  <% end %>
-    <% if current_user.superadmin_role %>
-    <div class="well">
-      <h4>Determine the state of the application:</h4>
-      <%= button_to 'Approve', approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to approve this application?' } %>
-      <%= button_to 'Approve Pending Revisions', revise_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to make this application approved pending revisions?' } %>
-      <%= button_to 'Reject', reject_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to reject this application?' } %>
+
+      <div class="text-center well">
+        <% if @your_votes.present? %>
+          <% if (@your_votes[0].state == 'new_app' || @your_votes[0].state == 'needs_revisions') %>
+            <h4>Vote for the state you believe this application should be:</h4>
+            <%= button_to 'Approve', approve_vote_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to vote to approve this application?' } %>
+            <%= button_to 'Approve Pending Revisions', revise_vote_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to vote to make this application approved pending revisions?' } %>
+            <%= button_to 'Reject', reject_vote_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to vote to reject this application?' } %>
+          <% else %>
+            <h4>You already voted on this application</h4>
+          <% end %>
+        <% end %>
+
+      </div>
+      <% if @votes.present? %>
+        <% @votes.each do |v| %>
+          <% @user = User.find(v.user_id) %>
+            <% if v.state == 'new_app' %>
+              <p><%= @user.first_name + " " + @user.last_name + " has not voted yet" %></p>
+              <% elsif v.state == 'needs_revisions' %>
+                <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be approved pending revisions" %></p>
+              <% else %>
+                <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be " + v.state %></p>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% if current_user.superadmin_role && (@document.state == 'new_app' || @document.state == 'needs_revisions')%>
+          <div class="well">
+            <h4>Determine the state of the application:</h4>
+            <%= button_to 'Approve', approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to approve this application?' } %>
+            <%= button_to 'Approve Pending Revisions', revise_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to make this application approved pending revisions?' } %>
+            <%= button_to 'Reject', reject_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to reject this application?' } %>
+          </div>
+        <% end %>
+      </div>
+      <!-- end comment section -->
     </div>
-    <% end %>
-  </div> <!-- end comment section -->
-</div><!-- end page row -->
+    <!-- end page row -->
 
-  <%= link_to 'Back', documents_path, class: 'btn btn-default' %>
+    <%= link_to 'Back', documents_path, class: 'btn btn-default' %>
 
-</div>
+  </div>

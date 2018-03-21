@@ -3,11 +3,12 @@ class DocumentsController < ApplicationController
   before_action :check_user
   before_action :check_document, only: [:show, :edit, :update, :destroy]
 
-
-
   # GET /applications
   # GET /applications.json
   def index
+    if !current_user.supervisor_role && !current_user.readonly_role
+      redirect_to applications_new_apps_path
+    end
     @users = User.where(supervisor_role: '1')
     if params[:search]
       @documents = Document.paginate(:page => params[:page], :per_page => 10).search(params[:search]).order("created_at DESC")#.where(:is_archived => '0') #1isArchived
@@ -22,30 +23,24 @@ class DocumentsController < ApplicationController
     @a = Assignment.all
 
   	if current_user.supervisor_role || current_user.readonly_role
-  	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(state: 'new_app').order("created_at DESC")
+  	   @documents = Document.where(state: 'new_app').or(Document.where(state: 'needs_revisions')).order("updated_at DESC").paginate(:page => params[:page], :per_page => 10)
   	else
-  	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(state: 'new_app').where(:email => current_user.email).order("created_at DESC")
+  	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(state: 'new_app').where(:email => current_user.email).order("updated_at DESC")
 	  end
   end
-
   # GET /applications/approved
   def approved
   	if current_user.supervisor_role || current_user.readonly_role
   	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(state: 'approved').order("created_at DESC")
   	else
   	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(state: 'approved').where(:email => current_user.email).order("created_at DESC")
-  	end
+ 	  end
   end
-
-  # GET /applications/needs_revisions
-  def needs_revisions
-    @users = User.where(supervisor_role: '1')
-    @documents = Document.paginate(:page => params[:page], :per_page => 10).where(state: 'needs_revisions').order("created_at DESC")
-  end
-
-  # GET /applications/rejected
+  # GET /applications/assignments
   def assignments
-
+    if !current_user.supervisor_role
+      redirect_to applications_new_apps_path
+    end
     @assignments = Assignment.where(user_id: current_user.id)
     @array = Array.new
     @assignments.each do |a|

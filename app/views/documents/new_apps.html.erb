@@ -1,5 +1,3 @@
-
-
 <div class="container">
 
   <h1>Applications</h1>
@@ -7,173 +5,125 @@
     <div class="col-md-8">
       <ul class="nav nav-tabs">
         <% if current_user.supervisor_role%>
-            <li role="presentation"><%= link_to 'Assignments', applications_assignments_path %></li>
-            <li role="presentation"  class = "active"><%= link_to 'New', applications_new_apps_path %></li>
-            <li role="presentation"><%= link_to 'All', documents_path %></li>
-            <li role="presentation"><%= link_to 'Archived', applications_archived_path %></li>
+          <li role="presentation"><%= link_to 'Assignments', applications_assignments_path %></li>
+          <li role="presentation" class="active"><%= link_to 'New', applications_new_apps_path %></li>
+          <li role="presentation"><%= link_to 'All', documents_path %></li>
+          <li role="presentation"><%= link_to 'Archived', applications_archived_path %></li>
 
-        <% elsif current_user.readonly_role %>
-            <li role="presentation"  class = "active"><%= link_to 'New', applications_new_apps_path %></li>
+          <% elsif current_user.readonly_role %>
+            <li role="presentation" class="active"><%= link_to 'New', applications_new_apps_path %></li>
             <li role="presentation"><%= link_to 'All', documents_path %></li>
             <li role="presentation"><%= link_to 'Archived', applications_archived_path %></li>
           </ul>
-	   <% else%>
-        <li role="presentation"  class="active"><%= link_to 'My New Applications', applications_new_apps_path %></li>
-        <li role="presentation"><%= link_to 'In Progress', applications_approved_path %></li>
-		<li role="presentation"><%= link_to 'Archived', applications_archived_path %></li>
-      </ul>
-	  <%end%>
+        <% else%>
+          <li role="presentation" class="active"><%= link_to 'My New Applications', applications_new_apps_path %></li>
+          <li role="presentation"><%= link_to 'In Progress', applications_approved_path %></li>
+          <li role="presentation"><%= link_to 'Archived', applications_archived_path %></li>
+        </ul>
+      <%end%>
 
     </div>
 
+    <% if current_user.superadmin_role %>
 
-<% if current_user.superadmin_role %>
-
-    <div class="col-md-4">
-      <%= form_tag(documents_path, :method => "get", id: "search-form", class: 'form-group') do %>
+      <div class="col-md-4">
+        <%= form_tag(documents_path, :method => "get", id: "search-form", class: 'form-group') do %>
         <div class="input-group">
           <%= text_field_tag :search, params[:search], placeholder: "Search applications...", class: 'form-control' %>
           <span class="input-group-btn">
             <%= submit_tag "Search", class: 'btn btn-default' %>
 
           </span>
-            <% end %>
-
-        </div>
-        </div>
-
-
-
-
-
-
-      <%= form_for @assignment, url: applications_assignments_path do |form| %>
-
-
-        <div class="table-responsive col-md-10">
-
-
-
-    <table class="table table-default table-bordered">
-    <thead>
-      <tr>
-        <th style="padding: 0px;"></th>
-        <th>Name</th>
-        <th>Department</th>
-        <th>Type</th>
-        <th>Project Title</th>
-        <th>Sponsor</th>
-        <!-- <th>Start Date</th> -->
-        <!-- <th>End Date</th> -->
-        <th>Assigned to</th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @documents.each do |document| %>
-      <% if document.state == 'new_app' %>
-        <tr class="alert-info">
-      <% elsif document.state == 'approved' %>
-        <tr class="alert-success">
-      <% elsif document.state == 'rejected' %>
-        <tr class="alert-danger">
-      <% elsif document.state == 'needs_revisions' %>
-        <tr class="alert-warning">
-      <% end %>
-
-
-      <% @str = "" %>
-      <% @first = true %>
-
-        <% @a.each do |a| %>
-
-          <% if a.document_id == document.id %>
-
-            <% if @first %>
-
-              <% @str += @users.find(a.user_id).first_name; @first = false %>
-
-            <% else %>
-
-              <% @str += ", " + @users.find(a.user_id).first_name %>
-
-            <% end %>
-
-        <% end %>
         <% end %>
 
-          <td><input type="checkbox" name="document_id[]" value="<%= document.id %>"></td>
-          <td><%= document.fName + " " + document.lName %></td>
-          <td><%= document.department %></td>
-          <% if document.typeOfApplication == 'not_sure' %>
-            <td><%= "not sure" %></td>
-          <% else %>
-            <td><%= document.typeOfApplication %></td>
-          <% end %>
-          <td><%= document.project_title %></td>
-          <td><%= document.sponsor_name %></td>
-          <!-- <td><%= document.start_date %></td> -->
-          <!-- <td><%= document.end_date %></td> -->
-          <td><%= @str %></td>
-          <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white'  %></td>
-        </tr>
-      <% end %>
-
-    </tbody>
-    </table>
-
-    <%= will_paginate @documents, :renderer => BootstrapPagination::Rails %>
-
+      </div>
     </div>
 
-    <br>
+    <%= form_for @assignment, url: applications_assignments_path do |form| %>
 
-
-    <br>
-
-    <div class="table-responsive col-md-2">
-        <table class="table table-default table-bordered">
+    <div class="table-responsive col-md-10">
+      <table class="table table-default table-bordered">
         <thead>
           <tr>
             <th style="padding: 0px;"></th>
-            <th>Board Member</th>
-            </th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Type</th>
+            <th>Project Title</th>
+            <th>Sponsor</th>
+            <!-- <th>Start Date</th> -->
+            <!-- <th>End Date</th> -->
+            <th>Assigned to</th>
+            <th></th>
           </tr>
         </thead>
+        <tbody>
+          <% @documents.each do |document| %>
+            <% if document.state == 'new_app' %>
+              <tr class="alert-info">
+                <% elsif document.state == 'approved' %>
+                  <tr class="alert-success">
+                    <% elsif document.state == 'rejected' %>
+                      <tr class="alert-danger">
+                        <% elsif document.state == 'needs_revisions' %>
+                          <tr class="alert-warning">
+                          <% end %>
+                          <% @str = "" %>
+                            <% @first = true %>
+                              <% @a.each do |a| %>
+                                <% if a.document_id == document.id %>
+                                  <% if @first %>
+                                    <% @str += @users.find(a.user_id).first_name; @first = false %>
+                                    <% else %>
+                                      <% @str += ", " + @users.find(a.user_id).first_name %><% end %>
+                                    <% end %>
+                                  <% end %>
+                                  <td><input type="checkbox" name="document_id[]" value="<%= document.id %>"></td>
+                                  <td><%= document.fName + " " + document.lName %></td>
+                                  <td><%= document.department %></td>
+                                  <% if document.typeOfApplication == 'not_sure' %>
+                                    <td><%= "not sure" %></td>
+                                  <% else %>
+                                    <td><%= document.typeOfApplication %></td>
+                                  <% end %>
+                                  <td><%= document.project_title %></td>
+                                  <td><%= document.sponsor_name %></td>
+                                  <!-- <td><%= document.start_date %></td> -->
+                                  <!-- <td><%= document.end_date %></td> -->
+                                  <td><%= @str %></td>
+                                  <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white' %></td>
+                                </tr>
+                              <% end %>
+                            </tbody>
+                          </table>
+                          <%= will_paginate @documents, :renderer => BootstrapPagination::Rails %>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="table-responsive col-md-2">
+                          <table class="table table-default table-bordered">
+                            <thead>
+                              <tr>
+                                <th style="padding: 0px;"></th>
+                                <th>Board Member</th>
+                              </th>
+                            </tr>
+                          </thead>
 
-
-    <tbody>
-        <% @users.each do |user| %>
-
-          <tr>
-
-
-            <td><input type="checkbox" name="user_id[]" value="<%= user.id %>"></td>
-            <td><%= user.first_name + " " + user.last_name %></td>
-
-          </tr>
-        <% end %>
-
-      </tbody>
-    </table>
-
-    <%= submit_tag('Assign', class: 'btn btn-primary', id: 'btnAssign') %>
-    <%= submit_tag('Delete', class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete the assignment(s)?"}) %>
-
-    </div>
-
-    <% end %>
-
-
-
-</div>
-
-<% else %>
-
-
-<%= render 'apps'%>
-
-
-
-<% end %>
+                          <tbody>
+                            <% @users.each do |user| %>
+                              <tr>
+                                <td><input type="checkbox" name="user_id[]" value="<%= user.id %>"></td>
+                                <td><%= user.first_name + " " + user.last_name %></td>
+                              </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                        <%= submit_tag('Assign', class: 'btn btn-primary', id: 'btnAssign') %>
+                        <%= submit_tag('Delete', class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete the assignment(s)?"}) %>
+                      </div>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <%= render 'apps'%>
+                <% end %>
