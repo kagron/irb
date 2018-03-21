@@ -23,6 +23,12 @@ Rails.application.routes.draw do
   get 'irb/ArchivedApps'
   devise_for :users, :controllers => { registrations: 'registrations' }
   root 'irb#home'
+  get 'edit', to: 'irb#edit'
+  # Update index
+  patch "/", :to => "irb#update"
+  put "/", :to => "irb#update"
+  post "/", :to => "irb#create"
+
 
 
 

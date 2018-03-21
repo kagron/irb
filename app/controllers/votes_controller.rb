@@ -29,10 +29,30 @@ class VotesController < ApplicationController
   end
 
   def approve
+    # Approve the application
     @document = Document.find(params[:id])
     @document.state = 'approved'
+    @document.is_archived = 'yes'
     @document.update(document_params)
+    # Email the investigator
     UserEmailMailer.update_document(@document.email).deliver
+    # TODO: put approved on each submitted document
+    @files = Array.new
+    # push all the documents files into an array
+    @files.push(@document.child_assent_file.file.path) if @document.child_assent_file.present?
+    @files.push(@document.hsr_certificate_file.file.path) if @document.hsr_certificate_file.present?
+    @files.push(@document.questions_file.file.path) if @document.questions_file.present?
+    @files.push(@document.consent_file.file.path) if @document.consent_file.present?
+    @files.push(@document.written_permission_file.file.path) if @document.written_permission_file.present?
+    # merge the stamp in a loop
+    if @files.present?
+      @files.each do |file|
+        stamp = CombinePDF.load("#{Rails.root}/stamp.pdf").pages[0]
+        pdf = CombinePDF.load(file)
+        pdf.pages.each {|page| page << stamp}
+        pdf.save file
+      end
+    end
     redirect_to @document, notice: 'You successfully changed the state to Approved'
   end
 
@@ -41,6 +61,7 @@ class VotesController < ApplicationController
     # Change document state to needs_revisions
     @document = Document.find(params[:id])
     @document.state = 'needs_revisions'
+    @document.is_resubmitted = false
     @document.update(document_params)
     # Email User that their document has been reviewed
     UserEmailMailer.update_document(@document.email).deliver

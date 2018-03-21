@@ -16,8 +16,9 @@ class AssignmentsController < ApplicationController
     # go through EACH user AND document passed through the POST request
     # params stores POST and GET data
 
-    params[:document_id].each do |d|
-      params[:user_id].each do |u|
+    params[:user_id].each do |u|
+      @has_assigment = false
+      params[:document_id].each do |d|
         @assignment = Assignment.new()
         @assignment.document_id = d
         @assignment.user_id = u
@@ -25,6 +26,7 @@ class AssignmentsController < ApplicationController
         if !assignment_check(@assignment)
           # if assignment does NOT exist, save the assignment and check for votes
           @assignment.save
+          UserEmailMailer.assign(u).deliver
           vote_check(u, d)
         else
           # assignment already exists, so we add to the error string and change

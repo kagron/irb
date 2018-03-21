@@ -22,4 +22,5 @@ ENV['RAILS_ENV'] = "development"
 set :output, 'log/whenever.log'
 every 1.day, :at => '12:00 am' do
   rake "whenever:demo_task", :environment => 'development'
+  rake "stamp:stamp_task", :environment => 'development'
 end

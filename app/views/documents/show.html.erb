@@ -38,7 +38,9 @@
       <h2>This application is
         <span style="color: #ec971f">Approved Pending Revisions</span></h2>
       <div class="text-center">
-        <%= button_to 'Edit Application', edit_document_path, method: :get, class: 'btn btn-primary', style: 'margin-bottom: 20px;' %>
+        <%= button_to edit_document_path, method: :get, class: 'btn btn-primary', style: 'margin-bottom: 20px;' do %>
+          <i class="fa fa-edit"></i> Revise Application
+        <% end %>
       </div>
       <% elsif current_user.supervisor_role %>
         <h2>This application is
@@ -48,7 +50,9 @@
           <span style="color: #ec971f">Approved Pending Revisions</span></h2>
         <h4>Please revise your application based on the comments provided and hit resubmit once you are finished</h4>
         <div class="text-center">
-          <%= button_to 'Edit Application', edit_document_path, method: :get, class: 'btn btn-primary', style: 'margin-bottom: 20px;' %>
+          <%= button_to edit_document_path, method: :get, class: 'btn btn-primary', style: 'margin-bottom: 20px;' do %>
+            <i class="fa fa-edit"></i> Revise Application
+          <% end %>
         </div>
       <% end %>
     <% end %>
@@ -90,7 +94,11 @@
           <div class="row application">
             <div class="col-md-4">
               <strong>Type of Application</strong><br>
-              <%= @document.typeOfApplication %>
+              <% if @document.typeOfApplication == 'not_sure' %>
+                not sure
+              <% else %>
+                <%= @document.typeOfApplication %>
+              <% end %>
             </div>
           </div>
           <!-- end third row -->
@@ -112,11 +120,11 @@
           <div class="row application">
             <div class="col-md-6">
               <strong>Project Start Date</strong><br>
-              <%= @document.start_date.strftime("%b %e %Y") %>
+              <%= @document.start_date.strftime("%B %e %Y") %>
             </div>
             <div class="col-md-6">
               <strong>Project End Date</strong><br>
-              <%= @document.end_date.strftime("%b %e %Y") %>
+              <%= @document.end_date.strftime("%B %e %Y") %>
             </div>
           </div>
           <!-- end row 2 -->
@@ -181,13 +189,27 @@
           <div class="row">
             <div class="col-md-12">
               <strong>Subjects consent:</strong><br>
-              <%= @document.subjects_consent %>
+              <% if @document.subjects_consent.present? %>
+                <%= @document.subjects_consent %>
+              <% else %>
+                <%= link_to @document.consent_file_url do %>
+                  <i class="fa fa-file"></i> Download PDF
+                <% end %>
+              <% end %>
+              </p>
             </div>
           </div>
           <div class="row application">
             <div class="col-md-12">
-              <strong>Parental consent:</strong><br>
-              <%= @document.parental_consent %>
+              <% if @document.child_assent_file.present? %>
+                <p>
+                  <strong>Copy of Child Assent Form:
+                  </strong>
+                  <%= link_to @document.child_assent_file_url do %>
+                    <i class="fa fa-file"></i> Download PDF
+                  <% end %>
+                </p>
+              <% end %>
             </div>
           </div>
         </div>
@@ -196,31 +218,26 @@
           <p>
             <strong>List of Questions:
             </strong>
-            <%= link_to "Download PDF", @document.questions_file_url %>
-          </p>
-
-          <p>
-            <strong>Copy of Consent Form:
-            </strong>
-            <%= link_to "Download PDF", @document.consent_file_url %>
-          </p>
-
-          <p>
-            <strong>Copy of Child Assent Form:
-            </strong>
-            <%= link_to "Download PDF", @document.child_assent_file_url %>
+            <%= link_to @document.questions_file_url  do %>
+              <i class="fa fa-file"></i> Download PDF
+            <% end %>
           </p>
 
           <p>
             <strong>Copy of Human Subjects Research Certificate:
             </strong>
-            <%= link_to "Download PDF", @document.hsr_certificate_file_url %>
+            <%= link_to @document.hsr_certificate_file_url do %>
+              <i class="fa fa-file"></i> Download PDF
+            <% end %>
           </p>
-
-          <p>
-            <strong>Written permission from the site where the research is to be conducted (if applicable):</strong>
-            <%= link_to "Download PDF", @document.written_permission_file_url %>
-          </p>
+          <% if @document.written_permission_file.present? %>
+            <p>
+              <strong>Written permission from the site where the research is to be conducted (if applicable):</strong>
+              <%= link_to @document.written_permission_file_url do %>
+                <i class="fa fa-file"></i> Download PDF
+              <% end %>
+            </p>
+          <% end %>
           <div class="row application">
             <div class="col-md-12">
               <strong>Advisor sig:</strong><br>
@@ -233,7 +250,7 @@
       <!-- end left side -->
       <div class="col-md-3">
         <!-- Comment section -->
-        <h3 style="margin-top: 0">Comments</h3>
+        <h3 style="margin-top: 0"><i class="fa fa-comments"></i> Comments</h3>
         <% if @comments.present? %>
           <% @comments.each do |c| %>
             <div class="comment-block">
@@ -265,9 +282,15 @@
         <% if @your_votes.present? %>
           <% if (@your_votes[0].state == 'new_app' || @your_votes[0].state == 'needs_revisions') %>
             <h4>Vote for the state you believe this application should be:</h4>
-            <%= button_to 'Approve', approve_vote_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to vote to approve this application?' } %>
-            <%= button_to 'Approve Pending Revisions', revise_vote_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to vote to make this application approved pending revisions?' } %>
-            <%= button_to 'Reject', reject_vote_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to vote to reject this application?' } %>
+            <%= button_to approve_vote_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to vote to approve this application?' }  do %>
+              <i class="fa fa-check"></i> Approve
+            <% end %>
+            <%= button_to revise_vote_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to vote to make this application approved pending revisions?' } do %>
+              <i class="fa fa-edit"></i> Approve Pending Revisions
+            <% end %>
+            <%= button_to reject_vote_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to vote to reject this application?' } do %>
+              <i class="fa fa-ban"></i> Reject
+            <% end %>
           <% else %>
             <h4>You already voted on this application</h4>
           <% end %>
@@ -290,16 +313,25 @@
         <% if current_user.superadmin_role && (@document.state == 'new_app' || @document.state == 'needs_revisions')%>
           <div class="well">
             <h4>Determine the state of the application:</h4>
-            <%= button_to 'Approve', approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to approve this application?' } %>
-            <%= button_to 'Approve Pending Revisions', revise_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to make this application approved pending revisions?' } %>
-            <%= button_to 'Reject', reject_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to reject this application?' } %>
+            <%= button_to approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to approve this application?' } do %>
+              <i class="fa fa-check"></i> Approve
+            <% end %>
+            <%= button_to revise_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to make this application approved pending revisions?' } do %>
+              <i class="fa fa-edit"></i> Approve Pending Revisions
+            <% end %>
+            <%= button_to reject_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to reject this application?' } do %>
+              <i class="fa fa-ban"></i> Reject
+            <% end %>
           </div>
         <% end %>
       </div>
       <!-- end comment section -->
     </div>
     <!-- end page row -->
-
-    <%= link_to 'Back', documents_path, class: 'btn btn-default' %>
+    <div class="app-buttons">
+      <%= link_to documents_path, class: 'btn btn-default' do %>
+        <i class="fa fa-angle-double-left"></i> Go Back
+      <% end %>
+    </div>
 
   </div>

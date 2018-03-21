@@ -32,10 +32,11 @@ class Document < ApplicationRecord
   # validates :subjects_consent, presence: true
   #validates :parental_consent, presence: true
   validates :advisor_sig, presence: true
-  # validates :questions_file, presence: true
+  validates :questions_file, presence: true
   # validates :consent_file, presence: true
-  # validates :hsr_certificate_file, presence: true
-  #validates :written_permission_file, presence: true
+  validates :hsr_certificate_file, presence: true
+  # validates :written_permission_file, presence: true
+  # validates :child_assent_file, presence: true
   belongs_to :user
   has_many :comments
   has_many :votes

@@ -19,8 +19,9 @@
           <li role="presentation" class="active"><%= link_to 'My New Applications', applications_new_apps_path %></li>
           <li role="presentation"><%= link_to 'In Progress', applications_approved_path %></li>
           <li role="presentation"><%= link_to 'Archived', applications_archived_path %></li>
-        </ul>
+
       <%end%>
+      </ul>
 
     </div>
 
@@ -31,13 +32,18 @@
         <div class="input-group">
           <%= text_field_tag :search, params[:search], placeholder: "Search applications...", class: 'form-control' %>
           <span class="input-group-btn">
-            <%= submit_tag "Search", class: 'btn btn-default' %>
+
+            <%= button_tag(type: "submit", class: "btn btn-default") do %>
+                <i class="fa fa-search"></i> Search
+            <% end %>
 
           </span>
+          </div>
         <% end %>
 
-      </div>
+
     </div>
+  <!-- </div> -->
 
     <%= form_for @assignment, url: applications_assignments_path do |form| %>
 
@@ -47,14 +53,12 @@
           <tr>
             <th style="padding: 0px;"></th>
             <th>Name</th>
+            <th>Project Title</th>
             <th>Department</th>
             <th>Type</th>
-            <th>Project Title</th>
-            <th>Sponsor</th>
             <!-- <th>Start Date</th> -->
             <!-- <th>End Date</th> -->
             <th>Assigned to</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -73,25 +77,27 @@
                               <% @a.each do |a| %>
                                 <% if a.document_id == document.id %>
                                   <% if @first %>
-                                    <% @str += @users.find(a.user_id).first_name; @first = false %>
+                                    <% @str += @users.find(a.user_id).first_name + " " + @users.find(a.user_id).last_name; @first = false %>
                                     <% else %>
-                                      <% @str += ", " + @users.find(a.user_id).first_name %><% end %>
+                                      <% @str += ", " + @users.find(a.user_id).first_name + " " + @users.find(a.user_id).last_name %><% end %>
                                     <% end %>
                                   <% end %>
                                   <td><input type="checkbox" name="document_id[]" value="<%= document.id %>"></td>
                                   <td><%= document.fName + " " + document.lName %></td>
+                                  <td><%= document.project_title %></td>
                                   <td><%= document.department %></td>
                                   <% if document.typeOfApplication == 'not_sure' %>
                                     <td><%= "not sure" %></td>
                                   <% else %>
                                     <td><%= document.typeOfApplication %></td>
                                   <% end %>
-                                  <td><%= document.project_title %></td>
-                                  <td><%= document.sponsor_name %></td>
                                   <!-- <td><%= document.start_date %></td> -->
                                   <!-- <td><%= document.end_date %></td> -->
                                   <td><%= @str %></td>
-                                  <td><%= link_to 'View', document, class: 'btn btn-primary', style: 'color: white' %></td>
+                                  <td><%= link_to document, class: 'btn btn-primary', style: 'color: white' do %>
+                                      <i class="fa fa-eye"></i> View
+                                    <% end %>
+                                  </td>
                                 </tr>
                               <% end %>
                             </tbody>
@@ -106,7 +112,7 @@
                               <tr>
                                 <th style="padding: 0px;"></th>
                                 <th>Board Member</th>
-                              </th>
+
                             </tr>
                           </thead>
 

@@ -1,0 +1,42 @@
+<div class="container">
+
+
+<h1>Edit the Home Page</h1>
+<p>This page uses <strong>Markdown</strong>.  Markdown is a way of typing that
+allows shortcuts to make links/images/lists/headings/etc.  Feel free to copy and
+paste or use the following as a guide: <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">here</a></p>
+<% if @front_page.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@front_page.errors.count, "error") %>
+      prohibited this page from being saved:</h2>
+
+    <ul>
+      <% @front_page.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<% if @front_page.present? %>
+<%= form_for @front_page, url: root_path() do |f| %>
+
+<div class="form-group">
+  <%= f.label(:title, "Title") %>
+  <%= f.text_field :title, class: 'form-control' %>
+</div>
+
+<div class="form-group">
+  <%= f.label(:content, "Body") %>
+  <%= f.text_area :content, class: 'form-control', rows: 15 %>
+</div>
+
+<div class="app-buttons">
+  <%= link_to root_path, class: 'btn btn-default' do %>
+    <i class="fa fa-angle-double-left"></i> Go Back
+  <% end %>
+  <%= f.submit 'Save', class: 'btn btn-primary' %>
+</div>
+
+<% end %>
+<% end %>
+</div>

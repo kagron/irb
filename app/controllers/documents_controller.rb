@@ -23,7 +23,7 @@ class DocumentsController < ApplicationController
     @a = Assignment.all
 
   	if current_user.supervisor_role || current_user.readonly_role
-  	   @documents = Document.where(state: 'new_app').or(Document.where(state: 'needs_revisions')).order("updated_at DESC").paginate(:page => params[:page], :per_page => 10)
+  	   @documents = Document.where(state: 'new_app').or(Document.where(state: 'needs_revisions').where(is_resubmitted: '1')).order("updated_at DESC").paginate(:page => params[:page], :per_page => 10)
   	else
   	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(state: 'new_app').where(:email => current_user.email).order("updated_at DESC")
 	  end
@@ -96,6 +96,7 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       if @document.save
         UserEmailMailer.submit_document(@document.email).deliver
+        UserEmailMailer.new_app(@document).deliver
         # Create empty votes for every board member
         @array = Array.new
         @board = User.where(supervisor_role: true)
@@ -120,14 +121,13 @@ class DocumentsController < ApplicationController
   def update
     respond_to do |format|
 
-		@oldstate = @document.state
+		# @oldstate = @document.state
 
 		if @document.update(document_params)
-    		@newstate = @document.state
-
-    		if (@oldstate != @newstate)
-      		UserEmailMailer.update_document(@document.email).deliver
-        end
+    		# @newstate = @document.state
+        # @document.is_resubmitted = true
+        @document.update_attributes(is_resubmitted: true)
+        UserEmailMailer.resubmit(@document).deliver
         format.html { redirect_to @document, notice: 'Document was successfully updated.' }
         format.json { render :show, status: :ok, location: @document }
       else
@@ -170,7 +170,7 @@ class DocumentsController < ApplicationController
          :end_date, :research_question, :lit_review, :procedure, :pool_of_subjects,
          :sub_recruitment, :risks, :opt_participation, :confidentiality, :authorities_consent,
          :subjects_consent, :parental_consent, :state, :is_archived, :questions_file, :advisor_sig,
-       :consent_file, :child_assent_file, :hsr_certificate_file, :written_permission, :users_id, :created_at,
+       :consent_file, :child_assent_file, :hsr_certificate_file, :written_permission_file, :users_id, :created_at,
      :updated_at)
     end
 end

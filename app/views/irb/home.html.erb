@@ -1,67 +1,19 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      <h1>Institutional Review Board</h1>
-      <p>Please note that there are new updated documents for your convenience.
-        Please contact Autumn McKeel at amckeel@aurora.edu or 630-844-6186 if you
-        have any questions.</p>
-        <p>This section is designed to help you navigate ethics practices at Aurora University.
-          Institutional Review Boards review your research proposal if you are conducting
-          research either with human or animal subjects.</p>
-        <p>The representatives of the college boards are as follows:</p>
-		   <ul>
-  			<li><a href="mailto:amckeel@aurora.edu">Autumn McKeel</a><span>&#160;(Chair)&#160;</span>&#8211; School of Nursing and Allied Health</li>
-  			<li><a href="mailto:kbrendel@aurora.edu">Kristen Brendel</a> &#8211; School of Social Work</li>
-  			<li><a href="mailto:vflynn@aurora.edu">Valerie Flynn</a>&#160;&#8211;&#160;College of Arts and Sciences</li>
-  			<li><a href="mailto:apickup@aurora.edu">Austin Pickup</a> &#8211; School of Education</li>
-  			<li><a href="mailto:fwilson@aurora.edu">Faith Wilson</a> &#8211; School of Education</li>
-  			<li><a href="mailto:swyman@aurora.edu">Sebastian Wyman</a>&#160;&#8211; College of Arts and Sciences<span><br/></span></li>
-			</ul>
-			<p>Check with your representative to determine whether your research requires IRB review.</p>
-      <h3>Application Process</h3>
-      <p>Please see the presentation, <a href="https://aurora.webex.com/cmp3200/webcomponents/widget/playback.do?siteurl=aurora&amp;recordID=117126362&amp;isnbr=true&amp;ticket=4832534b00000004ca6c4c3bc4ce04c8320ecd927b583e2c7d7152aacbacf7a158ac1f59d43c80cb&amp;timestamp=1508852235111&amp;serviceRecordID=117126367&amp;nbrhomepageurl=" rel="noopener noreferrer" target="_blank">"How to Complete an IRB Application"</a> for details on the application process.</p>
-      <h3>IRB Manual</h3>
-      <p>Please use this manual for specific questions when completing your application or additional forms.</p>
-      <p><%= link_to 'IRB Manual', asset_path("IRB-manual-08252016.pdf") %> (PDF)</p>
-      <h3>Ethics Tutorial</h3>
-      <p>Begin your research work by completing an online ethics tutorial.</p>
-      <p>When you bring your proposal to the university IRB, you will need to attach
-         a certificate showing that you completed the tutorial.</p>
-      <p>Below is the URL that will connect you to the tutorial site. You will register
-        at the site. The tutorial will take about 2 hours to complete, but you may work
-        on it in smaller increments.</p>
-      <p><a href="http://phrp.nihtraining.com/users/login.php">http://phrp.nihtraining.com/users/login.php</a></p>
-      <h3>Level of Review</h3>
-      <p>Use the following document to help you determine if your study is
-         research. The form is to be used as a guide, and if you have further questions
-         or concerns, please contact your representative &#8211; see above information.</p>
-      <%= link_to 'Human Subjects Determination Form', asset_path("human-subjects-determination-form.doc") %> (DOC)
-      <h3>Sample Consent Form</h3>
-      <p><%= link_to 'Sample Consent Form', asset_path("sample-consent-10172017.docx") %> (DOCX)</p>
-      <p>Please use this form to assist you in including all of the important sections of your consent form:</p>
-      <p><%= link_to 'Elements of Informed Consent', asset_path("IRB-elements-of-informed-consent-08252016.pdf") %> (PDF)</p>
+      <% if @front_page.present? %>
+      <h1><%= @front_page.title %></h1>
+      <% if user_signed_in? && current_user.supervisor_role %>
+        <div class="text-center">
+        <%= link_to "Edit Home Page", edit_path, class: 'btn btn-default' %>
+        </div>
 
-      <!--
-      <h3>IRB Packet</h3>
-      <p>Attached is a packet of all IRB materials, including the sample informed consent.</p>
-      <p><a href="/documents/academics/resources/irb/IRB_PACKET.pdf">IRB Packet</a></p>
-      -->
-      <h3>Special Forms</h3>
-      <p>Use of the <strong>Waiver of Documentation of Informed Consent Form</strong> to request that your informed consent forms not require participants&#8217; signatures. The form applies when your research either</p>
-      <ul>
-      <li>Puts participants at risk if they sign a consent form</li>
-      <li>Involves a low-risk online survey where obtaining a signed informed consent is impractical</li>
-      </ul>
-      <p><%= link_to 'Waiver of Consent Form', asset_path("waiver-of-informed-consent.docx") %> (DOCX)</p>
-      <p>Use of the <strong>Project Renewal Form</strong> when your research project extends beyond the one-year IRB approval cycle</p>
-      <p><%= link_to 'Project Renewal Form', asset_path("project-renewal-form.docx") %> (DOCX)</p>
-      <h3>Research with Children</h3>
-      <p>Children under the age of 18 are considered a protected class.&#160; In order to conduct research with them, researchers need to obtain the child's assent and a parent or guardian's permission.</p>
-      <p><%= link_to 'Sample Parent/Guardian Permission Form', asset_path("sample-parent-guardian-permission-form.docx") %> (DOCX)</p>
-      <p><%= link_to 'Sample Child Assent Form', asset_path("sample-student-assent-form-with-audiotaping.docx") %> (DOCX)</p>
-      <p>(The one exception to this rule is when a teacher is conducting action research, trying out an instructional technique to see how well it works.&#160; The technique cannot involve audio or videotaping students, surveying them, or interviewing them. These research methods require parent and student permission. Action research consists of usual classroom activities.)</p>
-
-   </div> <!-- end left column -->
+      <% end %>
+      <%= markdown(@front_page.content) %>
+      <% else %>
+        <% redirect_to edit_path %>
+      <% end %>
+    </div>
     <div class="col-md-4 well"> <!-- start right column -->
       <% if !user_signed_in? %>
       <h1>Log In</h1>
@@ -84,7 +36,7 @@
         <% end -%>
 
         <div class="actions">
-          <%= f.submit "Log in", class: 'btn btn-default' %>
+          <%= f.submit "Log in", class: 'btn btn-primary' %>
         </div>
       <% end %>
 
@@ -92,15 +44,25 @@
       <% else %>
         <h1>Get Started</h1>
         <div class="text-center">
-          <%= link_to 'Start a New Application', new_document_path, class: 'btn btn-primary btn-lg state-btn', style:'color: white' %>
+          <%= link_to new_document_path, class: 'btn btn-primary btn-lg state-btn', style:'color: white' do %>
+            <i class="fa fa-file"></i> Start a New Application
+          <% end %>
           <% if current_user.superadmin_role%>
-            <%= link_to 'View New Applications', applications_new_apps_path, class: 'btn btn-default btn-lg state-btn' %>
+            <%= link_to applications_new_apps_path, class: 'btn btn-default btn-lg state-btn' do %>
+              <i class="fa fa-th-list"></i> View New Applications
+            <% end %>
             <% elsif current_user.supervisor_role%>
-            <%= link_to 'View Your Assigned Applications', applications_assignments_path, class: 'btn btn-default btn-lg state-btn' %>
+            <%= link_to applications_assignments_path, class: 'btn btn-default btn-lg state-btn' do %>
+              <i class="fa fa-th-list"></i> View Your Assigned Applications
+            <% end %>
             <% elsif current_user.readonly_role%>
-            <%= link_to 'View All Applications', documents_path, class: 'btn btn-default btn-lg state-btn' %>
+            <%= link_to documents_path, class: 'btn btn-default btn-lg state-btn' do %>
+              <i class="fa fa-th-list"></i> View All Applications
+            <% end %>
             <%else%>
-          <%= link_to 'View Your Applications', applications_new_apps_path, class: 'btn btn-default btn-lg state-btn' %>
+          <%= link_to applications_new_apps_path, class: 'btn btn-default btn-lg state-btn' do %>
+            <i class="fa fa-th-list"></i> View Your Applications
+          <% end %>
           <% end %>
         </div>
       <% end %>
