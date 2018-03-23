@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   post 'applications/:id/reject', :to => 'votes#reject', as: 'reject_app'
   post 'applications/:id/comments/:comment_id', :to => 'comments#destroy', as: 'delete_comment'
 
+  # Chair Comment routes, we only need create, update, and destroy
+  post 'chair_comments', :to => 'chair_comments#create', as: 'create_chair_comment'
+  
+
   resources :applications, as: 'documents', controller: 'documents'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :admins

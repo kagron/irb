@@ -1,0 +1,2 @@
+class ChairComment < ApplicationRecord
+end

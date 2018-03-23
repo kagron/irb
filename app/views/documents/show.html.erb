@@ -328,6 +328,17 @@
       <!-- end comment section -->
     </div>
     <!-- end page row -->
+    <% if current_user.superadmin_role %>
+      <div class="row">
+        <div class="col-md-9">
+          <%= form_for @chair_comment, url: create_chair_comment_path do |form| %>
+            <%= form.hidden_field :document_id, :value => @document.id %>
+            <%= form.text_area :body, rows: '8', class: 'form-control txtComment', placeholder: 'Add a comment...' %>
+            <%= form.submit 'Save', class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
     <div class="app-buttons">
       <%= link_to documents_path, class: 'btn btn-default' do %>
         <i class="fa fa-angle-double-left"></i> Go Back
