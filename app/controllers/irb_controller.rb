@@ -1,5 +1,5 @@
 class IrbController < ApplicationController
-  before_action :check_user, only: [:edit, :update]
+  before_action :check_user, only: [:edit, :update, :board]
   def home
     @front_page = Page.first
   end
@@ -39,12 +39,17 @@ class IrbController < ApplicationController
     end
   end
 
-  def ArchivedApps
-    if params[:search]
-     @data = Document.search(params[:search]).where(:is_archived => '1').order("created_at DESC")
+  def board
+
+    if !current_user.superadmin_role
+      redirect_to root_path, notice: "You have to be the chair to do that"
+
     else
-      @data = Document.where(:is_archived => '1').order("created_at DESC")
+      @chair = User.where(superadmin_role: '1')
+      @board = User.where(supervisor_role: '1')
+
     end
+
   end
 
 

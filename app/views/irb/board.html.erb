@@ -1,0 +1,55 @@
+
+<div class="container">
+  <div class="well">
+
+
+
+    <h2>Current Chair</i></h2> <i class="fa fa-plus"></i> <i class="fa fa-minus"></i>
+
+
+        <table class="table table-default table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @chair.each do |chair| %>
+              <tr>
+                <td><%= chair.first_name + " " + chair.last_name %></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <% end %>
+            </tbody>
+        </table>
+
+
+
+    <h2>Current Board</h2> <i class="fa fa-plus"></i> <i class="fa fa-minus"></i>
+
+        <table class="table table-default table-bordered">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <% @board.each do |board| %>
+              <tbody>
+                <tr>
+                  <td><%= board.first_name + " " + board.last_name %></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <% end %>
+              </tbody>
+        </table>
+
+
+
+  </div>
+</div>

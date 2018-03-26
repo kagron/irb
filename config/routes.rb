@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   delete 'applications/new_apps', :to => 'assignments#destroy', as: 'delete_assign'
   post 'applications/assignments', :to => 'assignments#create'
   post 'applications/:id', :to => 'comments#create'
-  get 'irb/ArchivedApps'
+  get 'board', :to => 'irb#board'
   devise_for :users, :controllers => { registrations: 'registrations' }
   root 'irb#home'
   get 'edit', to: 'irb#edit'
