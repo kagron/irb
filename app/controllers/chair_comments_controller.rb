@@ -21,7 +21,16 @@ class ChairCommentsController < ApplicationController
   end
 
   def update
-
+    @document = Document.find(params[:chair_comment][:document_id])
+    @comment = ChairComment.where(document_id: params[:chair_comment][:document_id]).last
+    if @comment.update(comment_params)
+    		# @newstate = @document.state
+        # @document.is_resubmitted = true
+        redirect_to document_path(@document), notice: 'Comment was successfully updated.'
+      else
+        format.html { render :edit }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      end
   end
 
   def destroy

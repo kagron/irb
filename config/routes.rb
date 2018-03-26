@@ -14,7 +14,8 @@ Rails.application.routes.draw do
 
   # Chair Comment routes, we only need create, update, and destroy
   post 'chair_comments', :to => 'chair_comments#create', as: 'create_chair_comment'
-  
+  patch "/", :to => "chair_comments#update", as: 'edit_chair_comment'
+  put "/", :to => "chair_comments#update"
 
   resources :applications, as: 'documents', controller: 'documents'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

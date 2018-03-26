@@ -20,6 +20,12 @@ $(document).on('turbolinks:load', function(){
   $('.alert').delay(5000).fadeOut(2000);
   $('#document_child_assent_file').hide();
   $('#child_assent_label').hide();
+  $('#chair-comment').hide();
+
+
+  $('#edit-chair-comment').click(function() {
+    $('#chair-comment').toggle(500);
+  });
 
   $('#yesMinors').on('change', function() {
     $('#document_child_assent_file').show(500);
