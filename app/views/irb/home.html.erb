@@ -4,13 +4,18 @@
       <% if @front_page.present? %>
         <h1><%= @front_page.title %></h1>
         <% if user_signed_in? && current_user.supervisor_role %>
-        <div class="text-center">
-          <%= link_to "Edit Home Page", edit_path, class: 'btn btn-default' %>
-        </div>
-      <% end %>
+          <div class="text-center">
+            <%= link_to "Edit Home Page", edit_path, class: 'btn btn-default' %>
+          </div>
+        <% end %>
         <%= markdown(@front_page.content) %>
       <% else %>
         <h1>Theres nothing here right now... </h1>
+        <% if user_signed_in? && current_user.supervisor_role %>
+          <div class="text-center">
+            <%= link_to "Edit Home Page", edit_path, class: 'btn btn-default' %>
+          </div>
+        <% end %>
       <% end %>
     </div>
     <div class="col-md-4 well"> <!-- start right column -->
