@@ -21,11 +21,16 @@ $(document).on('turbolinks:load', function(){
   $('#document_child_assent_file').hide();
   $('#child_assent_label').hide();
   $('#chair-comment').hide();
+  $('#boardSearch').hide();
 
 
   $('#edit-chair-comment').click(function() {
     $('#chair-comment').toggle(500);
   });
+  $('#searchButton').click(function() {
+    $('#boardSearch').toggle(500);
+  });
+
 
   $('#yesMinors').on('change', function() {
     $('#document_child_assent_file').show(500);
@@ -45,15 +50,12 @@ $(document).on('turbolinks:load', function(){
   $('#showCheck').click(function() {
     $('.checkLabel').toggle('slow', function() {
       // Animation complete.
-  })};
-
-
-$('#boardSearch').hide();
-
-$('#searchButton').click(function() {
-  $('#boardSearch').toggle(500);
-
-});
+    });
+    $('.assignCombo').show(500);
+    $('#assignBtn').toggle('slow', function() {
+      // Animation complete.
+    });
+  });
 
   $("#checkAll").click(function(){
     $('input:checkbox').not(this).prop('checked', this.checked);
