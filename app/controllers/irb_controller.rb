@@ -1,5 +1,5 @@
 class IrbController < ApplicationController
-  before_action :check_user, only: [:edit, :update]
+  before_action :check_user, only: [:edit, :update, :board]
   def home
     @front_page = Page.first
   end
@@ -39,12 +39,62 @@ class IrbController < ApplicationController
     end
   end
 
-  def ArchivedApps
-    if params[:search]
-     @data = Document.search(params[:search]).where(:is_archived => '1').order("created_at DESC")
+  def board
+
+    if !current_user.superadmin_role
+      redirect_to root_path, notice: "You have to be the chair to do that"
+
     else
-      @data = Document.where(:is_archived => '1').order("created_at DESC")
+      @chair = User.where(superadmin_role: '1')
+      @board = User.where(supervisor_role: '1').where(superadmin_role: '0')
+
     end
+
+  end
+
+  def search
+
+      @user = User.where(supervisor_role: '0')
+
+  end
+
+  def removeBoard
+
+    @user = User.find(params[:id])
+    @user.superadmin_role = '0'
+    @user.supervisor_role = '0'
+    @user.save
+    redirect_to board_path, notice: "Board member succesfully removed"
+
+  end
+
+  def removeChair
+
+    @user = User.find(params[:id])
+    @user.supervisor_role = '1'
+    @user.superadmin_role = '0'
+    @user.save
+    redirect_to board_path, notice: "Chair member was succesfully demoted"
+
+  end
+
+  def addChair
+
+    @user = User.find(params[:id])
+    @user.supervisor_role = '1'
+    @user.superadmin_role = '1'
+    @user.save
+    redirect_to board_path, notice: "Board member was succesfully promoted to chair"
+
+  end
+
+  def addBoard
+
+    @new = User.find(params[:id])
+    @new.supervisor_role = '1'
+    @new.save
+    redirect_to board_path, notice: "Board member added succesfully"
+
   end
 
 

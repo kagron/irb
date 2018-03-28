@@ -1,0 +1,61 @@
+
+<div class="container">
+  <div class="well">
+
+
+
+    <h2>Current Chair</h2>
+
+
+        <table class="table table-default table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @chair.each do |chair| %>
+              <tr>
+                <td><%= chair.first_name + " " + chair.last_name %></td>
+                <td width="10%"><%= button_to remove_chair_path(chair), method: :post, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to demote the chair?'} do %>Demote
+              <% end %></td>
+              </tr>
+              <% end %>
+            </tbody>
+        </table>
+
+
+
+    <h2>Current Board</h2>
+
+
+        <table class="table table-default table-bordered">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @board.each do |board| %>
+                <tr>
+                  <td><%= board.first_name + " " + board.last_name %></td>
+                  <td width="10%"><%= button_to add_chair_path(board), method: :post, class: 'btn btn-primary', data: {confirm: 'Are you sure you want to promote ' + board.first_name + " " + board.last_name + " to chair?"} do %>Promote
+                  <% end %>
+                </td>
+                  <td width="10%"><%= button_to remove_board_path(board), method: :post, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to remove this board member?'} do %>Remove
+                  <% end %>
+                </td>
+                </tr>
+                <% end %>
+              </tbody>
+        </table>
+
+        <%= link_to( 'Add users to board', search_path, 'data-popup' => true  ) %>
+
+
+
+  </div>
+</div>

@@ -46,6 +46,11 @@ $(document).on('turbolinks:load', function(){
     $('.checkLabel').toggle('slow', function() {
       // Animation complete.
     });
+
+  $('a[data-popup]').on('click', function(e) {
+     window.open($(this).attr('href'));
+     e.preventDefault(); });
+
     $('.assignCombo').show(500);
     $('#assignBtn').toggle('slow', function() {
       // Animation complete.

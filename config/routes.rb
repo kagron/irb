@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   patch "/", :to => "chair_comments#update", as: 'edit_chair_comment'
   put "/", :to => "chair_comments#update"
 
+  post 'users/:id/removeboard', :to => 'irb#removeBoard', as: 'remove_board'
+  post 'users/:id/removechair', :to => 'irb#removeChair', as: 'remove_chair'
+  post 'users/:id/addboard', :to => 'irb#addBoard', as: 'add_board'
+  post 'users/:id/addchair', :to => 'irb#addChair', as: 'add_chair'
   resources :applications, as: 'documents', controller: 'documents'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :admins
@@ -25,7 +29,8 @@ Rails.application.routes.draw do
   delete 'applications/new_apps', :to => 'assignments#destroy', as: 'delete_assign'
   post 'applications/assignments', :to => 'assignments#create'
   post 'applications/:id', :to => 'comments#create'
-  get 'irb/ArchivedApps'
+  get 'board', :to => 'irb#board'
+  get 'search', :to => 'irb#search'
   devise_for :users, :controllers => { registrations: 'registrations' }
   root 'irb#home'
   get 'edit', to: 'irb#edit'
