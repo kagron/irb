@@ -54,7 +54,11 @@ class IrbController < ApplicationController
 
   def search
 
-      @user = User.where(supervisor_role: '0')
+      if params[:search]
+        @user = User.paginate(:page => params[:page], :per_page => 10).search(params[:search]).where(:supervisor_role => '0') #1isArchived
+      else
+        @user = User.paginate(:page => params[:page], :per_page => 10).where(:supervisor_role => '0')#.where(:is_archived => '0')
+      end
 
   end
 
@@ -70,11 +74,20 @@ class IrbController < ApplicationController
 
   def removeChair
 
-    @user = User.find(params[:id])
-    @user.supervisor_role = '1'
-    @user.superadmin_role = '0'
-    @user.save
-    redirect_to board_path, notice: "Chair member was succesfully demoted"
+    @chairMems = User.where(superadmin_role: '1')
+
+    if @chairMems.size > 1
+
+      @user = User.find(params[:id])
+      @user.supervisor_role = '1'
+      @user.superadmin_role = '0'
+      @user.save
+      redirect_to board_path, notice: "Chair member was succesfully demoted"
+
+    else
+      redirect_to board_path, notice: "Please name a new chair first"
+
+    end
 
   end
 
@@ -98,9 +111,6 @@ class IrbController < ApplicationController
   end
 
 
-  def self.search(search)
-	   where("id LIKE ? OR fName LIKE ? OR lName LIKE ? OR phone LIKE ? OR email LIKE ? OR department LIKE ? OR typeOfApplication LIKE ? OR project_title LIKE ? OR sponsor_name LIKE ? OR start_date LIKE ? OR end_date LIKE ? OR state LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%")
-  end
   private
     def check_user
       if (!user_signed_in?)
@@ -110,6 +120,10 @@ class IrbController < ApplicationController
     # strong params
     def home_params
        params.require(:page).permit(:title, :content)
+    end
+
+    def search_params
+        params.require(:user).permit(:first_name, :last_name)
     end
 
 end

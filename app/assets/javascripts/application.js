@@ -39,17 +39,15 @@ $(document).on('turbolinks:load', function(){
   $('#showCheck').click(function() {
     $('.checkLabel').toggle('slow', function() {
       // Animation complete.
-    });
-
-  $('a[data-popup]').on('click', function(e) {
-     window.open($(this).attr('href'));
-     e.preventDefault(); });
-
-    $('.assignCombo').show(500);
-    $('#assignBtn').toggle('slow', function() {
-      // Animation complete.
-    });
+    }
   });
+
+
+$('#boardSearch').hide();
+$('#searchButton').click(function() {
+  $('#boardSearch').toggle(500);
+
+};
 
   $("#checkAll").click(function(){
     $('input:checkbox').not(this).prop('checked', this.checked);

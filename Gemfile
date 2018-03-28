@@ -7,6 +7,7 @@ end
 gem 'delayed_job_active_record'
 gem 'sprockets-rails'
 gem 'will_paginate-bootstrap'
+gem "searchkick"
 # Use font awesome
 gem "font-awesome-rails"
 # Use Whenever for scheduling
