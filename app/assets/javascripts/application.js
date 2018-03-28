@@ -41,21 +41,9 @@ $(document).on('turbolinks:load', function(){
       // Animation complete.
     });
 
-  $('#addChairSearch').click(function() {
-    $('#addChairSearch').show(500);
-  });
-
-  $('#addBoardSearch').click(function() {
-    $('#addBoardSearch').show(500);
-  })
-
-  $('#removeChairSearch').click(function() {
-    $('#removeChairSearch').show(500);
-  });
-
-  $('#removeBoardSearch').click(function() {
-    $('#removeBoardSearch').show(500);
-  })
+  $('a[data-popup]').on('click', function(e) {
+     window.open($(this).attr('href'));
+     e.preventDefault(); });
 
     $('.assignCombo').show(500);
     $('#assignBtn').toggle('slow', function() {

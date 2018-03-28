@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   post 'applications/:id/revise', :to => 'votes#revise', as: 'revise_app'
   post 'applications/:id/reject', :to => 'votes#reject', as: 'reject_app'
   post 'applications/:id/comments/:comment_id', :to => 'comments#destroy', as: 'delete_comment'
-
+  post 'users/:id/removeboard', :to => 'irb#removeBoard', as: 'remove_board'
+  post 'users/:id/removechair', :to => 'irb#removeChair', as: 'remove_chair'
+  post 'users/:id/addboard', :to => 'irb#addBoard', as: 'add_board'
+  post 'users/:id/addchair', :to => 'irb#addChair', as: 'add_chair'
   resources :applications, as: 'documents', controller: 'documents'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :admins
@@ -21,6 +24,7 @@ Rails.application.routes.draw do
   post 'applications/assignments', :to => 'assignments#create'
   post 'applications/:id', :to => 'comments#create'
   get 'board', :to => 'irb#board'
+  get 'search', :to => 'irb#search'
   devise_for :users, :controllers => { registrations: 'registrations' }
   root 'irb#home'
   get 'edit', to: 'irb#edit'
