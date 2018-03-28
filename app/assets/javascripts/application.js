@@ -21,11 +21,16 @@ $(document).on('turbolinks:load', function(){
   $('#document_child_assent_file').hide();
   $('#child_assent_label').hide();
   $('#chair-comment').hide();
+  $('#boardSearch').hide();
 
 
   $('#edit-chair-comment').click(function() {
     $('#chair-comment').toggle(500);
   });
+  $('#searchButton').click(function() {
+    $('#boardSearch').toggle(500);
+  });
+
 
   $('#yesMinors').on('change', function() {
     $('#document_child_assent_file').show(500);
@@ -46,11 +51,6 @@ $(document).on('turbolinks:load', function(){
     $('.checkLabel').toggle('slow', function() {
       // Animation complete.
     });
-
-  $('a[data-popup]').on('click', function(e) {
-     window.open($(this).attr('href'));
-     e.preventDefault(); });
-
     $('.assignCombo').show(500);
     $('#assignBtn').toggle('slow', function() {
       // Animation complete.
