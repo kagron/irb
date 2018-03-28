@@ -67,6 +67,8 @@ class DocumentsController < ApplicationController
   def show
     @user = current_user
     @comment = Comment.new
+    @chair_comment = ChairComment.new
+    @last_comment = ChairComment.where(document_id: @document.id).last
     @comment.document_id = @document.id
     @comment.user_id = @user.id
 

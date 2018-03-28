@@ -11,6 +11,12 @@ Rails.application.routes.draw do
   post 'applications/:id/revise', :to => 'votes#revise', as: 'revise_app'
   post 'applications/:id/reject', :to => 'votes#reject', as: 'reject_app'
   post 'applications/:id/comments/:comment_id', :to => 'comments#destroy', as: 'delete_comment'
+
+  # Chair Comment routes, we only need create, update, and destroy
+  post 'chair_comments', :to => 'chair_comments#create', as: 'create_chair_comment'
+  patch "/", :to => "chair_comments#update", as: 'edit_chair_comment'
+  put "/", :to => "chair_comments#update"
+
   post 'users/:id/removeboard', :to => 'irb#removeBoard', as: 'remove_board'
   post 'users/:id/removechair', :to => 'irb#removeChair', as: 'remove_chair'
   post 'users/:id/addboard', :to => 'irb#addBoard', as: 'add_board'

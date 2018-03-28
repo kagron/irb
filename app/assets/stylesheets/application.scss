@@ -67,3 +67,14 @@ body, html {
  .delete-comment {
    float: right;
  }
+
+@media (max-width: 1023px) {
+   .navbar-default .navbar-nav > li {
+     margin-top: 0px;
+     text-align: center;
+     background-color: rgba(0,70,127,1);
+   }
+   .navbar-nav {
+     margin-top: 0px;
+   }
+ }
