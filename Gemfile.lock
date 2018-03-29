@@ -99,11 +99,6 @@ GEM
       elasticsearch-transport (= 6.0.2)
     elasticsearch-api (6.0.2)
       multi_json
-    elasticsearch-model (5.0.0)
-      activesupport (> 3)
-      elasticsearch (> 1)
-      hashie
-    elasticsearch-rails (5.0.2)
     elasticsearch-transport (6.0.2)
       faraday
       multi_json
@@ -304,8 +299,6 @@ DEPENDENCIES
   combine_pdf
   delayed_job_active_record
   devise
-  elasticsearch-model
-  elasticsearch-rails
   font-awesome-rails
   hirb (~> 0.7.3)
   jbuilder (~> 2.5)

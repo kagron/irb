@@ -6,5 +6,5 @@ class User < ApplicationRecord
   has_many :documents
   has_many :comments
   has_many :votes
-  searchkick
+  searchkick word_start: ['first_name']
 end

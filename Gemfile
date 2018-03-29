@@ -8,8 +8,8 @@ gem 'delayed_job_active_record'
 gem 'sprockets-rails'
 gem 'will_paginate-bootstrap'
 gem "searchkick"
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
+# gem 'elasticsearch-model'
+# gem 'elasticsearch-rails'
 # Use font awesome
 gem "font-awesome-rails"
 # Use Whenever for scheduling
