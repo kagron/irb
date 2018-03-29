@@ -31,11 +31,8 @@ Rails.application.routes.draw do
   post 'applications/:id', :to => 'comments#create'
   get 'board', :to => 'irb#board'
   get 'search', :to => 'irb#search'
-  devise_for :users, :controllers => { registrations: 'registrations' } do
-    collection do
-      get :autocomplete
-    end
-  end
+  devise_for :users, :controllers => { registrations: 'registrations' }
+  get 'users/autocomplete', :to => 'users#autocomplete'
   root 'irb#home'
   get 'edit', to: 'irb#edit'
   # Update index
