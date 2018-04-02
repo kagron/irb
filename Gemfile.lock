@@ -304,6 +304,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   jquery-turbolinks
+  jquery-ui-rails
   mysql2 (>= 0.3.18, < 0.5)
   pdfkit
   prawn

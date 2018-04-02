@@ -28,6 +28,8 @@ gem 'hirb', '~> 0.7.3'
 gem 'rails', '~> 5.1.4'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
+gem 'jquery-ui-rails'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
