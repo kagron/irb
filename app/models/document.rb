@@ -1,5 +1,7 @@
 class Document < ApplicationRecord
 
+
+  before_create :default_action
   mount_uploader :questions_file, QuestionsAttachmentUploader # Tells rails to use this uploader for this model.
   mount_uploader :consent_file, ConsentUploader # Tells rails to use this uploader for this model.
   mount_uploader :child_assent_file, ChildAssentUploader # Tells rails to use this uploader for this model.
@@ -45,5 +47,10 @@ class Document < ApplicationRecord
   def self.search(search)
 	where("id LIKE ? OR fName LIKE ? OR lName LIKE ? OR phone LIKE ? OR email LIKE ? OR department LIKE ? OR typeOfApplication LIKE ? OR project_title LIKE ? OR sponsor_name LIKE ? OR start_date LIKE ? OR end_date LIKE ? OR state LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%")
   end
+
+  private
+    def default_action
+      self.is_archived = "false"
+    end
 
 end
