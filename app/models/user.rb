@@ -12,8 +12,8 @@ class User < ApplicationRecord
 
   private
     def default_action
-      self.supervisor_role = 'false'
-      self.superadmin_role = 'false'
-      self.readonly_role = 'false'
+      self.supervisor_role = false
+      self.superadmin_role = false
+      self.readonly_role = false
     end
 end
