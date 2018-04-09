@@ -93,19 +93,13 @@ class IrbController < ApplicationController
     @x = Assignment.where(document_id: Document.where(is_archived: 'no'), user_id: @user.id)
 
     @x.each do |x|
-
         x.destroy
-
     end
-
 
     @user.superadmin_role = '0'
     @user.supervisor_role = '0'
     @user.save
     redirect_to board_path, notice: "Board member succesfully removed"
-
-
-
 
 end
 
