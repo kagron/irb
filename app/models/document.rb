@@ -1,7 +1,7 @@
 class Document < ApplicationRecord
+  before_validation :default_action
 
 
-  before_create :default_action
   mount_uploader :questions_file, QuestionsAttachmentUploader # Tells rails to use this uploader for this model.
   mount_uploader :consent_file, ConsentUploader # Tells rails to use this uploader for this model.
   mount_uploader :child_assent_file, ChildAssentUploader # Tells rails to use this uploader for this model.
@@ -50,7 +50,8 @@ class Document < ApplicationRecord
 
   private
     def default_action
-      self.is_archived = "false"
+      self.is_archived = false if self.is_archived.nil?
+      return true
     end
 
 end
