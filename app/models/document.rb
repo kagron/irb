@@ -9,7 +9,6 @@ class Document < ApplicationRecord
   mount_uploader :written_permission_file, WrittenPermissionUploader # Tells rails to use this uploader for this model.
   enum state: [:new_app, :approved, :rejected, :needs_revisions]
   enum typeOfApplication: [:standard, :expedited, :not_sure]
-  enum is_archived: [:no, :yes]
 
   validates :fName, presence: true
   validates :lName, presence: true

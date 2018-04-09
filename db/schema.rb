@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409152417) do
+ActiveRecord::Schema.define(version: 20180409160137) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -118,8 +118,8 @@ ActiveRecord::Schema.define(version: 20180409152417) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "superadmin_role"
-    t.boolean "supervisor_role"
+    t.boolean "superadmin_role", default: false
+    t.boolean "supervisor_role", default: false
     t.boolean "user_role", default: true
     t.string "first_name"
     t.string "last_name"
