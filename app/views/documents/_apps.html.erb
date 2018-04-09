@@ -1,3 +1,4 @@
+<% if current_user.supervisor_role %>
 <div class="col-md-4">
   <%= form_tag(documents_path, :method => "get", id: "search-form", class: 'form-group') do %>
   <div class="input-group">
@@ -9,7 +10,7 @@
     </span>
   </div>
 <% end %>
-</div>
+<% end %>
 </div>
 <% if @documents.present? %>
 <table class="table table-default table-bordered">
