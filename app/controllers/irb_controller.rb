@@ -63,11 +63,11 @@ class IrbController < ApplicationController
 
           if @new.present?
 
-            if @new.supervisor_role = false
+            if @new.supervisor_role = '0'
 
-              @new.supervisor_role = '0'
+              @new.supervisor_role = '1'
               @new.save
-              redirect_to board_path, notice: "Board member succesfully removed"
+              redirect_to board_path, notice: "Board member succesfully added"
 
             else
 
