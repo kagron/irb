@@ -66,6 +66,7 @@ class IrbController < ApplicationController
             if @new.supervisor_role = '0'
 
               @new.supervisor_role = '1'
+              @new.superadmin_role = '0'
               @new.save
               redirect_to board_path, notice: "Board member succesfully added"
 
@@ -141,6 +142,7 @@ end
 
     @new = User.find(params[:id])
     @new.supervisor_role = '1'
+    @new.superadmin_role = '0'
     @new.save
     redirect_to board_path, notice: "Board member added succesfully"
 
