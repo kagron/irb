@@ -50,7 +50,7 @@ class Document < ApplicationRecord
 
   private
     def default_action
-      self.is_archived = "false"
+      self.is_archived = false
     end
 
 end
