@@ -56,8 +56,18 @@
         </div>
       <% end %>
     <% end %>
-    <% if current_user.supervisor_role %>
-      <p>This application is assigned to: </p>
+    <% if current_user.supervisor_role && @assignments %>
+      <p>This application is assigned to:
+        <% @first = true;
+        @assignments.each do |a|
+          if @first %>
+            <%= a.first_name + " " + a.last_name %>
+            <% @first = false %>
+          <% else %>
+            <%= ", " + a.first_name + " " + a.last_name %>
+          <% end%>
+        <% end %>
+      </p>
     <% end %>
     <div class="row">
       <% if current_user.supervisor_role %>

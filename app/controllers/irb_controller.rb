@@ -91,9 +91,13 @@ class IrbController < ApplicationController
     @user = User.find(params[:id])
     #@a = Assignment.where(user_id: @user.id).pluck('document_id')
     @x = Assignment.where(document_id: Document.where(is_archived: 'no'), user_id: @user.id)
+    @v = Vote.where(document_id: Document.where(is_archived: 'no'), user_id: @user.id)
 
     @x.each do |x|
         x.destroy
+    end
+    @v.each do |v|
+      v.destroy
     end
 
     @user.superadmin_role = '0'

@@ -71,6 +71,7 @@ class DocumentsController < ApplicationController
     @last_comment = ChairComment.where(document_id: @document.id).last
     @comment.document_id = @document.id
     @comment.user_id = @user.id
+    @assignments = User.where(id: Assignment.where(document_id: @document.id).pluck('user_id'))
 
     @votes = Vote.where(document_id: @document.id)
     @your_votes = Vote.where(document_id: @document.id, user_id: @user.id)
