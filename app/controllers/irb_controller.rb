@@ -54,10 +54,33 @@ class IrbController < ApplicationController
 
   def search
 
-      if params[:search]
-        @user = User.paginate(:page => params[:page], :per_page => 10).search(params[:search]).where(:supervisor_role => '0') #1isArchived
-      else
-        @user = User.paginate(:page => params[:page], :per_page => 10).where(:supervisor_role => '0')#.where(:is_archived => '0')
+      if params[:query]
+
+
+
+          @name = params[:query].split(" ")
+          @new = User.where(first_name: @name[0], last_name: @name[1]).first
+
+          if @new.present?
+
+            if @new.supervisor_role = '0'
+
+              @new.supervisor_role = '1'
+              @new.save
+              redirect_to board_path, notice: "Board member succesfully added"
+
+            else
+
+              redirect_to board_path, notice: @new.first_name + " " + @new.last_name + " is already a board member"
+
+            end
+
+          else
+
+          redirect_to board_path, notice: "User does not exist"
+
+        end
+
       end
 
   end
@@ -65,12 +88,25 @@ class IrbController < ApplicationController
   def removeBoard
 
     @user = User.find(params[:id])
+    #@a = Assignment.where(user_id: @user.id).pluck('document_id')
+    @x = Assignment.where(document_id: Document.where(is_archived: 'no'), user_id: @user.id)
+
+    @x.each do |x|
+
+        x.destroy
+
+    end
+
+
     @user.superadmin_role = '0'
     @user.supervisor_role = '0'
     @user.save
     redirect_to board_path, notice: "Board member succesfully removed"
 
-  end
+
+
+
+end
 
   def removeChair
 
