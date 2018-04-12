@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post 'users/:id/removechair', :to => 'irb#removeChair', as: 'remove_chair'
   post 'users/:id/addboard', :to => 'irb#addBoard', as: 'add_board'
   post 'users/:id/addchair', :to => 'irb#addChair', as: 'add_chair'
+  post 'users/:id/addreadonly', :to => 'irb#addReadOnly', as: 'add_read_only'
   resources :applications, as: 'documents', controller: 'documents'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :admins

@@ -1,5 +1,6 @@
 class IrbController < ApplicationController
-  before_action :check_user, only: [:edit, :update, :board]
+  before_action :check_user, only: [:edit, :update]
+  before_action :check_chair, only: [:board]
   def home
     @front_page = Page.first
   end
@@ -47,43 +48,33 @@ class IrbController < ApplicationController
     else
       @chair = User.where(superadmin_role: '1')
       @board = User.where(supervisor_role: '1').where(superadmin_role: '0')
-
+      @readonly = User.where(readonly_role: '1')
     end
 
   end
 
   def search
-
       if params[:query]
-
-
-
           @name = params[:query].split(" ")
           @new = User.where(first_name: @name[0], last_name: @name[1]).first
-
           if @new.present?
+            if params[:readonly]
+              @new.readonly_role = '1'
+              @new.save
+              redirect_to board_path, notice: "Member succesfully added"
 
-            if @new.supervisor_role = '0'
-
+            elsif @new.supervisor_role = '0'
               @new.supervisor_role = '1'
               @new.superadmin_role = '0'
               @new.save
               redirect_to board_path, notice: "Board member succesfully added"
-
             else
-
               redirect_to board_path, notice: @new.first_name + " " + @new.last_name + " is already a board member"
-
             end
-
           else
-
           redirect_to board_path, notice: "User does not exist"
-
         end
-
       end
-
   end
 
   def removeBoard
@@ -102,8 +93,9 @@ class IrbController < ApplicationController
 
     @user.superadmin_role = '0'
     @user.supervisor_role = '0'
+    @user.readonly_role = '0'
     @user.save
-    redirect_to board_path, notice: "Board member succesfully removed"
+    redirect_to board_path, notice: "Member succesfully removed"
 
 end
 
@@ -136,21 +128,17 @@ end
 
   end
 
-  def addBoard
-
-    @new = User.find(params[:id])
-    @new.supervisor_role = '1'
-    @new.superadmin_role = '0'
-    @new.save
-    redirect_to board_path, notice: "Board member added succesfully"
-
-  end
 
 
   private
     def check_user
       if (!user_signed_in?)
         redirect_to root_path, notice: 'You must log in to do that'
+      end
+    end
+    def check_chair
+      if !current_user.superadmin_role
+        redirect_to root_path, notice: 'You must be chair to do that'
       end
     end
     # strong params

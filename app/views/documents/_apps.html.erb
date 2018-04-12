@@ -1,4 +1,4 @@
-<% if current_user.supervisor_role %>
+<% if current_user.supervisor_role || current_user.readonly_role %>
 <div class="col-md-4">
   <%= form_tag(documents_path, :method => "get", id: "search-form", class: 'form-group') do %>
   <div class="input-group">

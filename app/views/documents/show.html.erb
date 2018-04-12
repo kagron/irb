@@ -1,7 +1,7 @@
 <div class="container">
 
   <% if @document.state == 'new_app' %>
-    <% if current_user.supervisor_role %>
+    <% if current_user.supervisor_role || current_user.readonly_role %>
       <h2>This application is
         <span style="color: #31708f">New</span></h2>
     <% else %>
@@ -12,7 +12,7 @@
   <% end %>
 
   <% if @document.state == 'approved' %>
-    <% if current_user.supervisor_role %>
+    <% if current_user.supervisor_role || current_user.readonly_role %>
       <h2>This application is
         <span style="color: green">Approved</span></h2>
     <% else %>
@@ -23,7 +23,7 @@
   <% end %>
 
   <% if @document.state == 'rejected' %>
-    <% if current_user.supervisor_role %>
+    <% if current_user.supervisor_role || current_user.readonly_role %>
       <h2>This application is
         <span style="color: red">Rejected</span></h2>
     <% else %>
@@ -42,7 +42,7 @@
           <i class="fa fa-edit"></i> Revise Application
         <% end %>
       </div>
-      <% elsif current_user.supervisor_role %>
+      <% elsif current_user.supervisor_role || current_user.readonly_role %>
         <h2>This application is
           <span style="color: #ec971f">Approved Pending Revisions</span></h2>
       <% else %>

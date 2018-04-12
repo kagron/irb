@@ -24,6 +24,7 @@ $(document).on('turbolinks:load', function(){
   $('#child_assent_label').hide();
   $('#chair-comment').hide();
   $('#boardSearch').hide();
+  $('#boardSearch2').hide();
 
 
   $('#edit-chair-comment').click(function() {
@@ -31,6 +32,10 @@ $(document).on('turbolinks:load', function(){
   });
   $('#searchButton').click(function() {
     $('#boardSearch').toggle(500);
+  });
+
+  $('#searchButton2').click(function() {
+    $('#boardSearch2').toggle(500);
   });
 
 
@@ -64,6 +69,10 @@ $(document).on('turbolinks:load', function(){
   });
   $("#user_search").autocomplete({
       appendTo: "#suggestions-container",
+      source: "/users/autocomplete"
+  });
+  $("#user_search2").autocomplete({
+      appendTo: "#suggestions-container2",
       source: "/users/autocomplete"
   });
 });

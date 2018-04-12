@@ -66,40 +66,40 @@
           <% @documents.each do |document| %>
             <% if document.state == 'new_app' %>
               <tr class="alert-info">
-                <% elsif document.state == 'approved' %>
-                  <tr class="alert-success">
-                    <% elsif document.state == 'rejected' %>
-                      <tr class="alert-danger">
-                        <% elsif document.state == 'needs_revisions' %>
-                          <tr class="alert-warning">
+            <% elsif document.state == 'approved' %>
+              <tr class="alert-success">
+            <% elsif document.state == 'rejected' %>
+              <tr class="alert-danger">
+            <% elsif document.state == 'needs_revisions' %>
+              <tr class="alert-warning">
+            <% end %>
+                      <% @str = "" %>
+                      <% @first = true %>
+                      <% @a.each do |a| %>
+                        <% if a.document_id == document.id %>
+                          <% if @first %>
+                            <% @str += @users.find(a.user_id).first_name + " " + @users.find(a.user_id).last_name; @first = false %>
+                            <% else %>
+                              <% @str += ", " + @users.find(a.user_id).first_name + " " + @users.find(a.user_id).last_name %><% end %>
+                            <% end %>
                           <% end %>
-                          <% @str = "" %>
-                            <% @first = true %>
-                              <% @a.each do |a| %>
-                                <% if a.document_id == document.id %>
-                                  <% if @first %>
-                                    <% @str += @users.find(a.user_id).first_name + " " + @users.find(a.user_id).last_name; @first = false %>
-                                    <% else %>
-                                      <% @str += ", " + @users.find(a.user_id).first_name + " " + @users.find(a.user_id).last_name %><% end %>
-                                    <% end %>
-                                  <% end %>
-                                  <td><input type="checkbox" name="document_id[]" value="<%= document.id %>"></td>
-                                  <td><%= document.fName + " " + document.lName %></td>
-                                  <td><%= document.project_title %></td>
-                                  <td><%= document.department %></td>
-                                  <% if document.typeOfApplication == 'not_sure' %>
-                                    <td><%= "not sure" %></td>
-                                  <% else %>
-                                    <td><%= document.typeOfApplication %></td>
-                                  <% end %>
-                                  <!-- <td><%= document.start_date %></td> -->
-                                  <!-- <td><%= document.end_date %></td> -->
-                                  <td><%= @str %></td>
-                                  <td><%= link_to document, class: 'btn btn-primary', style: 'color: white' do %>
-                                      <i class="fa fa-eye"></i> View
-                                    <% end %>
-                                  </td>
-                                </tr>
+                              <td><input type="checkbox" name="document_id[]" value="<%= document.id %>"></td>
+                              <td><%= document.fName + " " + document.lName %></td>
+                              <td><%= document.project_title %></td>
+                              <td><%= document.department %></td>
+                              <% if document.typeOfApplication == 'not_sure' %>
+                                <td><%= "not sure" %></td>
+                              <% else %>
+                                <td><%= document.typeOfApplication %></td>
+                              <% end %>
+                              <!-- <td><%= document.start_date %></td> -->
+                              <!-- <td><%= document.end_date %></td> -->
+                              <td><%= @str %></td>
+                              <td><%= link_to document, class: 'btn btn-primary', style: 'color: white' do %>
+                                  <i class="fa fa-eye"></i> View
+                                <% end %>
+                              </td>
+                            </tr>
                               <% end %>
                             </tbody>
                           </table>
@@ -134,3 +134,4 @@
                 <% else %>
                   <%= render 'apps'%>
                 <% end %>
+</div>
