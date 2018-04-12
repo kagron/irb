@@ -4,12 +4,12 @@ Rails.application.routes.draw do
   get 'applications/needs_revisions', :to => 'documents#needs_revisions'
   get 'applications/archived', :to => 'documents#archived'
   get 'applications/new_apps', :to => 'documents#new_apps'
-  post 'applications/:id/approve-vote', :to => 'votes#approve_vote', as: 'approve_vote_app'
-  post 'applications/:id/revise-vote', :to => 'votes#revise_vote', as: 'revise_vote_app'
-  post 'applications/:id/reject-vote', :to => 'votes#reject_vote', as: 'reject_vote_app'
-  post 'applications/:id/approve', :to => 'votes#approve', as: 'approve_app'
-  post 'applications/:id/revise', :to => 'votes#revise', as: 'revise_app'
-  post 'applications/:id/reject', :to => 'votes#reject', as: 'reject_app'
+  get 'applications/:id/approve-vote', :to => 'votes#approve_vote', as: 'approve_vote_app'
+  get 'applications/:id/revise-vote', :to => 'votes#revise_vote', as: 'revise_vote_app'
+  get 'applications/:id/reject-vote', :to => 'votes#reject_vote', as: 'reject_vote_app'
+  get 'applications/:id/approve', :to => 'votes#approve', as: 'approve_app'
+  get 'applications/:id/revise', :to => 'votes#revise', as: 'revise_app'
+  get 'applications/:id/reject', :to => 'votes#reject', as: 'reject_app'
   post 'applications/:id/comments/:comment_id', :to => 'comments#destroy', as: 'delete_comment'
 
   # Chair Comment routes, we only need create, update, and destroy

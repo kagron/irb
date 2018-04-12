@@ -25,7 +25,7 @@ class DocumentsController < ApplicationController
   	if current_user.supervisor_role || current_user.readonly_role
   	   @documents = Document.where(state: 'new_app').or(Document.where(state: 'needs_revisions').where(is_resubmitted: '1')).order("updated_at DESC").paginate(:page => params[:page], :per_page => 10)
   	else
-  	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(state: 'new_app').where(:email => current_user.email).order("updated_at DESC")
+  	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(state: 'new_app').where(:user_id => current_user.id).order("updated_at DESC")
 	  end
   end
   # GET /applications/approved

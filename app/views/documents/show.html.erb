@@ -56,19 +56,70 @@
         </div>
       <% end %>
     <% end %>
-    <% if current_user.supervisor_role && @assignments %>
-      <p>This application is assigned to:
-        <% @first = true;
-        @assignments.each do |a|
-          if @first %>
-            <%= a.first_name + " " + a.last_name %>
-            <% @first = false %>
-          <% else %>
-            <%= ", " + a.first_name + " " + a.last_name %>
-          <% end%>
-        <% end %>
-      </p>
+    <% if current_user.supervisor_role %>
+    <div class="row" style="margin-bottom: 20px;">
+      <div class="col-md-6">
+      <% if @assignments.present? %>
+        <p>This application is assigned to:
+          <% @first = true;
+          @assignments.each do |a|
+            if @first %>
+              <%= a.first_name + " " + a.last_name %>
+              <% @first = false %>
+            <% else %>
+              <%= ", " + a.first_name + " " + a.last_name %>
+            <% end%>
+          <% end %>
+        </p>
+      <% else %>
+        <p>This application is not assigned to anyone</p>
+      <% end %>
     <% end %>
+
+    <% if @votes.present? %>
+      <% @votes.each do |v| %>
+        <% @user = User.find(v.user_id) %>
+          <% if v.state == 'new_app' %>
+            <p><%= @user.first_name + " " + @user.last_name + " has not voted yet" %></p>
+            <% elsif v.state == 'needs_revisions' %>
+              <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be approved pending revisions" %></p>
+            <% else %>
+              <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be " + v.state %></p>
+            <% end %>
+          <% end %>
+        <% end %>
+
+      </div>
+      <div class="col-md-3">
+        <div class="text-center">
+          <% if @your_votes.present? %>
+            <% if (@your_votes[0].state == 'new_app' || @your_votes[0].state == 'needs_revisions') %>
+              <h4>Vote:</h4>
+              <%= link_to approve_vote_app_path(@document), class: 'btn btn-success state-btn2' do %><i class="fa fa-check"></i><% end %>
+              <%= link_to revise_vote_app_path(@document), class: 'btn btn-warning state-btn2' do %><i class="fa fa-edit"></i><% end %>
+              <%= link_to reject_vote_app_path(@document), class: 'btn btn-danger state-btn2' do %><i class="fa fa-ban"></i><% end %>
+
+            <% else %>
+              <h4>You already voted on this application</h4>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+          <div class="col-md-3">
+
+
+          <% if current_user.superadmin_role && (@document.state == 'new_app' || @document.state == 'needs_revisions')%>
+            <div class="text-center">
+              <h4>State:</h4>
+              <%= link_to approve_app_path(@document), class: 'btn btn-success state-btn2' do %><i class="fa fa-check"></i><% end %>
+              <%= link_to revise_app_path(@document), class: 'btn btn-warning state-btn2' do %><i class="fa fa-edit"></i><% end %>
+              <%= link_to reject_app_path(@document), class: 'btn btn-danger state-btn2' do %><i class="fa fa-ban"></i><% end %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+
     <div class="row">
       <% if current_user.supervisor_role %>
       <div class="col-md-9">
@@ -296,52 +347,10 @@
         <%= submit_tag('Submit', class: 'btn btn-primary submit-btn', id: 'btnSubmitComment', style: 'margin-bottom: 20px') %>
       <% end %>
 
-      <div class="text-center well">
-        <% if @your_votes.present? %>
-          <% if (@your_votes[0].state == 'new_app' || @your_votes[0].state == 'needs_revisions') %>
-            <h4>Vote for the state you believe this application should be:</h4>
-            <%= button_to approve_vote_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to vote to approve this application?' }  do %>
-              <i class="fa fa-check"></i> Approve
-            <% end %>
-            <%= button_to revise_vote_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to vote to make this application approved pending revisions?' } do %>
-              <i class="fa fa-edit"></i> Approve Pending Revisions
-            <% end %>
-            <%= button_to reject_vote_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to vote to reject this application?' } do %>
-              <i class="fa fa-ban"></i> Reject
-            <% end %>
-          <% else %>
-            <h4>You already voted on this application</h4>
-          <% end %>
+
+
         <% end %>
 
-      </div>
-      <% if @votes.present? %>
-        <% @votes.each do |v| %>
-          <% @user = User.find(v.user_id) %>
-            <% if v.state == 'new_app' %>
-              <p><%= @user.first_name + " " + @user.last_name + " has not voted yet" %></p>
-              <% elsif v.state == 'needs_revisions' %>
-                <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be approved pending revisions" %></p>
-              <% else %>
-                <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be " + v.state %></p>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% end %>
-        <% if current_user.superadmin_role && (@document.state == 'new_app' || @document.state == 'needs_revisions')%>
-          <div class="well">
-            <h4>Determine the state of the application:</h4>
-            <%= button_to approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to approve this application?' } do %>
-              <i class="fa fa-check"></i> Approve
-            <% end %>
-            <%= button_to revise_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to make this application approved pending revisions?' } do %>
-              <i class="fa fa-edit"></i> Approve Pending Revisions
-            <% end %>
-            <%= button_to reject_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to reject this application?' } do %>
-              <i class="fa fa-ban"></i> Reject
-            <% end %>
-          </div>
-        <% end %>
       </div>
       <!-- end comment section -->
       <% end %>
