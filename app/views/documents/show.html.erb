@@ -62,38 +62,51 @@
       <% if @assignments.present? %>
         <p>This application is assigned to:
           <% @first = true;
+          @str = "";
           @assignments.each do |a|
             if @first %>
-              <%= a.first_name + " " + a.last_name %>
+              <% @str += a.first_name + " " + a.last_name %>
               <% @first = false %>
             <% else %>
-              <%= ", " + a.first_name + " " + a.last_name %>
+              <% @str += ", " + a.first_name + " " + a.last_name %>
             <% end%>
           <% end %>
+          <%= @str %>
         </p>
       <% else %>
         <p>This application is not assigned to anyone</p>
       <% end %>
     <% end %>
 
-    <% if @votes.present? %>
+    <% if @votes.present?
+      @approved = Array.new
+      @newapps = Array.new
+      @revisions = Array.new
+      @rejected = Array.new
+      %>
       <% @votes.each do |v| %>
-        <% @user = User.find(v.user_id) %>
-          <% if v.state == 'new_app' %>
-            <p><%= @user.first_name + " " + @user.last_name + " has not voted yet" %></p>
-            <% elsif v.state == 'needs_revisions' %>
-              <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be approved pending revisions" %></p>
-            <% else %>
-              <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be " + v.state %></p>
-            <% end %>
+        <% @user = User.find(v.user_id); %>
+          <% if v.state == 'new_app'
+              @newapps.push(@user.first_name + " " + @user.last_name)
+           elsif v.state == 'needs_revisions'
+             @revisions.push(@user.first_name + " " + @user.last_name)
+           elsif v.state == 'approved'
+             @approved.push(@user.first_name + " " + @user.last_name)
+           else
+             @rejected.push(@user.first_name + " " + @user.last_name)
+           end %>
           <% end %>
         <% end %>
+        <p>Haven't Voted: <%= @newapps.join(", ") if @newapps.present? %></p>
+        <p>Approved: <%= @approved.join(", ") if @approved.present? %></p>
+        <p>Needs Revisions: <%= @revisions.join(", ") if @revisions.present? %></p>
+        <p>Rejected: <%= @rejected.join(', ') if @rejected.present? %></p>
 
       </div>
       <div class="col-md-3">
         <div class="text-center">
           <% if @your_votes.present? %>
-            <% if (@your_votes[0].state == 'new_app' || @your_votes[0].state == 'needs_revisions') %>
+            <% if (@your_votes[0].state == 'new_app' || @document.state == 'needs_revisions') %>
               <h4>Vote:</h4>
               <%= link_to approve_vote_app_path(@document), class: 'btn btn-success state-btn2' do %><i class="fa fa-check"></i><% end %>
               <%= link_to revise_vote_app_path(@document), class: 'btn btn-warning state-btn2' do %><i class="fa fa-edit"></i><% end %>
