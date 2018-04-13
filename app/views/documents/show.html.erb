@@ -108,9 +108,9 @@
           <% if @your_votes.present? %>
             <% if (@your_votes[0].state == 'new_app' || @document.state == 'needs_revisions') %>
               <h4>Vote:</h4>
-              <%= link_to approve_vote_app_path(@document), class: 'btn btn-success state-btn2' do %><i class="fa fa-check"></i><% end %>
-              <%= link_to revise_vote_app_path(@document), class: 'btn btn-warning state-btn2' do %><i class="fa fa-edit"></i><% end %>
-              <%= link_to reject_vote_app_path(@document), class: 'btn btn-danger state-btn2' do %><i class="fa fa-ban"></i><% end %>
+              <%= link_to approve_vote_app_path(@document), class: 'btn btn-success state-btn2', data: {confirm: "Are you sure you want to vote to approve this application?"} do %><i class="fa fa-check"></i><% end %>
+              <%= link_to revise_vote_app_path(@document), class: 'btn btn-warning state-btn2', data: {confirm: "Are you sure you want to vote to approve this application pending revisions?"} do %><i class="fa fa-edit"></i><% end %>
+              <%= link_to reject_vote_app_path(@document), class: 'btn btn-danger state-btn2', data: {confirm: "Are you sure you want to vote to reject this application?"} do %><i class="fa fa-ban"></i><% end %>
 
             <% else %>
               <h4>You already voted on this application</h4>
@@ -124,9 +124,9 @@
           <% if current_user.superadmin_role && (@document.state == 'new_app' || @document.state == 'needs_revisions')%>
             <div class="text-center">
               <h4>State:</h4>
-              <%= link_to approve_app_path(@document), class: 'btn btn-success state-btn2' do %><i class="fa fa-check"></i><% end %>
-              <%= link_to revise_app_path(@document), class: 'btn btn-warning state-btn2' do %><i class="fa fa-edit"></i><% end %>
-              <%= link_to reject_app_path(@document), class: 'btn btn-danger state-btn2' do %><i class="fa fa-ban"></i><% end %>
+              <%= link_to approve_app_path(@document), class: 'btn btn-success state-btn2', data: {confirm: "Are you sure you want to approve this application?"} do %><i class="fa fa-check"></i><% end %>
+              <%= link_to revise_app_path(@document), class: 'btn btn-warning state-btn2', data: {confirm: "Are you sure you want to approve this application pending revisions?"} do %><i class="fa fa-edit"></i><% end %>
+              <%= link_to reject_app_path(@document), class: 'btn btn-danger state-btn2', data: {confirm: "Are you sure you want to reject this application?"} do %><i class="fa fa-ban"></i><% end %>
             </div>
           <% end %>
 

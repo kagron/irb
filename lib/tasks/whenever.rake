@@ -9,10 +9,10 @@ namespace :whenever do
     end
     puts "#{Time.now} - Success!"
     puts "Checking applications that are over a year..."
-    documents = Document.find_by_sql("select * from documents where datediff(start_date, end_date) <= -365 and datediff(curdate(), end_date) = -7")
+    documents = Document.find_by_sql("select * from documents where datediff(end_date, start_date) >= 365 and datediff(curdate(), start_date) = 358")
     documents.each do |doc|
-      UserEmailMailer.yearlong(@document).deliver
-      UserEmailMailer.yearlongresubmit(@document).deliver
+      UserEmailMailer.yearlong(doc).deliver
+      UserEmailMailer.yearlongresubmit(doc).deliver
     end
   end
 

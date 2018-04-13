@@ -35,9 +35,9 @@ class UserEmailMailer < ApplicationMailer
     mail(to: @chair.email, subject: "An IRB application is approaching the one year mark")
   end
 
-  def yearlongresubmit
+  def yearlongresubmit(document)
     @document = document
     @user = User.find(@document.user_id)
-    mail(to: @user.email, subject: "An IRB application is approaching the one year mark")
+    mail(to: @document.email, subject: "An IRB application is approaching the one year mark")
   end
 end

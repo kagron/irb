@@ -1,5 +1,5 @@
 <p>Dear <%= @chair.first_name %>,</p>
 
-<h3>A currently onging application is going to reach its deadline in one week: <%= @document.end_date %></h3>
+<p>A currently onging application is going to expire in one week: <%= (Time.now + 7.days).strftime("%B, %-d, %Y") %></p>
 
-<p>This same email has been sent to the investigator and should resubmit shortly.<p>
+<p>This same email has been sent to the investigator and they should resubmit shortly.<p>
