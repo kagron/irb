@@ -27,4 +27,17 @@ class UserEmailMailer < ApplicationMailer
     @chair = User.where(superadmin_role: '1').last
     mail(to: @chair.email, subject: "A new IRB Application has been submitted")
   end
+
+  def yearlong(document)
+    @document = document
+    @user = User.find(@document.user_id)
+    @chair = User.where(superadmin_role: '1').last
+    mail(to: @chair.email, subject: "An IRB application is approaching the one year mark")
+  end
+
+  def yearlongresubmit
+    @document = document
+    @user = User.find(@document.user_id)
+    mail(to: @user.email, subject: "An IRB application is approaching the one year mark")
+  end
 end

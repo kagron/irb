@@ -66,6 +66,7 @@ class IrbController < ApplicationController
             elsif @new.supervisor_role = '0'
               @new.supervisor_role = '1'
               @new.superadmin_role = '0'
+              @new.readonly_role = '0'
               @new.save
               redirect_to board_path, notice: "Board member succesfully added"
             else
