@@ -103,6 +103,7 @@ class IrbController < ApplicationController
       end
   end
 
+  # DELETE request to users/:id/removeboard
   def removeBoard
 
     # find the user in the database using the value passed in the params array (GET/POST Data)
@@ -134,7 +135,7 @@ class IrbController < ApplicationController
     redirect_to board_path, notice: "Member succesfully removed"
 
 end
-
+  # DELETE request to users/:id/removechair
   def removeChair
     # Find the members who have chair permissions
     @chairMems = User.where(superadmin_role: '1')
@@ -156,7 +157,7 @@ end
     end
 
   end
-
+  # POST request to users/:id/addchair
   def addChair
     # Find the user specified, and add them as a chair
     # They have to be a board member first with the way we coded it
