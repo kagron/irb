@@ -1,6 +1,7 @@
 class IrbController < ApplicationController
   # before these actions, run these methods
   before_action :check_user, only: [:edit, :update]
+  before_action :check_board, only: [:edit, :update]
   before_action :check_chair, only: [:board]
 
   # GET request to /
@@ -182,6 +183,12 @@ end
       # redirect if person is not a chair
       if !current_user.superadmin_role
         redirect_to root_path, notice: 'You must be chair to do that'
+      end
+    end
+    def check_board
+      # redirect if person is not a board member
+      if !current_user.supervisor_role
+        redirect_to root_path, notice: 'You don\'t have permissions to do that'
       end
     end
     # strong params

@@ -32,7 +32,7 @@
        <% if user_signed_in? %>
 
        <% if current_user.superadmin_role %>
-       <%-# If the current person is signed in AND is a chair member, display these links -%>
+       <%-# If the current person is signed in AND is a chair, display these links -%>
        <ul class="nav navbar-nav navbar-right">
 
          <li><%= link_to "Home", root_path %></li>

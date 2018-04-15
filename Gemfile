@@ -6,15 +6,15 @@ git_source(:github) do |repo_name|
 end
 gem 'delayed_job_active_record'
 gem 'sprockets-rails'
+# use will-paginate for paginations
 gem 'will_paginate-bootstrap'
+# Use Searchkick to link ruby on rails with Elasticsearch more efficiently
 gem "searchkick"
-# gem 'elasticsearch-model'
-# gem 'elasticsearch-rails'
-# Use font awesome
+# Use font awesome for icons
 gem "font-awesome-rails"
-# Use Whenever for scheduling
+# Use Whenever for scheduling rake tasks without using crontab
 gem 'whenever', require: false
-#install cancan gem
+#install cancan gem for roles
 gem 'cancancan'
 # Use redcarpet for markdown parsing
 gem 'redcarpet', '~> 3.3', '>= 3.3.4'
@@ -28,7 +28,7 @@ gem 'hirb', '~> 0.7.3'
 gem 'rails', '~> 5.1.4'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-
+# Use jquery-ui for autocomplete feature
 gem 'jquery-ui-rails'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
@@ -61,8 +61,9 @@ gem 'prawn'
 gem 'combine_pdf'
 # Use Yomu for reading doc and docx
 gem 'yomu'
-gem 'pdfkit'
-gem 'wkhtmltopdf-binary'
+# I dont think pdfkit is actually used
+# gem 'pdfkit'
+# gem 'wkhtmltopdf-binary'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -82,8 +83,11 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# Use devise for users
 gem 'devise'
 
+# this needs to be in here for some reason
 gem 'jquery-turbolinks'
 
+# I dont know what this does tbh
 gem 'rb-readline'

@@ -15,6 +15,9 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  # Added this so you can use markdown when editing the front page
+  # This is just using the RedCarpet gem to parse basic text
+  # and turn it into HTML
   def markdown(content)
     # renderer = HTMLwithPygments.new(hard_wrap: true, filter_html: true)
     options = {

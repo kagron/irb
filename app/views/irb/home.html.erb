@@ -1,6 +1,8 @@
+<%-# This is the home page -%>
 <div class="container">
   <div class="row">
     <div class="col-md-8">
+      <%-# If there's a front page, display it, otherwise tell the user there's nothign here -%>
       <% if @front_page.present? %>
         <h1><%= @front_page.title %></h1>
         <% if user_signed_in? && current_user.supervisor_role %>
@@ -8,9 +10,11 @@
             <%= link_to "Edit Home Page", edit_path, class: 'btn btn-default' %>
           </div>
         <% end %>
+        <%-# This markdown method takes in a string and parses it into HTML using whats called Markdown -%>
         <%= markdown(@front_page.content) %>
       <% else %>
         <h1>Theres nothing here right now... </h1>
+        <%-# If the current user is a board member, display an edit button -%>
         <% if user_signed_in? && current_user.supervisor_role %>
           <div class="text-center">
             <%= link_to "Edit Home Page", edit_path, class: 'btn btn-default' %>
@@ -20,6 +24,7 @@
     </div>
     <div class="col-md-4 well"> <!-- start right column -->
       <% if !user_signed_in? %>
+      <%-# If user is not signed in, display a log in form -%>
       <h1>Log In</h1>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="field">
@@ -46,6 +51,7 @@
 
       <%= render "devise/shared/links" %>
       <% else %>
+      <%-# If the current user is signed in, display these buttons and links -%>
         <h1>Get Started</h1>
         <div class="text-center">
           <%= link_to new_document_path, class: 'btn btn-primary btn-lg state-btn', style:'color: white' do %>
@@ -72,6 +78,7 @@
 
 
         <% if current_user.superadmin_role%>
+        <%-# Only display this button a chair -%>
         <%= link_to board_path, class: 'btn btn-default btn-lg state-btn' do %>
             <i class="fa fa-users"></i> View Board Members
           <% end %>

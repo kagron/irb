@@ -1,3 +1,4 @@
+<%-# This is for editing the home page -%>
 <div class="container">
 
 
@@ -5,6 +6,7 @@
 <p>This page uses <strong>Markdown</strong>.  Markdown is a way of typing that
 allows shortcuts to make links/images/lists/headings/etc.  Feel free to copy and
 paste or use the following as a guide: <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">here</a></p>
+<%-# Display any errors -%>
 <% if @front_page.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@front_page.errors.count, "error") %>
@@ -17,6 +19,7 @@ paste or use the following as a guide: <a href="https://github.com/adam-p/markdo
     </ul>
   </div>
 <% end %>
+<%-# If there's already a front page, create a form for editing it -%>
 <% if @front_page.present? %>
 <%= form_for @front_page, url: root_path() do |f| %>
 
