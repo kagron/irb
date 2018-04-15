@@ -4,6 +4,7 @@
   <div class="row">
     <div class="col-md-8">
       <ul class="nav nav-tabs">
+        <%-# Display different tabs based on who is signed in -%>
         <% if current_user.supervisor_role%>
           <li role="presentation"><%= link_to 'Assignments', applications_assignments_path %></li>
           <li role="presentation" class="active"><%= link_to 'New', applications_new_apps_path %></li>
@@ -26,7 +27,8 @@
     </div>
 
     <% if current_user.superadmin_role %>
-
+      <%-# Everything under this if statement is for the chair only -%>
+      <%-# Show the search box -%>
       <div class="col-md-4">
         <%= form_tag(documents_path, :method => "get", id: "search-form", class: 'form-group') do %>
         <div class="input-group">
@@ -46,7 +48,8 @@
   <!-- </div> -->
 
     <%= form_for @assignment, url: applications_assignments_path do |form| %>
-
+    <%-# Create a form for assignments.  Every application needs to be part of this form, so we cant  -%>
+    <%-# create a form for each document. -%>
     <div class="table-responsive col-md-10">
       <table class="table table-default table-bordered">
         <thead>
@@ -63,6 +66,7 @@
           </tr>
         </thead>
         <tbody>
+          <%-# Change the color of the row based on its state -%>
           <% @documents.each do |document| %>
             <% if document.state == 'new_app' %>
               <tr class="alert-info">
@@ -73,6 +77,8 @@
             <% elsif document.state == 'needs_revisions' %>
               <tr class="alert-warning">
             <% end %>
+            <%-# This is the sloppy part of the application.  We get EVERY assignment and loop through it -%>
+            <%-# for every row to see who it's assigned to.  I know theres a better way to do this I'll get back to it -Kyle -%>
                       <% @str = "" %>
                       <% @first = true %>
                       <% @a.each do |a| %>
@@ -83,7 +89,9 @@
                               <% @str += ", " + @users.find(a.user_id).first_name + " " + @users.find(a.user_id).last_name %><% end %>
                             <% end %>
                           <% end %>
+                          <%-# Create a checkbox and make it's value the documents ID so we can pass them through the form -%>
                               <td><input type="checkbox" name="document_id[]" value="<%= document.id %>"></td>
+                              <%-# List out the other common/needed fields so we can easily identify which application is which -%>
                               <td><%= document.fName + " " + document.lName %></td>
                               <td><%= document.project_title %></td>
                               <td><%= document.department %></td>
@@ -103,6 +111,7 @@
                               <% end %>
                             </tbody>
                           </table>
+                          <%-# Paginate the applications -%>
                           <%= will_paginate @documents, :renderer => BootstrapPagination::Rails %>
                         </div>
                         <br>
@@ -110,6 +119,7 @@
                         <div class="table-responsive col-md-2">
                           <table class="table table-default table-bordered">
                             <thead>
+                              <%-# This table is to list out the board members so you can assign applications to them -%>
                               <tr>
                                 <th style="padding: 0px;"></th>
                                 <th>Board Member</th>
@@ -120,6 +130,7 @@
                           <tbody>
                             <% @users.each do |user| %>
                               <tr>
+                                <%-# List out each board member and make each value their ID so it gets passed through the form -%>
                                 <td><input type="checkbox" name="user_id[]" value="<%= user.id %>"></td>
                                 <td><%= user.first_name + " " + user.last_name %></td>
                               </tr>
@@ -131,6 +142,7 @@
                       </div>
                     <% end %>
                   </div>
+                  <%-# If the current user is NOT chair, just display the _apps.html.erb partial table instead -%>
                 <% else %>
                   <%= render 'apps'%>
                 <% end %>

@@ -59,12 +59,11 @@ class DocumentsController < ApplicationController
   end
   # GET /applications/assignments
   def assignments
-    # Kyle: I'm really not sure why this exists?  We use POST applications/assignments but not GET.
-    # So this block of code is not used
-    # I think originally we were going to use this as a way to list out assignments
+    # Make sure only board members see this page
     if !current_user.supervisor_role
       redirect_to applications_new_apps_path
     end
+    # Grab every assignment that the current user has currently
     @assignments = Assignment.where(user_id: current_user.id)
     @array = Array.new
     @assignments.each do |a|
@@ -73,7 +72,10 @@ class DocumentsController < ApplicationController
 
     end
 
-
+    # We could probably do this with a subquery but this was before we tried anything fancy
+    # like subqueries
+    # but we grab evvery document that is assigned to the current user by passing in an array of
+    # IDs
     @documents = Document.paginate(:page => params[:page], :per_page => 10).where(id: @array, state: 'new_app').order("created_at DESC")
   end
 
