@@ -1,22 +1,28 @@
 class AssignmentsController < ApplicationController
 
+  # POST request to /applications/assignments
   def create
+    # Check if any parameters were passed in a POST request
+    # If nothing was passed, redirect back
     if !params[:document_id].present?
       redirect_to applications_new_apps_path, notice: 'Please select one or more applications' and return
     elsif !params[:user_id].present?
       redirect_to applications_new_apps_path, notice: 'Please select one or more board members' and return
     end
     if (params[:commit] == 'Delete')
+      # if the delete pseudo-method is passed, go to the destroy method instead
       destroy and return
     end
     # "document_id"=>["5", "1"], "user_id"=>["1", "3"],
+    # create a boolean to determine whether or not errorStr is returned back
     @isAllCorrect = true
-    # create an empty error string
+    # create an empty error string array for holding errors
     @errorStr = Array.new
     # go through EACH user AND document passed through the POST request
     # params stores POST and GET data
 
     params[:user_id].each do |u|
+      # I'm not sure if this does anything anymore
       @has_assigment = false
       params[:document_id].each do |d|
         @assignment = Assignment.new()
@@ -24,7 +30,7 @@ class AssignmentsController < ApplicationController
         @assignment.user_id = u
         # check if assignment already exists
         if !assignment_check(@assignment)
-          # if assignment does NOT exist, save the assignment and check for votes
+          # if assignment does NOT exist, save the assignment and check for votes using the vote_check method
           @assignment.save
           UserEmailMailer.assign(u).deliver
           vote_check(u, d)
@@ -43,12 +49,16 @@ class AssignmentsController < ApplicationController
       # if everything is correct, display no errors
       redirect_to applications_new_apps_path, notice: "Application(s) assigned successfully" and return
     else
-      # if something is wrong, display the error instead
+      # if something is wrong, display the error instead.  Note: This will still
+      # save any assignments that didn't have errors, but we didn't want to display errors
+      # AND successful assignments
       redirect_to applications_new_apps_path, notice: @errorStr.join("<br />").html_safe and return
     end
   end
 
+  # DELETE request to applications/assignments
   def destroy
+      # This method is essentially the same as create but deleting
       # "document_id"=>["5", "1"], "user_id"=>["1", "3"],
       @isAllCorrect = true
       # create an empty error string
@@ -65,6 +75,9 @@ class AssignmentsController < ApplicationController
           # check if assignment exists
           if @assignment.present?
             # if assignment does exist, destroy the assignment
+            # the ! makes it important, and will cause a runtime error if something
+            # happens in this process.  Without the ! it would display nothing
+            # So basically this was for debugging, you can get rid of the !
             @assignment[0].destroy!
           else
             # assignment does not exist, so we add to the error string and change
@@ -88,6 +101,7 @@ class AssignmentsController < ApplicationController
 
   private
     def assignment_params
+      # Whitelist these two params for the database so no one can add something
       params.require(:assignment).permit(:document_id,:user_id)
     end
     def vote_check(user_id, document_id)

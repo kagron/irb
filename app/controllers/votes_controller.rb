@@ -51,6 +51,7 @@ class VotesController < ApplicationController
         pdf = CombinePDF.load(file)
         pdf.pages.each {|page| page << stamp}
         pdf.save file
+        puts 'created stamped pdf'
       end
     end
     redirect_to @document, notice: 'You successfully changed the state to Approved'
