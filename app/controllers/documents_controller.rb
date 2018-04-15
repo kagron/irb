@@ -226,6 +226,8 @@ class DocumentsController < ApplicationController
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_document
+      # instead of grabbing the document every action, we can just put it in a method
+      # We probably shouldve used this genius logic more often
       @document = Document.find(params[:id])
     end
 

@@ -4,12 +4,13 @@
   <div class="row">
     <div class="col-md-8">
       <ul class="nav nav-tabs">
+      <%-# If the current user is a normal board member, display different tabs than for a read only board member -%>
       <% if current_user.supervisor_role%>
           <li role="presentation"><%= link_to 'Assignments', applications_assignments_path %></li>
           <li role="presentation"><%= link_to 'New', applications_new_apps_path %></li>
           <li role="presentation" class = "active"><%= link_to 'All', documents_path %></li>
           <li role="presentation"><%= link_to 'Archived', applications_archived_path %></li>
-
+      <%-# Read only board members do not need to see an assignments tab since they won't be assigned to any -%>
       <% elsif current_user.readonly_role %>
           <li role="presentation"><%= link_to 'New', applications_new_apps_path %></li>
           <li role="presentation" class = "active"><%= link_to 'All', documents_path %></li>
@@ -18,5 +19,6 @@
       <% end %>
     </div>
 
+    <%-# Render the partial file _apps.html.erb -%>
   <%= render 'apps'%>
 </div>

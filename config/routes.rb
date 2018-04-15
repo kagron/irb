@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  # This place is a disaster
+  # These are all our routing and somehow it magically works
+  # please don't hate us
+  # The way it works is, we specify which HTTP request will come in, and direct it
+  # to a certain action.  Sometimes we name them using the as: 'string' thing so we can call it
+  # specifically in HTML
   get 'applications/approved', :to => 'documents#approved'
   get 'applications/assignments', :to => 'documents#assignments'
   get 'applications/needs_revisions', :to => 'documents#needs_revisions'
