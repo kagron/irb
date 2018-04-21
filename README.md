@@ -4,6 +4,7 @@
 ##### Created by Kyle Grondin, Anthony Barrios, and Brandon Pichen
 
 Ruby 2.4.1
+
 Rails 5.1.4
 
 ---
@@ -19,7 +20,7 @@ For Users: [IRB User Manual](https://docs.google.com/document/d/1g5JFOZxCvrauNB5
 
 For the student(s) who might maintain this: scroll down to Further Guides and References or changing the application process / adding new features.
 
-This application was developed in the MVC Framework Ruby on Rails.  Every line of code is commented ( we think ), and any resources we used are linked below.  HTML, CSS, ad Jascript/jQuery were also used.  Any diagrams/presentations/notes we have will be in the repository as well.
+This application was developed in the MVC Framework Ruby on Rails and is currently running on a CentOS server.  Every line of code is commented ( we think ), and any resources we used are linked below.  HTML, CSS, ad Jascript/jQuery were also used.  Automation was done using the [Whenever](https://github.com/javan/whenever) gem which allows for using CronTab easily in Ruby syntax.  We would run rake tasks on a daily basis located in the lib/task folder. Any diagrams/presentations/notes we have will be in the repository as well.
 
 
 ## Features
@@ -71,6 +72,7 @@ If you're on windows, step 7 will be different.  For installation on windows go 
 *  [RubyDocs](http://www.rubydoc.info/) - For a list of APIs and documentation for gems
 *  [Ruby On Rails API](http://api.rubyonrails.org/) - The official Ruby on Rails API
 *  [Ruby on Rails Guide](http://guides.rubyonrails.org/) - Official list of Ruby on Rails Guides and examples
+*  [Ruby on Rails commands for the Command Line](http://guides.rubyonrails.org/command_line.html) - Use this to read about various commands Ruby on rails allows
 *  [StackOverflow](https://stackoverflow.com/) - StackOverflow for answering any question you might have outside of these other links
 *  [Elastic](https://www.elastic.co/ ) - Elastic's website: the Company that made ElasticSearch
 *  [ElasticSearch Getting Started Guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html)
@@ -87,6 +89,10 @@ If you're on windows, step 7 will be different.  For installation on windows go 
 This application is personalized to the Aurora University Institutional Review Board.  In order to add / remove parts of the application process, the documents table will need to be changed.  Each application is called a 'document' in our database.  Ruby on Rails uses an Active Record model to abstract the database.  So in order to modify the application/document, you will need to create a **migration** which can be read about [here](http://edgeguides.rubyonrails.org/active_record_migrations.html).  Once the table is modified, the model is located in app/models/document.rb  and the controller for modifying various actions is in app/controllers/documents_controller.rb! If you do not know about MVC logic, a link to MVC frameworks is linked above.
 
 Other features will likely require JavaScript / other tables in the MySQL Database.  Anything that needs to be saved from page to page should be in session variables or saved in a table.  Anything that pertains to how the application behaves ( examples being validation, fancy animations when doing something, AJAX ) should be done in CSS/JavaScript/AJAX.  For starters, we recommend looking into SASS for CSS related stuff, Axios for AJAX related stuff, and React/Angular/VueJS for anything else Javascript related.
+
+If it is related to automation, take a look at how [Whenever](https://github.com/javan/whenever) works.  It allows for easy Cron jobs using Ruby syntax.  You can use this to run Rake tasks in any interval possible.
+
+If all else fails, try looking up a gem to do what you want!  There's thousands of gems and there's generally something out there for what you need done.
 
 
 ## Contribution
