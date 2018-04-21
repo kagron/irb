@@ -39,7 +39,7 @@ This application was developed in the MVC Framework Ruby on Rails and is current
 *  **Read Only Role**:  There is also a read only role in case there's a person in the board who just needs to view applications
 
 
-## Requirements
+## Requirements to Run Locally
 
 1.  Ruby 2.4.1+
 2.  Rails 5.1.4+
@@ -51,7 +51,7 @@ This application was developed in the MVC Framework Ruby on Rails and is current
 If you're using Linux, we recommend you use [RVM](https://rvm.io/) or RBEnv for managing your Ruby version and gems (including Rails).  For Windows: Download the Ruby Installer [here](https://www.ruby-lang.org/en/downloads/).  Once you have Ruby installed, download Rails by typing in `gem install rails`. For MySQL, theres a windows installer [here](https://dev.mysql.com/downloads/mysql/) that you can download.  For NodeJS, the installer is [here](https://nodejs.org/en/).  For more guides, scroll down to Further Guides and Resources.
 
 
-## Get Started
+## Getting Started Locally
 
 1.  Clone via git
 2.  Make sure your database.yml file has the correct username and password for your MySQL
