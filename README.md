@@ -10,8 +10,8 @@ The Institutional Review Board (IRB) is a web application designed to connect th
 
 
 If you're looking for information on using the software:
-For Board Members: (IRB Board Manual)[https://docs.google.com/document/d/1-X5ouNzfN3ncTXFYhbNVclyeZyZIa49QF3oXrXbyS1A/edit?usp=sharing]
-For Users: (IRB User Manual)[https://docs.google.com/document/d/1g5JFOZxCvrauNB5Z_lo8z3b0gpe0zysHIepgzUJfFPU/edit?usp=sharing]
+For Board Members: [IRB Board Manual](https://docs.google.com/document/d/1-X5ouNzfN3ncTXFYhbNVclyeZyZIa49QF3oXrXbyS1A/edit?usp=sharing)
+For Users: [IRB User Manual](https://docs.google.com/document/d/1g5JFOZxCvrauNB5Z_lo8z3b0gpe0zysHIepgzUJfFPU/edit?usp=sharing)
 
 This application was developed in Ruby on Rails.  Every line of code is commented ( we think ), and any resources we used are linked below.  
 
