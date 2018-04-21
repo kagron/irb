@@ -53,14 +53,16 @@ If you're using Linux, we recommend you use [RVM](https://rvm.io/) or RBEnv for 
 
 ## Getting Started Locally
 
-1.  Clone via git
-2.  Make sure your database.yml file has the correct username and password for your MySQL
-3.  Bundle install
-4.  Create databases in mysql by running $ rake db:create
-5.  `$ rake db:create`
-6.  `$ rake db:migrate`
-7.  `$ service elasticsearch start`
-8.  `$  Rails s`
+1.  Clone by typing `git clone https://github.com/kagron/irb.git` into terminal / command prompt
+2.  `cd irb`
+3.  Make sure your config/database.yml file has the correct username and password for your local MySQL user
+4.  `bundle install`
+5.  Create databases in mysql by running `rake db:create`
+6.  `rake db:create`
+7.  `rake db:migrate`
+8.  `service elasticsearch start`
+9.  `rails s`
+10. Open up http://localhost:3000/ in your preferred web browser
 
 If you're on windows, step 7 will be different.  For installation on windows go [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/windows.html) and for more general information go to the Getting Started guide [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html).  Make sure you install Elastic Search as a service if you're using Linux, otherwise just make sure its running by checking http://localhost:9200/
 
