@@ -22,6 +22,8 @@ For the student(s) who might maintain this: scroll down to Further Guides and Re
 
 This application was developed in the MVC Framework Ruby on Rails and is currently running on a CentOS server.  Every line of code is commented ( we think ), and any resources we used are linked below.  HTML, CSS, ad Jascript/jQuery were also used.  Automation was done using the [Whenever](https://github.com/javan/whenever) gem which allows for using CronTab easily in Ruby syntax.  We would run rake tasks on a daily basis located in the lib/task folder. Any diagrams/presentations/notes we have will be in the repository as well.
 
+A lot of our functionality came from gems.  What and why we used it is in our Gemfile.  
+
 
 ## Features
 
