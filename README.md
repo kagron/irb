@@ -2,8 +2,10 @@
 
 # Aurora University IRB application
 ##### Created by Kyle Grondin, Anthony Barrios, and Brandon Pichen
+
 Ruby 2.4.1
 Rails 5.1.4
+
 ---
 
 The Institutional Review Board (IRB) is a web application designed to connect the investigator with Aurora University’s Institutional Review Board easily and efficiently.  The purpose of the IRB web app is to provide a platform where investigators at the university can submit an application for ethics and safety review and Board members can effectively review, discuss, vote, and assign applications among each other.  
