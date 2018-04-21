@@ -12,10 +12,14 @@ The Institutional Review Board (IRB) is a web application designed to connect th
 
 
 If you're looking for information on using the software:
+
 For Board Members: [IRB Board Manual](https://docs.google.com/document/d/1-X5ouNzfN3ncTXFYhbNVclyeZyZIa49QF3oXrXbyS1A/edit?usp=sharing)
+
 For Users: [IRB User Manual](https://docs.google.com/document/d/1g5JFOZxCvrauNB5Z_lo8z3b0gpe0zysHIepgzUJfFPU/edit?usp=sharing)
 
-This application was developed in Ruby on Rails.  Every line of code is commented ( we think ), and any resources we used are linked below.  
+For the student(s) who might maintain this: scroll down to Further Guides and References or changing the application process / adding new features.
+
+This application was developed in the MVC Framework Ruby on Rails.  Every line of code is commented ( we think ), and any resources we used are linked below.  HTML, CSS, ad Jascript/jQuery were also used.  Any diagrams/presentations/notes we have will be in the repository as well.
 
 
 ## Features
@@ -28,8 +32,10 @@ This application was developed in Ruby on Rails.  Every line of code is commente
 *  **Emailing**: Emailing the chair when a new application comes in, and email the user when their application is finished reviewing
 *  **Revisions**: Users can then resubmit their application with changes if needed
 *  **Stamping**: Stamp each approved PDF with an approved stamp so the investigator can hand it out to the people being investigated
-*  **Archival**: Archive every application
+*  **Archival**: Every application is archived either after approval or 3 months of inactivity
 *  **Searching**: Search all the applications and sort by date and name
+*  **Changing Board and Chair Members**: The Chair of the board can easily add/remove current board members or add a new chair member
+*  **Read Only Role**:  There is also a read only role in case there's a person in the board who just needs to view applications
 
 
 ## Requirements
@@ -66,17 +72,26 @@ If you're on windows, step 7 will be different.  For installation on windows go 
 *  [Ruby On Rails API](http://api.rubyonrails.org/) - The official Ruby on Rails API
 *  [Ruby on Rails Guide](http://guides.rubyonrails.org/) - Official list of Ruby on Rails Guides and examples
 *  [StackOverflow](https://stackoverflow.com/) - StackOverflow for answering any question you might have outside of these other links
-*  [Elastic](https://www.elastic.co/ ) - Elastic's website for ElasticSearch
+*  [Elastic](https://www.elastic.co/ ) - Elastic's website: the Company that made ElasticSearch
+*  [ElasticSearch Getting Started Guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html)
+*  [ElasticSearch Installation on Windows](https://www.elastic.co/guide/en/elasticsearch/reference/current/windows.html)
 *  [Everything you need to know about Git](https://www.udemy.com/learngit/)
 *  [How to Install MySQL Server on Windows](https://www.youtube.com/watch?v=UgHRay7gN1g)
 *  [How to Install NodeJS on Windows](https://www.youtube.com/watch?v=-u-j7uqU7sI)
 *  [How to Install Ruby on Rails on Windows](https://www.youtube.com/watch?v=OHgXELONyTQ)
 *  [How to Install ElasticSearch on Windows](https://www.youtube.com/watch?v=YE7AzSCC3E0)
+*  [What is a MVC Framework?](https://www.youtube.com/watch?v=qXRcVhWxuaU)
+
+## Changing the Application Process / Adding other features
+
+This application is personalized to the Aurora University Institutional Review Board.  In order to add / remove parts of the application process, the documents table will need to be changed.  Each application is called a 'document' in our database.  Ruby on Rails uses an Active Record model to abstract the database.  So in order to modify the application/document, you will need to create a **migration** which can be read about [here](http://edgeguides.rubyonrails.org/active_record_migrations.html).  Once the table is modified, the model is located in app/models/document.rb  and the controller for modifying various actions is in app/controllers/documents_controller.rb! If you do not know about MVC logic, a link to MVC frameworks is linked above.
+
+Other features will likely require JavaScript / other tables in the MySQL Database.  Anything that needs to be saved from page to page should be in session variables or saved in a table.  Anything that pertains to how the application behaves ( examples being validation, fancy animations when doing something, AJAX ) should be done in CSS/JavaScript/AJAX.  For starters, we recommend looking into SASS for CSS related stuff, Axios for AJAX related stuff, and React/Angular/VueJS for anything else Javascript related.
 
 
 ## Contribution
 
-Thank you for considering contributing to our Institutional Review Board web application.  Feel free to fork and create a pull request!
+Thank you for considering contributing to our Institutional Review Board web application.  Feel free to fork and create a pull request!  The documents table was created specifically for Aurora University's Institutional Review Board, so in order to truly utilize the application, the application process should be customized to the board.
 
 ## License
 
