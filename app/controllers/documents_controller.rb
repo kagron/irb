@@ -83,10 +83,10 @@ class DocumentsController < ApplicationController
   def archived
     if current_user.supervisor_role || current_user.readonly_role
       # If person is a board member OR a readonly board member, then display every archived document
-  	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(is_archived: 'yes').order("created_at DESC")
+  	   @documents = Document.paginate(:page => params[:page], :per_page => 10).where(is_archived: true).order("created_at DESC")
   	else
       # Display current users archived applications
-    	@documents = Document.paginate(:page => params[:page], :per_page => 10).where(is_archived: 'yes').where(:user_id => current_user.id).order("created_at DESC")
+    	@documents = Document.paginate(:page => params[:page], :per_page => 10).where(is_archived: true).where(:user_id => current_user.id).order("created_at DESC")
   	end
   end
 
