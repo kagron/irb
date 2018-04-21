@@ -1,7 +1,7 @@
 <img src="http://s3.amazonaws.com/kylegrondin-portfolio/projects/avatars/000/000/004/original/irb.jpg?1520623284" alt="IRB image" align="center">
 
 # Aurora University IRB application
-### Created by Kyle Grondin, Anthony Barrios, and Brandon Pichen
+##### Created by Kyle Grondin, Anthony Barrios, and Brandon Pichen
 Ruby 2.4.1
 Rails 5.1.4
 ---
@@ -74,7 +74,7 @@ If you're on windows, step 7 will be different.  For installation on windows go 
 
 ## Contribution
 
-Thank you for considering contributing to our Institutional Review Board web application.  Feel free to fork and develop on top of this!
+Thank you for considering contributing to our Institutional Review Board web application.  Feel free to fork and create a pull request!
 
 ## License
 
