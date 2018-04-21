@@ -64,7 +64,7 @@ If you're using Linux, we recommend you use [RVM](https://rvm.io/) or RBEnv for 
 9.  `rails s`
 10. Open up http://localhost:3000/ in your preferred web browser
 
-If you're on windows, step 7 will be different.  For installation on windows go [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/windows.html) and for more general information go to the Getting Started guide [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html).  Make sure you install Elastic Search as a service if you're using Linux, otherwise just make sure its running by checking http://localhost:9200/
+If you're on windows, step 8 will be different.  For installation on windows go [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/windows.html) and for more general information go to the Getting Started guide [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html).  Make sure you install Elastic Search as a service if you're using Linux, otherwise just make sure its running by checking http://localhost:9200/
 
 ## Further Guides and Helpful References
 
