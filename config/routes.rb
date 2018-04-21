@@ -20,8 +20,8 @@ Rails.application.routes.draw do
 
   # Chair Comment routes, we only need create, update, and destroy
   post 'chair_comments', :to => 'chair_comments#create', as: 'create_chair_comment'
-  patch "/", :to => "chair_comments#update", as: 'edit_chair_comment'
-  put "/", :to => "chair_comments#update"
+  patch "/chair_comments", :to => "chair_comments#update", as: 'edit_chair_comment'
+  put "/chair_comments", :to => "chair_comments#update"
 
   post 'users/:id/removeboard', :to => 'irb#removeBoard', as: 'remove_board'
   post 'users/:id/removechair', :to => 'irb#removeChair', as: 'remove_chair'
