@@ -17,7 +17,11 @@ This application was developed in Ruby on Rails.  Every line of code is commente
 
 
 ## Features
+<<<<<<< HEAD
 
+=======
+---
+>>>>>>> 4246ba840b2f88173c3ea9307ae45e58b1eabd64
 *  **Login**
 *  **Document Submission**: Users can submit an application and attach PDFs to be reviewed
 *  **Reviewable**: Each application can then be seen by board members
@@ -29,6 +33,7 @@ This application was developed in Ruby on Rails.  Every line of code is commente
 *  **Archival**: Archive every application
 *  **Searching**: Search all the applications and sort by date and name
 
+<<<<<<< HEAD
 
 ## Requirements
 
@@ -44,6 +49,22 @@ If you're using Linux, we recommend you use [RVM](https://rvm.io/) or RBEnv for 
 
 ## Get Started
 
+=======
+
+## Requirements
+---
+1.  Ruby 2.4.1+
+2.  Rails 5.1.4+
+3.  [ElasticSearch](https://www.elastic.co/products/elasticsearch)
+4.  MySql Community Server
+5.  NodeJS
+6.  Git
+
+If you're using Linux, we recommend you use [RVM](https://rvm.io/) or RBEnv for managing your Ruby version and gems (including Rails).  For Windows: Download the Ruby Installer [here](https://www.ruby-lang.org/en/downloads/).  Once you have Ruby installed, download Rails by typing in `gem install rails`. For MySQL, theres a windows installer [here](https://dev.mysql.com/downloads/mysql/) that you can download.  For NodeJS, the installer is [here](https://nodejs.org/en/).  For more guides, scroll down to Further Guides and Resources.
+
+
+To run this
+>>>>>>> 4246ba840b2f88173c3ea9307ae45e58b1eabd64
 1.  Clone via git
 2.  Make sure your database.yml file has the correct username and password for your MySQL
 3.  Bundle install
@@ -56,7 +77,11 @@ If you're using Linux, we recommend you use [RVM](https://rvm.io/) or RBEnv for 
 If you're on windows, step 7 will be different.  For installation on windows go [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/windows.html) and for more general information go to the Getting Started guide [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html).  Make sure you install Elastic Search as a service if you're using Linux, otherwise just make sure its running by checking http://localhost:9200/
 
 ## Further Guides and Helpful References
+<<<<<<< HEAD
 
+=======
+---
+>>>>>>> 4246ba840b2f88173c3ea9307ae45e58b1eabd64
 *  [Ruby-Lang](https://www.ruby-lang.org/en/downloads/) - The Official Ruby programming language website
 *  [MySQL](https://dev.mysql.com/downloads/mysql/) - MySQL's official website
 *  [NodeJS](https://nodejs.org/en/)
@@ -73,9 +98,17 @@ If you're on windows, step 7 will be different.  For installation on windows go 
 
 
 ## Contribution
+<<<<<<< HEAD
 
 Thank you for considering contributing to our Institutional Review Board web application.  Feel free to fork and develop on top of this!
 
 ## License
 
+=======
+---
+Thank you for considering contributing to our Institutional Review Board web application.  Feel free to fork and develop on top of this!
+
+## License
+---
+>>>>>>> 4246ba840b2f88173c3ea9307ae45e58b1eabd64
 The Institional Review Board is open-sourced software licensed under the [MIT License](https://opensource.org/licenses/MIT).
