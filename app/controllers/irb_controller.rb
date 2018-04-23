@@ -109,8 +109,7 @@ class IrbController < ApplicationController
 
     # find the user in the database using the value passed in the params array (GET/POST Data)
     @user = User.find(params[:id])
-<<<<<<< HEAD
-=======
+
     #@a = Assignment.where(user_id: @user.id).pluck('document_id')
     # These queries were a pain to figure out but what they are, are subqueries.
     # The first query that will get executed is the first one and return an array of documents
@@ -118,7 +117,6 @@ class IrbController < ApplicationController
     # to find out which assignments and votes to destroy because this user is no longer a board member
     # NOTE: we only destroyed the ones that are NOT archived because we figured the board
     # would still want to know who reviewed documents in the past.
->>>>>>> 12c3e80af1a4ea65b1008cf66009717cc37ee82f
     @x = Assignment.where(document_id: Document.where(is_archived: 'no'), user_id: @user.id)
     @v = Vote.where(document_id: Document.where(is_archived: 'no'), user_id: @user.id)
 
