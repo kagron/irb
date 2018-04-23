@@ -1,6 +1,6 @@
 <h3>A previously submitted application has been resubmitted</h3>
 
-<p>Dear <%= @chair.first_name %>,</p>
+<p><%= @chair.first_name %>,</p>
 
 <p><%= @user.first_name + " " + @user.last_name %>'s application "<%= @document.project_title %>" has been resubmitted and needs your review.
-  Please check it <%= link_to "here", @document %></p>
+  Please log in to check it.</p>

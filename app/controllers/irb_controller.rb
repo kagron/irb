@@ -89,7 +89,6 @@ class IrbController < ApplicationController
   def removeBoard
 
     @user = User.find(params[:id])
-    #@a = Assignment.where(user_id: @user.id).pluck('document_id')
     @x = Assignment.where(document_id: Document.where(is_archived: 'no'), user_id: @user.id)
     @v = Vote.where(document_id: Document.where(is_archived: 'no'), user_id: @user.id)
 
