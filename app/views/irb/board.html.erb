@@ -1,13 +1,8 @@
 
 <div class="container">
-  <div class="well">
-
-
-
     <h2>Current Chair</h2>
-
-
-        <table class="table table-default table-bordered">
+    <%-# Display the current people with Chair permissions in a table -%>
+        <table class="table table-striped table-bordered">
             <thead>
               <tr>
                 <th>Name</th>
@@ -28,9 +23,8 @@
 
 
     <h2>Current Board</h2>
-
-
-        <table class="table table-default table-bordered">
+    <%-# Display the current people with Board permissions in a table -%>
+        <table class="table table-striped table-bordered">
               <thead>
                 <tr>
                   <th>Name</th>
@@ -41,6 +35,7 @@
               <tbody>
                 <% @board.each do |board| %>
                 <tr>
+                  <%-# These buttons are for promoting to chair, or for removing them from the board -%>
                   <td><%= board.first_name + " " + board.last_name %></td>
                   <td width="10%"><%= button_to add_chair_path(board), method: :post, class: 'btn btn-primary', data: {confirm: 'Are you sure you want to promote ' + board.first_name + " " + board.last_name + " to chair?"} do %>Promote
                   <% end %>
@@ -54,15 +49,17 @@
         </table>
 
 
-        <div>
 
-        <Button id ="searchButton" class ='btn btn-success'> Assign new board members</button></br></br>
 
+        <Button id ="searchButton" class ='btn btn-success'> <i class="fa fa-plus"></i> Add</button></br></br>
+        <%-# By using jQuery we can hide this stuff and toggle it when hititng the button -%>
         <div id="boardSearch">
           <%= form_tag(search_path, :method => "get", id: "search-form", class: 'form-group') do %>
           <div class="input-group">
+            <%-# Display the users who match what you type into this textfield using ElasticSearch and Searchkick -%>
             <%= text_field_tag :query, params[:query], placeholder: "Search users...", class: 'form-control', id: "user_search" %>
             <div id="suggestions-container">
+              <%-# This is a container for the suggested Users -%>
             </div>
             <span class="input-group-btn">
 
@@ -74,9 +71,54 @@
             </span>
             </div>
           </div>
-        </br></br>
+
+        <h2>Current Read Only Member</h2>
+
+        <%-# Display the current people with read only permissions in a table -%>
+            <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @readonly.each do |board| %>
+                    <tr>
+                      <td><%= board.first_name + " " + board.last_name %></td>
+                      <%-# This button is for removing a readonly person -%>
+                      <td width="10%"><%= button_to remove_board_path(board), method: :post, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to remove this member?'} do %>Remove
+                      <% end %>
+                    </td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+            </table>
 
 
-      </div>
-  </div>
+
+
+            <Button id ="searchButton2" class ='btn btn-success'><i class="fa fa-plus"></i> Add</button></br></br>
+            <%-# Same as the other search textfield above -%>
+            <div id="boardSearch2">
+              <%= form_tag(search_path, :method => "get", id: "search-form", class: 'form-group') do %>
+              <div class="input-group">
+                <%= text_field_tag :query, params[:query], placeholder: "Search users...", class: 'form-control', id: "user_search2" %>
+                <input type="hidden" name="readonly" value="true">
+                <div id="suggestions-container2">
+                </div>
+                <span class="input-group-btn">
+
+                  <%= button_tag(type: "submit", class: 'btn btn-primary') do %>Add
+
+                  <% end %>
+                  <% end %>
+
+                </span>
+                </div>
+              </div>
+            </br></br>
+
+
+
 </div>

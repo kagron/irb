@@ -5,6 +5,7 @@
     <div class="col-md-8">
       <ul class="nav nav-tabs">
         <% if current_user.supervisor_role%>
+        <%-# Different tabs based on whos logged in -%>
             <li role="presentation"><%= link_to 'Assignments', applications_assignments_path %></li>
             <li role="presentation" ><%= link_to 'New', applications_new_apps_path %></li>
             <li role="presentation"><%= link_to 'All', documents_path %></li>
@@ -23,7 +24,7 @@
 	  <%end%>
     </div>
 
-
+<%-# Render the partial _apps.html.erb -%>
 	<%= render 'apps'%>
 
 </div>

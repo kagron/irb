@@ -1,0 +1,5 @@
+<p>Dear <%= @user.first_name %>,</p>
+
+<p>A currently onging application is going to reach is going to expire in one week: <%= (Time.now + 7.days).strftime("%B %-d, %Y") %></p>
+
+<p>Since this application is active for longer than a year, we ask for you to resubmit your document.<p>

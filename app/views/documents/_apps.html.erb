@@ -1,4 +1,5 @@
-<% if current_user.supervisor_role %>
+<%-# Display the search bar to only board members -%>
+<% if current_user.supervisor_role || current_user.readonly_role %>
 <div class="col-md-4">
   <%= form_tag(documents_path, :method => "get", id: "search-form", class: 'form-group') do %>
   <div class="input-group">
@@ -12,7 +13,9 @@
 <% end %>
 <% end %>
 </div>
+<%-# If there's any applications in the array, show them, otherwise get rid of the table -%>
 <% if @documents.present? %>
+<div class="table-responsive col-md-12">
 <table class="table table-default table-bordered">
 <thead>
   <tr>
@@ -20,7 +23,6 @@
     <th>Project Title</th>
     <th>Department</th>
     <th>Type</th>
-    <!-- <th>Sponsor</th> -->
     <th>Start Date</th>
     <th>End Date</th>
     <th></th>
@@ -28,39 +30,43 @@
 </thead>
 
 <tbody>
+  <%-# Loop through every document and create a new row in the table -%>
   <% @documents.each do |document| %>
+  <%-# This if statement is to color the rows based on their state -%>
     <% if document.state == 'new_app' %>
       <tr class="alert-info">
-        <% elsif document.state == 'approved' %>
-          <tr class="alert-success">
-            <% elsif document.state == 'rejected' %>
-              <tr class="alert-danger">
-                <% elsif document.state == 'needs_revisions' %>
-                  <tr class="alert-warning">
-                  <% end %>
-                  <td><%= document.fName + " " + document.lName %></td>
-                  <td><%= document.project_title %></td>
-                  <td><%= document.department %></td>
-                  <% if document.typeOfApplication == 'not_sure' %>
-                    <td><%= "not sure" %></td>
-                  <% else %>
-                    <td><%= document.typeOfApplication %></td>
-                  <% end %>
-                  <!-- <td><%= document.sponsor_name %></td> -->
-                  <td><%= document.start_date.strftime("%b %e %Y") %></td>
-                  <td><%= document.end_date.strftime("%b %e %Y") %></td>
-                  <td><%= link_to document, class: 'btn btn-primary', style: 'color: white' do %>
-                      <i class="fa fa-eye"></i> View
-                    <% end %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-
+    <% elsif document.state == 'approved' %>
+      <tr class="alert-success">
+    <% elsif document.state == 'rejected' %>
+      <tr class="alert-danger">
+    <% elsif document.state == 'needs_revisions' %>
+      <tr class="alert-warning">
+    <% end %>
+    <%-# Display certain data per table data -%>
+      <td><%= document.fName + " " + document.lName %></td>
+      <td><%= document.project_title %></td>
+      <td><%= document.department %></td>
+      <% if document.typeOfApplication == 'not_sure' %>
+        <td><%= "not sure" %></td>
+      <% else %>
+        <td><%= document.typeOfApplication %></td>
+      <% end %>
+      <td><%= document.start_date.strftime("%b %e %Y") %></td>
+      <td><%= document.end_date.strftime("%b %e %Y") %></td>
+      <td><%= link_to document, class: 'btn btn-primary', style: 'color: white' do %>
+          <i class="fa fa-eye"></i> View
+        <% end %></td>
+    </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+    <%-# paginate the applications so we dont get 8 billion -%>
           <%= will_paginate @documents, :renderer => BootstrapPagination::Rails %>
 
 
 <% else %>
+<%-# Display this if nothing is found in the @documents array  -%>
   <h4>There does not seem to be anything here yet... </h4>
 <% end %>
 

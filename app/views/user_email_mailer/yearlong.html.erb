@@ -1,0 +1,7 @@
+<p>Dear <%= @chair.first_name %>,</p>
+
+<p>A currently onging application is going to expire in one week: <%= (Time.now + 7.days).strftime("%B, %-d, %Y") %></p>
+
+<p>This same email has been sent to the investigator and they should resubmit shortly.<p>
+</br>
+<p>Thank you!</p>

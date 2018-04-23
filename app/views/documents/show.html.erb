@@ -1,7 +1,9 @@
 <div class="container">
-
+  <%-# Check what the state is, and based on that and if youre a board, display various things -%>
+  <%-# There has to be a better way to do this, but I really don't know how -%>
+  <%-# At the very least, it could be in a partial file -%>
   <% if @document.state == 'new_app' %>
-    <% if current_user.supervisor_role %>
+    <% if current_user.supervisor_role || current_user.readonly_role %>
       <h2>This application is
         <span style="color: #31708f">New</span></h2>
     <% else %>
@@ -12,7 +14,7 @@
   <% end %>
 
   <% if @document.state == 'approved' %>
-    <% if current_user.supervisor_role %>
+    <% if current_user.supervisor_role || current_user.readonly_role %>
       <h2>This application is
         <span style="color: green">Approved</span></h2>
     <% else %>
@@ -23,7 +25,7 @@
   <% end %>
 
   <% if @document.state == 'rejected' %>
-    <% if current_user.supervisor_role %>
+    <% if current_user.supervisor_role || current_user.readonly_role %>
       <h2>This application is
         <span style="color: red">Rejected</span></h2>
     <% else %>
@@ -42,7 +44,7 @@
           <i class="fa fa-edit"></i> Revise Application
         <% end %>
       </div>
-      <% elsif current_user.supervisor_role %>
+      <% elsif current_user.supervisor_role || current_user.readonly_role %>
         <h2>This application is
           <span style="color: #ec971f">Approved Pending Revisions</span></h2>
       <% else %>
@@ -56,26 +58,102 @@
         </div>
       <% end %>
     <% end %>
-    <% if current_user.supervisor_role && @assignments %>
-      <p>This application is assigned to:
-        <% @first = true;
-        @assignments.each do |a|
-          if @first %>
-            <%= a.first_name + " " + a.last_name %>
-            <% @first = false %>
-          <% else %>
-            <%= ", " + a.first_name + " " + a.last_name %>
-          <% end%>
-        <% end %>
-      </p>
+    <% if current_user.supervisor_role %>
+    <div class="row" style="margin-bottom: 20px;">
+      <div class="col-md-6">
+        <%-# Display assignments in a comma seperated list -%>
+      <% if @assignments.present? %>
+        <p>This application is assigned to:
+          <% @first = true;
+          @str = "";
+          @assignments.each do |a|
+            if @first %>
+              <% @str += a.first_name + " " + a.last_name %>
+              <% @first = false %>
+            <% else %>
+              <% @str += ", " + a.first_name + " " + a.last_name %>
+            <% end%>
+          <% end %>
+          <%= @str %>
+        </p>
+      <% else %>
+      <%-# If no one is currently assigned, display this instead -%>
+        <p>This application is not assigned to anyone</p>
+      <% end %>
     <% end %>
-    <div class="row">
-      <% if current_user.supervisor_role %>
-      <div class="col-md-9">
-        <% else %>
-        <div class="col-md-12">
+
+    <% if @votes.present?
+      # If there are votes present, create 4 arrays and push board members to each one
+      # so that each state has its own array of people Ex: approved only has people who voted approved
+      @approved = Array.new
+      @newapps = Array.new
+      @revisions = Array.new
+      @rejected = Array.new
+      %>
+      <% @votes.each do |v| %>
+        <% @user = User.find(v.user_id); %>
+          <% if v.state == 'new_app'
+              @newapps.push(@user.first_name + " " + @user.last_name)
+           elsif v.state == 'needs_revisions'
+             @revisions.push(@user.first_name + " " + @user.last_name)
+           elsif v.state == 'approved'
+             @approved.push(@user.first_name + " " + @user.last_name)
+           else
+             @rejected.push(@user.first_name + " " + @user.last_name)
+           end %>
+          <% end %>
         <% end %>
+        <%-# Display the arrays using join on the arrays -%>
+        <p>Haven't Voted: <%= @newapps.join(", ") if @newapps.present? %></p>
+        <p>Approved: <%= @approved.join(", ") if @approved.present? %></p>
+        <p>Needs Revisions: <%= @revisions.join(", ") if @revisions.present? %></p>
+        <p>Rejected: <%= @rejected.join(', ') if @rejected.present? %></p>
+
+      </div>
+      <div class="col-md-3">
+        <div class="text-center">
+          <% if @your_votes.present? %>
+          <%-# Display only if your votes is present -%>
+          <%-# You can only vote if the vote's state is new app or the document's state is needs_revisions -%>
+            <% if (@your_votes[0].state == 'new_app' || @document.state == 'needs_revisions') %>
+              <h4>Vote:</h4>
+              <%-# These buttons are for voting, each one is going to do a GET request to a rails action and change a document based on the GET request sent -%>
+              <%= link_to approve_vote_app_path(@document), class: 'btn btn-success state-btn2', data: {confirm: "Are you sure you want to vote to approve this application?"} do %><i class="fa fa-check"></i><% end %>
+              <%= link_to revise_vote_app_path(@document), class: 'btn btn-warning state-btn2', data: {confirm: "Are you sure you want to vote to approve this application pending revisions?"} do %><i class="fa fa-edit"></i><% end %>
+              <%= link_to reject_vote_app_path(@document), class: 'btn btn-danger state-btn2', data: {confirm: "Are you sure you want to vote to reject this application?"} do %><i class="fa fa-ban"></i><% end %>
+
+            <% else %>
+              <h4>You already voted on this application</h4>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+          <div class="col-md-3">
+
+            <%-# If the chair is viewing the app, they can change the state of the application -%>
+          <% if current_user.superadmin_role && (@document.state == 'new_app' || @document.state == 'needs_revisions')%>
+            <div class="text-center">
+              <h4>State:</h4>
+              <%-# These buttons also work using GET requests to a rails action.  If that get request is called, then it changes the state -%>
+              <%= link_to approve_app_path(@document), class: 'btn btn-success state-btn2', data: {confirm: "Are you sure you want to approve this application?"} do %><i class="fa fa-check"></i><% end %>
+              <%= link_to revise_app_path(@document), class: 'btn btn-warning state-btn2', data: {confirm: "Are you sure you want to approve this application pending revisions?"} do %><i class="fa fa-edit"></i><% end %>
+              <%= link_to reject_app_path(@document), class: 'btn btn-danger state-btn2', data: {confirm: "Are you sure you want to reject this application?"} do %><i class="fa fa-ban"></i><% end %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+
+    <div class="row">
+      <%-# If current user is chair, then make room for everything else ont he page -%>
+      <% if current_user.supervisor_role %>
+        <div class="col-md-9">
+      <% else %>
+        <%-# Otherwise, make this column 100% width so it looks nicer -%>
+        <div class="col-md-12">
+      <% end %>
         <div class="well">
+          <%-# These sections are to display the application's contents from the database in Bootstrap styling -%>
           <h2>Section 1</h2>
           <div class="row">
             <div class="col-md-4">
@@ -112,6 +190,7 @@
             <div class="col-md-4">
               <strong>Type of Application</strong><br>
               <% if @document.typeOfApplication == 'not_sure' %>
+              <%-# instead of getting not_sure with a _ character, change it to not sure regularly because it looks nicer -%>
                 not sure
               <% else %>
                 <%= @document.typeOfApplication %>
@@ -137,10 +216,12 @@
           <div class="row application">
             <div class="col-md-6">
               <strong>Project Start Date</strong><br>
+              <%-# strftime is used to formate the datetime so it looks better -%>
               <%= @document.start_date.strftime("%B %e %Y") %>
             </div>
             <div class="col-md-6">
               <strong>Project End Date</strong><br>
+              <%-# strftime is used to formate the datetime so it looks better -%>
               <%= @document.end_date.strftime("%B %e %Y") %>
             </div>
           </div>
@@ -206,6 +287,7 @@
           <div class="row">
             <div class="col-md-12">
               <strong>Subjects consent:</strong><br>
+              <%-# If someone submitted text instead of attached a file, display that instead of the file -%>
               <% if @document.subjects_consent.present? %>
                 <%= @document.subjects_consent %>
               <% else %>
@@ -218,6 +300,7 @@
           </div>
           <div class="row application">
             <div class="col-md-12">
+              <%-# If this file was submitted, display a link to the file -%>
               <% if @document.child_assent_file.present? %>
                 <p>
                   <strong>Copy of Child Assent Form:
@@ -235,18 +318,21 @@
           <p>
             <strong>List of Questions:
             </strong>
+            <%-# If this file was submitted, display a link to the file -%>
             <%= link_to @document.questions_file_url  do %>
               <i class="fa fa-file"></i> Download PDF
             <% end %>
           </p>
 
           <p>
+            <%-# If this file was submitted, display a link to the file -%>
             <strong>Copy of Human Subjects Research Certificate:
             </strong>
             <%= link_to @document.hsr_certificate_file_url do %>
               <i class="fa fa-file"></i> Download PDF
             <% end %>
           </p>
+          <%-# If this file was submitted, display a link to the file -%>
           <% if @document.written_permission_file.present? %>
             <p>
               <strong>Written permission from the site where the research is to be conducted (if applicable):</strong>
@@ -265,13 +351,17 @@
         <!-- end section 4 -->
       </div>
       <!-- end left side -->
+      <%-# If the current user is a board member, display this stuff -%>
       <% if current_user.supervisor_role %>
       <div class="col-md-3">
         <!-- Comment section -->
         <h3 style="margin-top: 0"><i class="fa fa-comments"></i> Comments</h3>
+        <%-# If there are comments, then display them -%>
         <% if @comments.present? %>
+        <%-# Loop through the comments -%>
           <% @comments.each do |c| %>
             <div class="comment-block">
+              <%-# If the current user wrote this comment, then allow them to delete the coomment -%>
               <% if c.user_id == current_user.id %>
                 <span class="delete-comment"><%= button_to(delete_comment_path(@document, c), class: 'close', data: {confirm: "Are you sure you want to delete your comment?"}) do %>&times;<% end %>
               </span>
@@ -286,9 +376,10 @@
         <%= will_paginate @comments, :renderer => BootstrapPagination::Rails %>
 
       <% else %>
+      <%-# Display this if no comments are present -%>
         <p class="comment">There do not seem to be any comments here...</p>
       <% end %>
-
+      <%-# This if statement can probably be removed.  It checks if the current user is a board member to display the add comment form -%>
       <% if current_user.supervisor_role %>
         <%= form_for @comment, url: @document do |form| %>
         <%= form.text_area :content, id: :comment_content, rows: '5', class: 'form-control txtComment', placeholder: 'Add a comment...' %>
@@ -296,52 +387,10 @@
         <%= submit_tag('Submit', class: 'btn btn-primary submit-btn', id: 'btnSubmitComment', style: 'margin-bottom: 20px') %>
       <% end %>
 
-      <div class="text-center well">
-        <% if @your_votes.present? %>
-          <% if (@your_votes[0].state == 'new_app' || @your_votes[0].state == 'needs_revisions') %>
-            <h4>Vote for the state you believe this application should be:</h4>
-            <%= button_to approve_vote_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to vote to approve this application?' }  do %>
-              <i class="fa fa-check"></i> Approve
-            <% end %>
-            <%= button_to revise_vote_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to vote to make this application approved pending revisions?' } do %>
-              <i class="fa fa-edit"></i> Approve Pending Revisions
-            <% end %>
-            <%= button_to reject_vote_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to vote to reject this application?' } do %>
-              <i class="fa fa-ban"></i> Reject
-            <% end %>
-          <% else %>
-            <h4>You already voted on this application</h4>
-          <% end %>
+
+
         <% end %>
 
-      </div>
-      <% if @votes.present? %>
-        <% @votes.each do |v| %>
-          <% @user = User.find(v.user_id) %>
-            <% if v.state == 'new_app' %>
-              <p><%= @user.first_name + " " + @user.last_name + " has not voted yet" %></p>
-              <% elsif v.state == 'needs_revisions' %>
-                <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be approved pending revisions" %></p>
-              <% else %>
-                <p><%= @user.first_name + " " + @user.last_name + " thinks this application should be " + v.state %></p>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% end %>
-        <% if current_user.superadmin_role && (@document.state == 'new_app' || @document.state == 'needs_revisions')%>
-          <div class="well">
-            <h4>Determine the state of the application:</h4>
-            <%= button_to approve_app_path(@document), class: 'btn btn-success state-btn', data: { confirm: 'Are you sure you want to approve this application?' } do %>
-              <i class="fa fa-check"></i> Approve
-            <% end %>
-            <%= button_to revise_app_path(@document), class: 'btn btn-warning state-btn', data: { confirm: 'Are you sure you want to make this application approved pending revisions?' } do %>
-              <i class="fa fa-edit"></i> Approve Pending Revisions
-            <% end %>
-            <%= button_to reject_app_path(@document), method: :post, class: 'btn btn-danger state-btn', data: { confirm: 'Are you sure you want to reject this application?' } do %>
-              <i class="fa fa-ban"></i> Reject
-            <% end %>
-          </div>
-        <% end %>
       </div>
       <!-- end comment section -->
       <% end %>
@@ -350,10 +399,13 @@
       <div class="row">
         <div class="col-md-9">
           <% if @last_comment %>
+          <%-# If there's a comment from the Chair, display it here for anyone to see -%>
             <h3>Feedback from the board</h3>
             <p><%= @last_comment.body %></p>
+            <%-# Add an edit button for the chair in case they make a mistake -%>
             <% if current_user.superadmin_role %>
               <button id="edit-chair-comment" class="btn btn-primary">Edit</button>
+              <%-# This div has an id for jQuery purposes.  It will hide/show when you click the above button -%>
               <div id="chair-comment">
               <%= form_for @last_comment, url: edit_chair_comment_path do |form| %>
                 <%= form.hidden_field :document_id, :value => @document.id %>
@@ -362,6 +414,7 @@
               <% end %>
             </div>
             <% end %>
+          <%-# If there's no chair comment, BUT the current user is a chair, let them create one -%>
           <% elsif current_user.superadmin_role %>
               <h3>Add final comments</h3>
               <%= form_for @chair_comment, url: create_chair_comment_path do |form| %>

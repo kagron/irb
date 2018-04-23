@@ -20,10 +20,14 @@ body, html {
   padding: 0;
   margin: 0;
 }
-#suggestions-container {
+#suggestions-container,
+#suggestions-container2 {
   display: block;
   position:relative;
   top: 30px;
+}
+.footer {
+  margin-bottom: 30px;
 }
 .ui-autocomplete {
   position: absolute;

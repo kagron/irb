@@ -19,18 +19,24 @@
 
 
 $(document).on('turbolinks:load', function(){
+  // Hide all these things on page load
   $('.alert').delay(5000).fadeOut(2000);
   $('#document_child_assent_file').hide();
   $('#child_assent_label').hide();
   $('#chair-comment').hide();
   $('#boardSearch').hide();
+  $('#boardSearch2').hide();
 
-
+  // When you click these various divs and ids, show other divs and ids
   $('#edit-chair-comment').click(function() {
     $('#chair-comment').toggle(500);
   });
   $('#searchButton').click(function() {
     $('#boardSearch').toggle(500);
+  });
+
+  $('#searchButton2').click(function() {
+    $('#boardSearch2').toggle(500);
   });
 
 
@@ -58,12 +64,17 @@ $(document).on('turbolinks:load', function(){
       // Animation complete.
     });
   });
-
+  // This was removed but is still here incase we need a check all feature
   $("#checkAll").click(function(){
     $('input:checkbox').not(this).prop('checked', this.checked);
   });
+  // Grab stuff from the autocomplete and put them in these divs
   $("#user_search").autocomplete({
       appendTo: "#suggestions-container",
+      source: "/users/autocomplete"
+  });
+  $("#user_search2").autocomplete({
+      appendTo: "#suggestions-container2",
       source: "/users/autocomplete"
   });
 });
