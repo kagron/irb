@@ -126,7 +126,7 @@ class VotesController < ApplicationController
     end
 
     # only board can change their vote, we dont want anyone typing in those GET requests
-    def check_chair
+    def check_board
       if (!current_user.supervisor_role)
         redirect_to root_path, notice: 'You do not have permissions to do that'
       end
