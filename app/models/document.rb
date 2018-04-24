@@ -25,7 +25,7 @@ class Document < ApplicationRecord
   validates :department, presence: true
   validates :typeOfApplication, presence: true
   validates :project_title, presence: true
-  validates :sponsor_name, presence: true
+  # validates :sponsor_name, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :research_question, presence: true
@@ -33,7 +33,7 @@ class Document < ApplicationRecord
   validates :procedure, presence: true
   validates :pool_of_subjects, presence: true
   validates :sub_recruitment, presence: true
-  #validates :risks, presence: true
+  validates :risks, presence: true
   validates :opt_participation, presence: true
   validates :confidentiality, presence: true
   validates :authorities_consent, presence: true
