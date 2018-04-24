@@ -18,7 +18,7 @@ For Board Members: [IRB Board Manual](https://docs.google.com/document/d/1-X5ouN
 
 For Users: [IRB User Manual](https://docs.google.com/document/d/1g5JFOZxCvrauNB5Z_lo8z3b0gpe0zysHIepgzUJfFPU/edit?usp=sharing)
 
-For the student(s) who might maintain this: scroll down to Further Guides and References or changing the application process / adding new features.
+For the student(s) who might maintain this: scroll down to Further Guides and References or changing the application process / adding new features.  There is also a documentation.md located in this repository for more information about the various files and directories along with common issues and how to troubleshoot them!
 
 This application was developed in the MVC Framework Ruby on Rails and is currently running on a CentOS server.  Every line of code is commented ( we think ), and any resources we used are linked below.  HTML, CSS, ad Jascript/jQuery were also used.  Automation was done using the [Whenever](https://github.com/javan/whenever) gem which allows for using CronTab easily in Ruby syntax.  We would run rake tasks on a daily basis located in the lib/task folder. Any diagrams/presentations/notes we have will be in the repository as well.
 
