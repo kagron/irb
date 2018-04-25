@@ -85,10 +85,20 @@ Currently the deployment is NOT using a script or application to pull from githu
 2.  Change directories into /var/www/irb
 3.  Pull the changes into the directory
 4.  Migrate any new database changes via `rake db:migrate`
+5.  If the application is being deployed for the first time, make sure the database is clean by running `rake db:reset` (Note this will also erase everything including users, so make sure to recreate the board members)
 5.  Reindex User tables if needed `rake searchkick:reindex class=User`
 6.  Restart the nginx server by typing in `service nginx restart`.  If deploying to a new server, you will likely need to set the rails environment to production instead of development
 7.  Check the website
 8.  If needed, nginx logs everything to `/var/log/nginx/error.log` if it's stricly a nginx error, otherwise your errors will likely end up in `/var/www/irb/log/production.rb`.  
+
+## Implementing AU's Single Sign On
+
+Truthfully, when designing this application, Single Sign in was always considered but we were never entirely sure how to prepare for it.  So currently, users will have to register and log in.  If you need to implement Single Sign On, we suggest still using our users table because that is what our application is based around.  In order to do that, you could perhaps treat them as "profiles" instead of regular users.  What we mean by this, is that when a user logs in using Single Sign On, they still get a user created in our database but it is instead treated as a profile.  This way, you dont need to go through the entire application changing authorization and/or figuring out permissions.  Permissions work by checking the current user and determining whether they have permissions based on a boolean value stored in the database.  If you were to use Single Sign On, you would not have alteration priviliges to Aurora University's database and thus, the application breaks.
+
+Some files to look at: 
+  *  /app/controllers/registrations_controller.rb - This is a file that overrides the Devise controller.  We use this to modify how registrations are handled.  You might be able to just do everything in the sign_up_params method
+  *  /app/models/user.rb - This is the file related to the Users model.  You might be able to add some things in here 
+  *  [Devise](https://github.com/plataformatec/devise) - This is the gem that we used for User authentication.  It provides everything we needed and can be accessed via rails helper methods.  For any questions/guides/concerns, check this place first.
 
 ## Further Guides and Helpful References
 
