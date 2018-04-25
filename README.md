@@ -81,7 +81,7 @@ If you're on windows, step 8 will be different.  For installation on windows go 
 
 Currently the deployment is NOT using a script or application to pull from github, so we have do that manually.  I also did not set up an SSH key to this github to the server because that gives more access to my github than just the IRB application.
 
-1.  Make sure your latest changes are pushed to either your forked master branch
+1.  Make sure your latest changes are pushed to either your forked master branch or the master branch here
 2.  Change directories into /var/www/irb
 3.  Pull the changes into the directory
 4.  Migrate any new database changes via `rake db:migrate`
@@ -89,7 +89,7 @@ Currently the deployment is NOT using a script or application to pull from githu
 5.  Reindex User tables if needed `rake searchkick:reindex class=User`
 6.  Restart the nginx server by typing in `service nginx restart`.  If deploying to a new server, you will likely need to set the rails environment to production instead of development
 7.  Check the website
-8.  If needed, nginx logs everything to `/var/log/nginx/error.log` if it's stricly a nginx error, otherwise your errors will likely end up in `/var/www/irb/log/production.rb`.  
+8.  If needed, nginx logs everything to `/var/log/nginx/error.log` if it's stricly a nginx error, otherwise your errors will likely end up in `/var/www/irb/log/production.log` if in production, otherwise it's `/var/www/irb/log/development.log`.  
 
 ## Implementing AU's Single Sign On
 
