@@ -68,6 +68,28 @@ If you're using Linux, we recommend you use [RVM](https://rvm.io/) or RBEnv for 
 
 If you're on windows, step 8 will be different.  For installation on windows go [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/windows.html) and for more general information go to the Getting Started guide [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html).  Make sure you install Elastic Search as a service if you're using Linux, otherwise just make sure its running by checking http://localhost:9200/
 
+## Accessing the live server 
+
+1.  Use Putty (Windows) or terminal (Linux/Mac) to SSH into the server
+2.  Hostname: irb.aurora.edu
+3.  Password: Will be supplied to whoever is maintaining the app
+4.  Files will be located in /var/www/irb
+5.  Ruby is installed via RVM
+6.  Nginx config file is in /opt/nginx/config/nginx.conf
+
+## Deploying/Re-Deploying the application
+
+Currently the deployment is NOT using a script or application to pull from github, so we have do that manually.  I also did not set up an SSH key to this github to the server because that gives more access to my github than just the IRB application.
+
+1.  Make sure your latest changes are pushed to either your forked master branch
+2.  Change directories into /var/www/irb
+3.  Pull the changes into the directory
+4.  Migrate any new database changes via `rake db:migrate`
+5.  Reindex User tables if needed `rake searchkick:reindex class=User`
+6.  Restart the nginx server by typing in `service nginx restart`.  If deploying to a new server, you will likely need to set the rails environment to production instead of development
+7.  Check the website
+8.  If needed, nginx logs everything to `/var/log/nginx/error.log` if it's stricly a nginx error, otherwise your errors will likely end up in `/var/www/irb/log/production.rb`.  
+
 ## Further Guides and Helpful References
 
 *  [Ruby-Lang](https://www.ruby-lang.org/en/downloads/) - The Official Ruby programming language website
