@@ -119,6 +119,7 @@ Some files to look at:
 *  [How to Install Ruby on Rails on Windows](https://www.youtube.com/watch?v=OHgXELONyTQ)
 *  [How to Install ElasticSearch on Windows](https://www.youtube.com/watch?v=YE7AzSCC3E0)
 *  [What is a MVC Framework?](https://www.youtube.com/watch?v=qXRcVhWxuaU)
+*  In order to install any of these things on Linux, it's going to vary from distro to distro, so I recommend figuring out what distro commands to use.  Debian distros (Ubuntu) will use `sudo apt-get` while redhat distros will use `sudo yum` (Centos).  To install any of these, you'll likely need to type in `sudo apt-get install NAME_OF_PACKAGE` and that will likely install it.  For example, to install NodeJS on Ubuntu (a Debian distro), you would type in `sudo apt-get install nodejs` in your terminal and you'll be good to go!
 
 ## Changing the Application Process / Adding other features
 
